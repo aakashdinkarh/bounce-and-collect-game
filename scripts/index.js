@@ -3,6 +3,7 @@ let e = 0.8; //elasticty
 
 const ball = document.getElementById('ball');
 const field = document.getElementById('field');
+const groundHitsCount = document.getElementById('ground-hits');
 
 let intervalId;
 let timeoutId;

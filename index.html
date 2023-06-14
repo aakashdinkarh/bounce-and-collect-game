@@ -11,16 +11,32 @@
 		<script src="scripts/getCoords.js"></script>
 		<script src="scripts/moveTheBall.js"></script>
 		<script src="scripts/writeCoordinates.js"></script>
+		<script src="scripts/makeBallHitSound.js"></script>
 </head>
 
 <body>
-
-  Click on a field to move the ball there.
-  <br> The ball should never leave the field.
+	Click on the field to move the ball there.
+	<br />
+	Gravity is here, be careful.
+	<br />
+	<br />
 
 	<section>
-		<div id="field">
-			<img src="https://en.js.cx/clipart/ball.svg" id="ball">
+		<div>
+			<div class="field-container" >
+				<div id="field">
+					<img src="https://en.js.cx/clipart/ball.svg" id="ball">
+				</div>
+				<div class="info" >
+					<span class="info-icon" >i</span>
+					<div class="info-text" >Audio on the page may not be audible to you on the first load or refresh.
+						 This is due to browser privacy policies and cannot be avoided.
+						 Please interact with the page first (like click on page anywhere) so that the audio becomes audible to you.
+					</div>
+				</div>
+			</div>
+
+			<p id="ground-hits" >Ground Hits : 0</p>
 		</div>
 
 		<p class="field-dimension" >

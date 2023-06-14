@@ -24,3 +24,31 @@
 .outer-coords, .inner-coords {
     padding-left: 10px;
 }
+
+.field-container {
+    display: flex;
+}
+
+.info {
+    padding: 0 10px 10px 10px;
+    height: fit-content;
+}
+
+.info-icon {
+    border: 1px solid black;
+    padding: 0px 6px;
+    border-radius: 50%;
+}
+
+.info-text {
+    display: none;
+    width: 200px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 4px black;
+}
+
+.info:hover .info-text {
+    display: block;
+}
