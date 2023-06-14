@@ -8,8 +8,6 @@ const groundHitsCount = document.getElementById('ground-hits');
 let intervalId;
 let timeoutId;
 
-const { width: ballWidth, height: ballHeight } = ball.getBoundingClientRect();
-
 function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;

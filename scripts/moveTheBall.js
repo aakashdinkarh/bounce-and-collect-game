@@ -83,14 +83,16 @@ function freeFall({vy = 0, vx = 2, dy = 1, dx = 1} = {}) {
 
 
 function moveTheBall(e){
+    const { width: ballWidth, height: ballHeight } = ball.getBoundingClientRect();
+
     const { left: fieldLeft, top: fieldTop } = getCoords('field');
     const { left: ballInitialLeft } = getCoords('ball', true);
 
-    let ballX = e.clientX - fieldLeft;
-    let ballY = e.clientY - fieldTop;
+    let mouseX = e.clientX - fieldLeft;
+    let mouseY = e.clientY - fieldTop;
 
-    ballX = Math.max(ballX - ballWidth/2, 0); //left edge case handle
-    ballY = Math.max(ballY - ballHeight/2, 0); //top edge case handle
+    let ballX = Math.max(mouseX - ballWidth/2, 0); //left edge case handle
+    let ballY = Math.max(mouseY - ballHeight/2, 0); //top edge case handle
 
     ballX = Math.min(ballX, field.clientWidth - ballWidth); //right edge case handle
     ballY = Math.min(ballY, field.clientHeight - ballHeight); //bottom edge case handle

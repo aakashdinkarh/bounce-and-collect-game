@@ -1,6 +1,6 @@
 function getCoords(id, relativeToField = false) {
     const elem =  document.getElementById(id);
-    const { left, right, top, bottom } = elem.getBoundingClientRect();
+    const { left, top } = elem.getBoundingClientRect();
 
     const elemCoords = {
         left: left + elem.clientLeft, //elemX + elemBorderLeftWidth
