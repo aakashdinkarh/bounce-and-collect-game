@@ -95,7 +95,7 @@ function moveTheBall(e){
     ballX = Math.min(ballX, field.clientWidth - ballWidth); //right edge case handle
     ballY = Math.min(ballY, field.clientHeight - ballHeight); //bottom edge case handle
 
-    const initialHorizontalSpeed = Math.min(Math.abs(ballInitialLeft - ballX) / 15, 3);
+    const initialHorizontalSpeed = Math.min(Math.abs(ballInitialLeft - ballX) / 15);
     const initialHorizontalDirection = ballX - ballInitialLeft >= 0 ? 1 : -1;
 
     ball.style.transition = 'all 0.4s';
