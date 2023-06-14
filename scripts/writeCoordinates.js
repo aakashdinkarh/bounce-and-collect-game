@@ -6,7 +6,7 @@ function writeMouseCoords(e){
 }
 
 function writeFieldCoords() {
-    const {width, height, top, left} = field.getBoundingClientRect();
+    const {top, left} = field.getBoundingClientRect();
 
     const fieldOuterCoords = document.querySelectorAll('.field-coords .outer-coords .coordinates');
     fieldOuterCoords[0].innerHTML = 'X : ' + left;
@@ -19,6 +19,7 @@ function writeFieldCoords() {
     const fieldWidth = document.querySelector('.field-width');
     const fieldHeight = document.querySelector('.field-height');
 
-    fieldWidth.innerHTML = 'Width : ' + width;
-    fieldHeight.innerHTML = 'Height : ' + height;
+    fieldWidth.innerHTML = 'Field width : ' + field.clientWidth;
+    fieldHeight.innerHTML = 'Field height : ' + field.clientHeight;
+
 }

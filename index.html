@@ -21,11 +21,27 @@
 	<br />
 	<br />
 
+	<form onsubmit="handleSubmit(event)" >
+		<label>
+			Elasticity constant, e =
+			<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" value="0.5" />
+		</label>
+
+		<label>
+			Gravity constant, g = 
+			<input name="gravity" type="number" max="1" min="0.01" step="0.01" value="0.08" />
+		</label>
+		
+		<button type="submit">Save</button>
+	</form>
+
+	<br />
+
 	<section>
 		<div>
 			<div class="field-container" >
 				<div id="field">
-					<img src="https://en.js.cx/clipart/ball.svg" id="ball">
+					<img src="image/ball.svg" id="ball">
 				</div>
 				<div class="info" >
 					<span class="info-icon" >i</span>
@@ -44,20 +60,6 @@
 			<div class="field-height"></div>
 		</p>
 	</section>
-
-	<form onsubmit="handleSubmit(event)" >
-		<label>
-			Elasticity constant, e =
-			<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" value="0.5" />
-		</label>
-
-		<label>
-			Gravity constant, g = 
-			<input name="gravity" type="number" max="1" min="0.01" step="0.01" value="0.08" />
-		</label>
-		
-		<button type="submit">Save</button>
-	</form>
 
 	</div>
 
