@@ -4,6 +4,7 @@ let e = 0.8; //elasticty
 const ball = document.getElementById('ball');
 const field = document.getElementById('field');
 const groundHitsCount = document.getElementById('ground-hits');
+const audio = document.getElementById('ball-hit-audio');
 
 let intervalId;
 let timeoutId;
