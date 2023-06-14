@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Move The Ball (FreeFall)</title>
     <link rel="stylesheet" href="style.css">
-		<script src="scripts/fillDots.js"></script>
-		<script src="scripts/getCoords.js"></script>
-		<script src="scripts/moveTheBall.js"></script>
-		<script src="scripts/writeCoordinates.js"></script>
-		<script src="scripts/makeBallHitSound.js"></script>
+		<script src="./scripts/fillDots.js"></script>
+		<script src="./scripts/getCoords.js"></script>
+		<script src="./scripts/moveTheBall.js"></script>
+		<script src="./scripts/writeCoordinates.js"></script>
+		<script src="./scripts/makeBallHitSound.js"></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 		<div>
 			<div class="field-container" >
 				<div id="field">
-					<img src="image/ball.svg" id="ball">
+					<img src="./image/ball.svg" id="ball">
 				</div>
 				<div class="info" >
 					<span class="info-icon" >i</span>
@@ -89,6 +89,8 @@
 			</section>
 		</section>
 	</section>
+
+	<audio id="ball-hit-audio" src="./sound/ball-hits-sound.mp3"></audio>
 	<script src="scripts/index.js"></script>
 </body>
 </html>
