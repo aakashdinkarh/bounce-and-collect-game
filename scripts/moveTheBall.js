@@ -1,83 +1,93 @@
 let groundHits = 0;
 
-function updateGroundHits(hits = 0){
-    groundHitsCount.innerHTML = 'Ground Hits : ' + hits;
+function verticallyEdgeTouch({ vx, vy, dy, top = 0 }){
+    ball.style.top = top + 'px';
+    vx = vx * e;
+    vy = vy * e;
+    dy = -dy;
+
+    makeBallHitSound();
+    return [vx, vy, dy];
+}
+
+function horizontallyEdgeTouch({ vx, dx, left }){
+    ball.style.left = left + 'px';
+    dx = -dx;
+    vx = vx * e;
+
+    makeBallHitSound();
+    return [vx, dx];
 }
 
 function moveTheBallHorizontally({ dx = 1, vx = 0 }){
-    const { left } = getCoords('ball', true);
-    const { right: fieldRight } = getCoords('field', true);
-
-    let newLeft = left + (dx * vx);
-
-    if(vx > 0.1){
-        if(dx === 1){
-            if(newLeft >= fieldRight - ball.clientWidth){
-                newLeft = fieldRight - ball.clientWidth;
-                dx = -dx;
-                vx = vx * e;
-                makeBallHitSound();
-            }
-        } else {
-            if(newLeft <= 0){
-                newLeft = 0;
-                dx = -dx;
-                vx = vx * e;
-                makeBallHitSound();
-            }
-        }
-        ball.style.left = newLeft + 'px';
-    } else {
+    if(vx < minimumHorizontalSpeedToMove) {
         vx = 0;
+        return [vx, dx];
     }
+
+    const movingToRight = dx >= 0;
+
+    const { left, right } = getCoords('ball', true);
+    const { right: fieldRight, left: fieldLeft } = getCoords('field', true);
+
+    const diffX = Math.abs(movingToRight ? fieldRight - right : left - fieldLeft);
+
+    if (diffX <= vx) { //horizontally touch condition
+        [vx, dx] = horizontallyEdgeTouch({ vx, dx, left: movingToRight ? fieldRight - ball.clientWidth : 0 });
+        
+        return [vx, dx];
+    }
+
+    ball.style.left = left + (dx * vx) + 'px';
 
     return [vx, dx];
 }
 
 function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
-    const { bottom: fieldBottom } = getCoords('field', true);
+    vy += dy * g;
+    const freeFall = dy >= 0;
+
+    if(vy < 0 && !freeFall){
+        vy = 0;
+        dy = -dy;
+
+        return [vx, vy, dx, dy];
+    }
+
+    const { bottom: fieldBottom, top: fieldTop } = getCoords('field', true);
     const { top, bottom } = getCoords('ball', true);
 
-    vy += dy * g;
+    const diffY = Math.abs(freeFall ? bottom - fieldBottom : top - fieldTop);
+    
+    if (diffY <= vy) { //vertically touch condition
+        [vx, vy, dy] = verticallyEdgeTouch({ vx, vy, dy, top: freeFall ? fieldBottom - ball.clientHeight : 0 });
 
-    if(dy === 1){ //free fall
-        const diffY = Math.abs(bottom - fieldBottom);
-        if(diffY <= vy){
-            ball.style.top = fieldBottom - ball.clientHeight + 'px';
-            vx = vx * e;
-            vy = vy * e;
-            dy = -dy;
-            makeBallHitSound();
-            updateGroundHits(++groundHits);
+        freeFall && updateGroundHits(++groundHits);
 
-            return [vx, vy, dx, dy];
-        }
-    } else { // jump back
-        if(vy < g){
-            vy = 0;
-            dy = -dy;
-        }
+        return [vx, vy, dx, dy];
     }
+
     ball.style.top = top + (dy * vy) + 'px';
 
     return [vx, vy, dx, dy];
 }
 
-function freeFall({vy = 0, vx = 2, dy = 1, dx = 1} = {}) {
+function freeFall({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
     clearInterval(intervalId);
-    groundHits = 0;
-    updateGroundHits(groundHits);
+
+    resetGroundHits();
 
     intervalId = setInterval(() => {
+        const { bottom: fieldBottom } = getCoords('field', true);
+        const { bottom: ballBottom} = getCoords('ball', true);
+
+        if(vy === 0 && ballBottom === fieldBottom && vx === 0){
+            clearInterval(intervalId);
+            return;
+        }
+
         [vx, vy, dx, dy] = moveTheBallVertically({ vy, dy, vx, dx });
         [vx, dx] = moveTheBallHorizontally({ vx, dx });
-
-        const {bottom: fieldBottom } = getCoords('field', true);
-        const {bottom: ballBottom} = getCoords('ball', true);
-
-        if(vy === 0 && ballBottom === fieldBottom || vx === 0){
-            clearInterval(intervalId);
-        }
     }, 10)
 }
 
@@ -86,7 +96,7 @@ function moveTheBall(e){
     const { width: ballWidth, height: ballHeight } = ball.getBoundingClientRect();
 
     const { left: fieldLeft, top: fieldTop } = getCoords('field');
-    const { left: ballInitialLeft } = getCoords('ball', true);
+    const { left: ballInitialLeft, top: ballInitialTop } = getCoords('ball', true);
 
     let mouseX = e.clientX - fieldLeft;
     let mouseY = e.clientY - fieldTop;
@@ -97,20 +107,28 @@ function moveTheBall(e){
     ballX = Math.min(ballX, field.clientWidth - ballWidth); //right edge case handle
     ballY = Math.min(ballY, field.clientHeight - ballHeight); //bottom edge case handle
 
-    const initialHorizontalSpeed = Math.min(Math.abs(ballInitialLeft - ballX) / 15);
+    const initialHorizontalSpeed = Math.abs(ballInitialLeft - ballX) / 40;
     const initialHorizontalDirection = ballX - ballInitialLeft >= 0 ? 1 : -1;
+    const initialVerticalSpeed = Math.abs(ballInitialTop - ballY) / 40;
+    const initialVerticalDirection = ballY - ballInitialTop >= 0 ? 1 : -1;
 
-    ball.style.transition = 'all 0.4s';
+    ball.style.transition = 'all 0.4s linear';
     ball.style.top = ballY + 'px';
     ball.style.left = ballX + 'px';
 
-    groundHits = 0;
-    updateGroundHits(groundHits);
+    resetGroundHits();
 
     clearTimeout(timeoutId);
     clearInterval(intervalId);
+
     timeoutId = setTimeout(() => {
         ball.style.transition = '';
-        freeFall({ vx: initialHorizontalSpeed, dx: initialHorizontalDirection });
+
+        freeFall({
+            vx: initialHorizontalSpeed,
+            dx: initialHorizontalDirection,
+            vy: initialVerticalSpeed,
+            dy: initialVerticalDirection,
+        });
     }, 400);
 }

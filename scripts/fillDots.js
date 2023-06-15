@@ -1,5 +1,5 @@
 function fillDots(){
-    const { width: totalWidth, height: totalHeight } = field.getBoundingClientRect();
+    const [totalHeight, totalWidth] = [field.clientHeight, field.clientWidth];
 
     const fragement = document.createDocumentFragment();
 
