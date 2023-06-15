@@ -7,6 +7,8 @@ function makeBallHitSound(){
     audio.play();
     
     audioTimeoutId = setTimeout(() => {
-        audio.pause();
+        if(!audio.paused){
+            audio.pause();
+        }
     }, 200)
 }
