@@ -7,20 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Move The Ball (FreeFall)</title>
     <link rel="stylesheet" href="style.css">
+		<script src="./scripts/edgeTouch.js"></script>
 		<script src="./scripts/fillDots.js"></script>
 		<script src="./scripts/getCoords.js"></script>
-		<script src="./scripts/moveTheBall.js"></script>
-		<script src="./scripts/writeCoordinates.js"></script>
-		<script src="./scripts/makeBallHitSound.js"></script>
 		<script src="./scripts/groundHitsCallbacks.js"></script>
+		<script src="./scripts/makeBallHitSound.js"></script>
+		<script src="./scripts/mouseEvents.js"></script>
+		<script src="./scripts/moveTheBall.js"></script>
+		<script src="./scripts/moveTheBallHorizontally.js"></script>
+		<script src="./scripts/moveTheBallVertically.js"></script>
+		<script src="./scripts/showDirectionOfThrow.js"></script>
 		<script src="./scripts/submitForm.js"></script>
+		<script src="./scripts/writeCoordinates.js"></script>
 </head>
 
 <body>
-	Click on the field to move the ball there.
-	<br />
-	Gravity is here, be careful.
-	<br />
+	<h3>Click on the field to move the ball there.</h3>
+
+	<p>
+		<i>Instructions:  </i> Once you click in the field anywhere, the ball will follow the path in a certain time.
+		<br />
+		The ball will then follow a projectile motion under the effect of <strong>g</strong> and <strong>e</strong>.
+	</p>
+	<p>Gravity is here, be careful. 🤓</p>
 	<br />
 
 	<form onsubmit="handleSubmit(event)" >
@@ -44,6 +53,7 @@
 		<div>
 			<div class="field-container" >
 				<div id="field">
+					<div class="direction-line"></div>
 					<img src="./image/ball.svg" id="ball" alt="ball">
 				</div>
 				<div class="info" >
