@@ -1,7 +1,12 @@
+body {
+    font-family: sans-serif;
+}
+
 #field {
-    width: 800px;
+    width: 80%;
     height: 400px;
     border: 10px solid black;
+    border-radius: 4px;
     background-color: #00FF00;
     overflow: hidden;
     position: relative;
@@ -16,9 +21,10 @@
 }
 
 .coords {
-    position: fixed;
+    position: absolute;
     right: 0;
     top: 0;
+    z-index: 1;
 }
 
 .outer-coords, .inner-coords {
@@ -29,9 +35,26 @@
     display: flex;
 }
 
+.direction-line {
+    position: absolute;
+    height: 2px;
+    background-color: red;
+    display: none;
+    transform-origin: 0% 0%;
+}
+.direction-line::after {
+    content: '>';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    color: red;
+    transform: translateY(-43%);
+}
+
 .info {
     padding: 0 10px 10px 10px;
     height: fit-content;
+    position: relative;
 }
 
 .info-icon {
@@ -41,9 +64,12 @@
 }
 
 .info-text {
+    position: absolute;
+    z-index: 2;
+    top: 30px;
+    left: 10px;
     display: none;
     width: 200px;
-    margin-top: 10px;
     padding: 10px;
     border-radius: 4px;
     box-shadow: 0 0 4px black;
@@ -51,4 +77,10 @@
 
 .info:hover .info-text {
     display: block;
+}
+
+@media (max-width: 1200px){
+    .coords {
+        display: none;
+    }
 }
