@@ -38,6 +38,8 @@ function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
 
     resetGroundHits();
 
+    clearTrajectory();
+
     intervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
@@ -83,15 +85,9 @@ function moveTheBall(e){
     const initialVerticalSpeed = Math.abs(ballInitialTop - ballY) / 40;
     const initialVerticalDirection = ballY - ballInitialTop >= 0 ? 1 : -1;
 
-    // ball.style.transition = 'all 0.4s linear';
-    // ball.style.top = ballY + 'px';
-    // ball.style.left = ballX + 'px';
-
     moveBallTo(ballX, ballY, 400);
 
     resetGroundHits();
-
-    clearTrajectory();
 
     clearTimeout(timeoutId);
     clearInterval(intervalId);
