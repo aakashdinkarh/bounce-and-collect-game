@@ -37,9 +37,18 @@ body {
 
 .direction-line {
     position: absolute;
-    height: 1px;
+    height: 2px;
     background-color: red;
     display: none;
+    transform-origin: 0% 0%;
+}
+.direction-line::after {
+    content: '>';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    color: red;
+    transform: translateY(-43%);
 }
 
 .info {

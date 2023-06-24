@@ -7,18 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Move The Ball (FreeFall)</title>
     <link rel="stylesheet" href="style.css">
-		<script src="./scripts/edgeTouch.js"></script>
-		<script src="./scripts/fillDots.js"></script>
-		<script src="./scripts/getCoords.js"></script>
-		<script src="./scripts/groundHitsCallbacks.js"></script>
-		<script src="./scripts/makeBallHitSound.js"></script>
-		<script src="./scripts/mouseEvents.js"></script>
-		<script src="./scripts/moveTheBall.js"></script>
-		<script src="./scripts/moveTheBallHorizontally.js"></script>
-		<script src="./scripts/moveTheBallVertically.js"></script>
-		<script src="./scripts/showDirectionOfThrow.js"></script>
-		<script src="./scripts/submitForm.js"></script>
-		<script src="./scripts/writeCoordinates.js"></script>
+	<script src="./scripts/clearTrajectory.js"></script>
+	<script src="./scripts/edgeTouch.js"></script>
+	<script src="./scripts/fillDots.js"></script>
+	<script src="./scripts/getCoords.js"></script>
+	<script src="./scripts/groundHitsCallbacks.js"></script>
+	<script src="./scripts/makeBallHitSound.js"></script>
+	<script src="./scripts/mouseEvents.js"></script>
+	<script src="./scripts/moveTheBall.js"></script>
+	<script src="./scripts/moveTheBallHorizontally.js"></script>
+	<script src="./scripts/moveTheBallVertically.js"></script>
+	<script src="./scripts/showDirectionOfThrow.js"></script>
+	<script src="./scripts/showTrajectory.js"></script>
+	<script src="./scripts/submitForm.js"></script>
+	<script src="./scripts/writeCoordinates.js"></script>
 </head>
 
 <body>
@@ -41,7 +43,7 @@
 		<label>
 			Gravity constant, g = 
 			<input name="gravity" type="number" max="1" min="0.01" step="0.01" value="0.08" />
-			px / (10 ms)<sup>2</sup>
+			px / (<span id="frame-rate" ></span> ms)<sup>2</sup>
 		</label>
 		
 		<button type="submit">Save</button>

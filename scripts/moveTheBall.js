@@ -1,4 +1,37 @@
-let groundHits = 0;
+
+let moveBallToTimeoutId;
+
+
+function moveBallTo(x, y, duration){
+    const { left, top } = getCoords('ball', true);
+    
+    const totalSteps = Math.ceil(duration / frameRate);
+
+    let currentX = left;
+    let currentY = top;
+
+    const dx = (x - currentX) / totalSteps;
+    const dy = (y - currentY) / totalSteps;
+
+    let currentStep = 0;
+
+    function updatePosition(){
+        currentX += dx;
+        currentY += dy;
+
+        ball.style.left = currentX + 'px';
+        ball.style.top = currentY + 'px';
+
+        currentStep++;
+
+        if(currentStep < totalSteps){
+            moveBallToTimeoutId = setTimeout(updatePosition, frameRate);
+        }
+    }
+
+    clearTimeout(moveBallToTimeoutId);
+    updatePosition();
+}
 
 function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
     clearInterval(intervalId);
@@ -10,6 +43,11 @@ function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
             clearInterval(intervalId);
             return;
         }
+
+        showTrajectory({ clientX: storedMouseCoordinates.x, clientY: storedMouseCoordinates.y });
+
+        showTrajectory();
+
         if(!isEdgeTouch('bottom') || vy !== 0){
             [vx, vy, dx, dy] = moveTheBallVertically({ vy, dy, vx, dx });
         }
@@ -22,7 +60,7 @@ function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
         if(isEdgeTouch('left') || isEdgeTouch('right')){
             [vx, dx] = horizontallyEdgeTouchEffect({ vx, dx });
         }
-    }, 10)
+    }, frameRate)
 }
 
 function moveTheBall(e){
@@ -45,11 +83,15 @@ function moveTheBall(e){
     const initialVerticalSpeed = Math.abs(ballInitialTop - ballY) / 40;
     const initialVerticalDirection = ballY - ballInitialTop >= 0 ? 1 : -1;
 
-    ball.style.transition = 'all 0.4s linear';
-    ball.style.top = ballY + 'px';
-    ball.style.left = ballX + 'px';
+    // ball.style.transition = 'all 0.4s linear';
+    // ball.style.top = ballY + 'px';
+    // ball.style.left = ballX + 'px';
+
+    moveBallTo(ballX, ballY, 400);
 
     resetGroundHits();
+
+    clearTrajectory();
 
     clearTimeout(timeoutId);
     clearInterval(intervalId);

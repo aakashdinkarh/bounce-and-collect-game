@@ -1,10 +1,4 @@
 function showDirectionOfThrow(e){
-    if(isMouseDown){
-        directionLine.style.display = 'block';
-    } else {
-        directionLine.style.display = '';
-    }
-
     const { left, top } = getCoords('ball', true);
 
     const ballCenter = {
@@ -21,10 +15,10 @@ function showDirectionOfThrow(e){
     const lengthY = newLocation.top - ballCenter.top;
 
     const lengthOfDirectionLine = Math.sqrt(lengthX ** 2 + lengthY ** 2);
-    const angleOfDirectionLine = Math.atan2(lengthY , lengthX);
+    const angleOfDirectionLine = Math.atan2(lengthY, lengthX);
 
-    directionLine.style.left = ballCenter.left - lengthX + 'px';
+    directionLine.style.left = ballCenter.left + 'px';
     directionLine.style.top = ballCenter.top + 'px';
-    directionLine.style.width = lengthOfDirectionLine * 2 + 'px';
+    directionLine.style.width = lengthOfDirectionLine + 'px';
     directionLine.style.transform = `rotate(${angleOfDirectionLine}rad)`;
 }
