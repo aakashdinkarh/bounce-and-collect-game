@@ -1,5 +1,7 @@
 let g = 0.08; //default gravity
 let e = 0.8; //default elasticty
+let e_x = Math.min(e * 1.2, 0.99); //e effect on horizontal velocity when ball touch on vertical edges
+
 const minimumHorizontalSpeedToMove = 0.01;
 const rotateFactor = 0.2;
 let groundHits = 0;
