@@ -1,11 +1,17 @@
 function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
     clearInterval(intervalId);
+    
+    clearScoreDots();
+
+    showScoreDots();
 
     intervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
             return;
         }
+
+        removeScoreDotIfEarned();
 
         showDirectionOfThrow({ clientX: storedMouseCoordinates.x, clientY: storedMouseCoordinates.y });
 
