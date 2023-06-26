@@ -1,4 +1,8 @@
 function showDirectionOfThrow(e){
+    if(!isMouseDown){
+        return;
+    }
+
     const { left, top } = getCoords('ball', true);
 
     const ballCenter = {

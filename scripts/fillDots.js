@@ -4,7 +4,7 @@ const dotHeight = 20;
 function fillDots(){
     const [totalHeight, totalWidth] = [field.clientHeight, field.clientWidth];
 
-    const fragement = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
 
     const totalNumberOfDots = (Math.floor(totalWidth / dotWidth) * Math.floor(totalHeight / dotHeight));
     for(let i = 0; i < totalNumberOfDots; i++){
@@ -15,7 +15,7 @@ function fillDots(){
             height: 20px;
             margin: 0 3px;
         `;
-        fragement.append(dot);
+        fragment.append(dot);
     }
-    field.append(fragement);
+    field.append(fragment);
 }
