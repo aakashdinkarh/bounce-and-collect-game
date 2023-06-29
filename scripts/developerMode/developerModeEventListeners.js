@@ -78,3 +78,26 @@ function handleThemeChange(e){
         editableStyleTag.textContent = sampelCss;
     }
 }
+
+function insertCustomChar(char) {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+
+    const textNode = document.createTextNode(char);
+
+    range.insertNode(textNode);
+
+    range.collapse(false);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
+function handleKeyDown(event){
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        insertCustomChar('\n');
+    } else if (event.key === 'Tab'){
+        event.preventDefault();
+        insertCustomChar('\t');
+    }
+}

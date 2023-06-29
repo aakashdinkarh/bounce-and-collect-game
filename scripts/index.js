@@ -27,6 +27,8 @@ const frameRateText = document.querySelector('#frame-rate');
 const developerModeButton = document.querySelector('.developer-mode-secret-button');
 const developerModeDiv = document.querySelector('.developer-mode');
 const developerModeCloseButton = developerModeDiv.querySelector('.close-button');
+const editableStyleTag = developerModeDiv.querySelector('style');
+
 const theme = document.getElementById('theme');
 const overlay = document.querySelector('.overlay');
 
@@ -65,3 +67,4 @@ theme.addEventListener('change', handleThemeChange);
 developerModeButton.addEventListener('mousedown', onMouseDown);
 developerModeButton.addEventListener('mouseup', onMouseUp);
 developerModeCloseButton.addEventListener('click', closeDeveloperModeDiv)
+editableStyleTag.addEventListener('keydown', handleKeyDown);
