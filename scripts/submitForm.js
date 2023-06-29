@@ -8,7 +8,8 @@ function handleSubmit(event) {
     ball.style.top = 0 + 'px';
     ball.style.left = 0 + 'px';
 
-    resetGroundHits();
+    resetCurrentScore();
+    resetHighestScore();
 
     clearTrajectory();
 

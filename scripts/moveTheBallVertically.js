@@ -17,8 +17,6 @@ function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
     if (diffY <= vy) { //vertically touch condition
         ball.style.top = (freeFall ? fieldBottom - ball.clientHeight : 0) + 'px';
         makeBallHitSound();
-
-        freeFall && updateGroundHits(++groundHits);
     } else {
         ball.style.top = top + (dy * vy) + 'px';
     }
