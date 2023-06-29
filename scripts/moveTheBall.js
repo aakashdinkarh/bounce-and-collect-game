@@ -20,7 +20,7 @@ function moveTheBall(e){
 
     moveBallTo(ballX, ballY, 300);
 
-    resetGroundHits();
+    resetCurrentScore();
 
     clearTrajectory();
 

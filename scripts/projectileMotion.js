@@ -8,6 +8,8 @@ function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
     intervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
+
+            updateHighestScore(Math.max(currentScore, highestScore));
             return;
         }
 

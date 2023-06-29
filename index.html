@@ -7,16 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Move The Ball (FreeFall)</title>
     <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="toggle.css">
+	<link rel="stylesheet" href="developerModeRelated.css">
 
 	<script src="./scripts/checkIfScoreDotTouchBall.js"></script>
 	<script src="./scripts/clearScoreDots.js"></script>
 	<script src="./scripts/clearTrajectory.js"></script>
+	<script src="./scripts/developerModeEventListeners.js"></script>
 	<script src="./scripts/edgeTouch.js"></script>
 	<script src="./scripts/fillDots.js"></script>
 	<script src="./scripts/generateRandomCoordinates.js"></script>
 	<script src="./scripts/getCoords.js"></script>
-	<script src="./scripts/groundHitsCallbacks.js"></script>
 	<script src="./scripts/makeBallHitSound.js"></script>
+	<script src="./scripts/makeCoinCollectSound.js"></script>
 	<script src="./scripts/mouseEvents.js"></script>
 	<script src="./scripts/moveBallTo.js"></script>
 	<script src="./scripts/moveTheBall.js"></script>
@@ -24,6 +27,7 @@
 	<script src="./scripts/moveTheBallVertically.js"></script>
 	<script src="./scripts/projectileMotion.js"></script>
 	<script src="./scripts/removeScoreDotIfEarned.js"></script>
+	<script src="./scripts/scoreCallbacks.js"></script>
 	<script src="./scripts/showDirectionOfThrow.js"></script>
 	<script src="./scripts/showScoreDots.js"></script>
 	<script src="./scripts/showTrajectory.js"></script>
@@ -42,6 +46,13 @@
 	<p>Gravity is here, be careful. 🤓</p>
 	<br />
 
+	<div class="theme-toggle" >
+		<label class="switch">
+			<input id="theme" type="checkbox">
+			<span class="slider round"></span>
+		</label>
+	</div>
+
 	<form onsubmit="handleSubmit(event)" >
 		<label>
 			Elasticity constant, e =
@@ -54,7 +65,7 @@
 			px / (<span id="frame-rate" ></span> ms)<sup>2</sup>
 		</label>
 		
-		<button type="submit">Save</button>
+		<button type="submit">Save and Restart</button>
 	</form>
 
 	<br />
@@ -64,18 +75,15 @@
 			<div class="field-container" >
 				<div id="field">
 					<div class="direction-line"></div>
-					<img src="./image/ball.svg" id="ball" alt="ball">
-				</div>
-				<div class="info" >
-					<span class="info-icon" >i</span>
-					<div class="info-text" >Audio on the page may not be audible to you on the first load or refresh.
-						 This is due to browser privacy policies and cannot be avoided.
-						 Please interact with the page first (like click on page anywhere) so that the audio becomes audible to you.
+					<div id="ball">
+
+						<img src="./image/ball.svg"  alt="ball">
 					</div>
 				</div>
 			</div>
 
-			<p id="ground-hits" >Ground Hits : 0</p>
+			<p id="highest-score-earned">Highest Score : 0</p>
+			<p id="score-earned">Current Score : 0</p>
 		</div>
 
 		<p class="field-dimension" >
@@ -86,7 +94,7 @@
 
 	</div>
 
-	<section class="coords">
+	<!-- <section class="coords">
 		<section class="mouse-coords" >
 			Mouse corrdinates: 
 			<div class="coordinates"></div>
@@ -111,9 +119,27 @@
 				<div class="coordinates"></div>	
 			</section>
 		</section>
-	</section>
+	</section> -->
+
+	<div class="overlay">
+		<span>
+			Click Anywhere to start...
+		</span>
+	</div>
+
+	<div class="developer-mode-secret-button"></div>
+
+	<div class="developer-mode">
+		<b>Welcome to Developer Mode... Write css in your own style</b>
+		<span class="close-button">x</span>
+		<style contenteditable>.developer-mode > style {
+	background-color: #e2e2e2;
+}
+		</style>
+	</div>
 
 	<audio id="ball-hit-audio" src="./sound/ball-hits-sound.mp3"></audio>
+	<audio id="coin-collect-sound" src="./sound/coin-collect-sound.mp3"></audio>
 	<script src="scripts/index.js"></script>
 </body>
 </html>
