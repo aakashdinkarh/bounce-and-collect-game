@@ -1,0 +1,23 @@
+.score-board {
+    display: none;
+}
+
+.score-board.show {
+    display: block;
+}
+
+.score-board > table td,
+.score-board > table th {
+    text-align: left;
+    padding: 8px 6px;
+    border: 1px solid black;
+}
+
+.score-board > table {
+    border-collapse: collapse;
+}
+
+.score-board > table td {
+    border-style: dashed;
+    padding: 6px;
+}

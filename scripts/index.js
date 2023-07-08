@@ -3,6 +3,8 @@ overlay.addEventListener('click', function() {
     projectileMotion();
 })
 
+assignDefaultValues();
+
 // writeFieldCoords();
 
 frameRateText.innerHTML = frameRate;

@@ -1,7 +1,6 @@
-function resetGame({ top, left } = {}){
-
-    ball.style.top = top ?? (field.clientHeight - ball.clientHeight) + 'px';
-    ball.style.left = left ?? 0 + 'px';
+function resetGame(){
+    ball.style.top = (field.clientHeight - ball.clientHeight) + 'px';
+    ball.style.left = 0 + 'px';
 
     resetCurrentScore();
     resetHighestScore();
@@ -11,7 +10,20 @@ function resetGame({ top, left } = {}){
     clearScoreDots();
     showScoreDots();
 
-    handlePlayModeChange();
+    scoresArray = [];
+    numberOfRoundsPassed = 0;
+
+    if (playMode !== 'free_play') {
+        scoreBoard.classList.add('show');
+        updateScoresTable();
+        const [firstPlayer, secondPlayer] = scoreBoard.querySelectorAll('table thead th');
+        firstPlayer.innerText = playerOneName;
+        secondPlayer.innerText = playMode === '1_vs_1' ? playerTwoName : 'CPU';
+    } else {
+        scoreBoard.classList.remove('show');
+    }
+
+    handleModeChangeEffects();
 
     clearInterval(intervalId);
 }

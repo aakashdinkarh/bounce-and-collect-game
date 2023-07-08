@@ -12,6 +12,8 @@
 	<link rel="stylesheet" href="./styles/form.css">
 	<link rel="stylesheet" href="./styles/playModes.css">
 	<link rel="stylesheet" href="./styles/alertPopover.css">
+	<link rel="stylesheet" href="./styles/scoreBoard.css">
+	<link rel="stylesheet" href="./styles/overlay.css">
 
 	<script src="./scripts/others/alertPopover.js"></script>
 	<script src="./scripts/score/checkIfScoreDotTouchBall.js"></script>
@@ -38,13 +40,16 @@
 	<script src="./scripts/form/submitForm.js"></script>
 	<script src="./scripts/disabled/writeCoordinates.js"></script>
 	<script src="./scripts/others/resetGame.js"></script>
-	<script src="./scripts/playMode/handlePlayModeChange.js"></script>
+	<script src="./scripts/playMode/handleModeChangeEffects.js"></script>
 	<script src="./scripts/others/handleEnableDisableField.js"></script>
 	<script src="./scripts/ball/handleTurnEnd.js"></script>
+	<script src="./scripts/form/assignDefaultValues.js"></script>
+	<script src="./scripts/form/handlePlayModeChange.js"></script>
+	<script src="./scripts/playMode/updateScoresTable.js"></script>
 </head>
 
 <body>
-	<div class="overlay">
+	<div class="overlay start">
 		<span>
 			Click Anywhere to start...
 		</span>
@@ -70,24 +75,24 @@
 	<form class="form" onsubmit="handleSubmit(event)" >
 		<label>
 			Elasticity constant, e =
-			<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" value="0.8" required />
+			<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" required />
 		</label>
 
 		<label>
 			Gravity constant, g = 
-			<input name="gravity" type="number" max="1" min="0.01" step="0.01" value="0.08" required />
+			<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
 			px / (<span id="frame-rate" ></span> ms)<sup>2</sup>
 		</label>
 		
 		<label>
 			Maximum points : 
-			<input name="max-points" type="number" max="60" min="2" step="1" value="15" required />
+			<input name="max-points" type="number" max="60" min="2" step="1" required />
 		</label>
 
 		<label>
 			Choose Play Mode:
-			<select id="play-mode" required >	
-				<option selected value="free_play" label="Free Play">
+			<select name="play-mode" required onchange="handlePlayModeChange(event)" >	
+				<option value="free_play" label="Free Play">
 				<option value="1_vs_1" label="1 vs 1">
 				<option value="1_vs_cpu" label="1 vs CPU">
 			</select>
@@ -112,6 +117,18 @@
 
 			<p id="highest-score-earned">Highest Score : 0</p>
 			<p id="score-earned">Current Score : 0</p>
+			<div class="score-board">
+				<table>
+					<thead>
+						<tr>
+							<th>Player 1</th>
+							<th>Player 2</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
 		<p class="field-dimension" >
@@ -162,8 +179,8 @@
 	<audio id="ball-hit-audio" src="./sound/ball-hits-sound.mp3"></audio>
 	<audio id="coin-collect-sound" src="./sound/coin-collect-sound.mp3"></audio>
 
-	<script src="scripts/elementSelectConstants.js"></script>
 	<script src="scripts/constants.js"></script>
+	<script src="scripts/elementSelectConstants.js"></script>
 	<script src="scripts/index.js"></script>
 </body>
 </html>
