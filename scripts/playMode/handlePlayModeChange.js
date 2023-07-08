@@ -1,25 +1,38 @@
-function handlePlayModeChange(){
-    switch(playMode){
-        case '1_vs_1' : {
-            ball.className = 'ball one-vs-one';
-            currentPlayerSelected = 1;
-            alertPopover('Player 1');
-            break;
-        }
-        case '1_vs_cpu' : {
-            ball.className = 'ball one-vs-cpu';
-            currentPlayerSelected = 1;
-            alertPopover('Player 1');
-            break;
-        }
-        case 'free_play' : {
-            ball.className = 'ball free-play';
-            currentPlayerSelected = 0;
-            alertPopover('Free Play');
-            break;
-        }
-        default : {
-            break;
-        }
+const classNameMapping = {
+    one: 'ball one',
+    two: 'ball cpu',
+    cpu: 'ball two',
+    none: 'ball free-play',
+}
+
+const popoverTextMapping = {
+    one: ['Player 1'],
+    two: ['Player 2', 'yellow'],
+    cpu: ['CPU', 'yellow'],
+    none: ['Free Play'],
+}
+
+const turnToogleMapping = {
+    '1_vs_1': {
+        one: 'two',
+        two: 'one',
+    },
+    '1_vs_cpu': {
+        one: 'cpu',
+        cpu: 'one',
+    },
+    'free_play': {
+        none: 'none',
     }
+}
+
+function handlePlayModeChange(togglePlayer = false){
+
+    if (togglePlayer) {
+        currentPlayerSelected = turnToogleMapping[playMode][currentPlayerSelected];
+    }
+
+    ball.className = classNameMapping[currentPlayerSelected] || '';
+
+    alertPopover(...popoverTextMapping[currentPlayerSelected]);
 }

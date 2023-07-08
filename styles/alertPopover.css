@@ -2,12 +2,20 @@
     position: fixed;
     width: fit-content;
     max-width: 70%;
+    min-width: 200px;
+    text-align: center;
     padding: 8px 12px;
     color: white;
     background-color: green;
     border-radius: 4px;
     animation: animate-popover 3s;
 }
+
+.alert-popover.yellow {
+    background-color: #e2e257;
+    color: #000;
+}
+
 @keyframes animate-popover {
     0% {
         top: -100%;
@@ -29,8 +37,4 @@
         left: 50%;
         transform: translateX(-50%);
     }
-}
-
-.alert-popover.error {
-    background-color: red;
 }

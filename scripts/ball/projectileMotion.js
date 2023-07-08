@@ -5,23 +5,10 @@ function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
 
     showScoreDots();
 
-    let isPlaygroundDisabled = false;
-
     intervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
-            
-            highestScore = Math.max(currentScore, highestScore);
-            updateHighestScore(highestScore);
-
-            if(isPlaygroundDisabled){
-                makePlaygroundEnable();
-            }
-        }
-
-        if(playMode !== 'free_play'){
-            isPlaygroundDisabled = true;
-            makePlaygroundDisable();
+            handleTurnEnd();
         }
 
         removeScoreDotIfEarned();

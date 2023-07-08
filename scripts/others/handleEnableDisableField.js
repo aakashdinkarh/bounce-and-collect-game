@@ -9,6 +9,8 @@ function makePlaygroundDisable (){
 
     field.removeEventListener('mouseup', handleMouseUp);
     field.removeEventListener('mouseup', updateStoredMouseCoordinates);
+
+    field.style.cursor = 'not-allowed';
 }
 
 function makePlaygroundEnable(){
@@ -22,4 +24,6 @@ function makePlaygroundEnable(){
 
     field.addEventListener('mouseup', handleMouseUp);
     field.addEventListener('mouseup', updateStoredMouseCoordinates);
+
+    field.style.cursor = '';
 }
