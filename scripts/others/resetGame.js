@@ -8,5 +8,10 @@ function resetGame({ top, left } = {}){
 
     clearTrajectory();
 
+    clearScoreDots();
+    showScoreDots();
+
+    handlePlayModeChange();
+
     clearInterval(intervalId);
 }

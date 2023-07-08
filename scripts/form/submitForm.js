@@ -5,6 +5,7 @@ function handleSubmit(event) {
     e = +form.elasticity.value || e;
     g = +form.gravity.value || g;
     maximumPossiblePoints = +form['max-points'].value || maximumPossiblePoints;
+    playMode = form['play-mode'].value || 'free_play';
 
     resetGame();
 }

@@ -23,35 +23,3 @@ function makePlaygroundEnable(){
     field.addEventListener('mouseup', handleMouseUp);
     field.addEventListener('mouseup', updateStoredMouseCoordinates);
 }
-
-function onPlayModeChange(e){
-    const value = e.target.value;
-
-    console.log(value);
-
-    switch(value){
-        case '1_vs_1' : {
-            ball.className = 'ball one-vs-one';
-            currentPlayerSelected = 1;
-            alertPopover('Player 1');
-            break;
-        }
-        case '1_vs_cpu' : {
-            ball.className = 'ball one-vs-cpu';
-            currentPlayerSelected = 1;
-            alertPopover('Player 1');
-            break;
-        }
-        case 'free_play' : {
-            ball.className = 'ball free-play';
-            currentPlayerSelected = 0;
-            break;
-        }
-        default : {
-            break;
-        }
-    }
-
-    playMode = value;
-    resetGame();
-}

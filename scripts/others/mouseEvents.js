@@ -1,9 +1,9 @@
-function handleMouseDown(e){
+function handleMouseDown(){
     isMouseDown = true;
     directionLine.style.display = 'block';
 }
 
-function handleMouseUp(e){
+function handleMouseUp(){
     isMouseDown = false;
     directionLine.style.display = '';
 }

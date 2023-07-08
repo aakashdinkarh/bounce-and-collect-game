@@ -19,7 +19,7 @@
 	<script src="./scripts/trajectory/clearTrajectory.js"></script>
 	<script src="./scripts/developerMode/developerModeEventListeners.js"></script>
 	<script src="./scripts/ball/edgeTouch.js"></script>
-	<script src="./scripts/others/fillDots.js"></script>
+	<script src="./scripts/disabled/fillDots.js"></script>
 	<script src="./scripts/others/generateRandomCoordinates.js"></script>
 	<script src="./scripts/others/getCoords.js"></script>
 	<script src="./scripts/ball/makeBallHitSound.js"></script>
@@ -36,9 +36,10 @@
 	<script src="./scripts/score/showScoreDots.js"></script>
 	<script src="./scripts/trajectory/showTrajectory.js"></script>
 	<script src="./scripts/form/submitForm.js"></script>
-	<script src="./scripts/others/writeCoordinates.js"></script>
-	<script src="./scripts/playMode/onPlayModeChange.js"></script>
+	<script src="./scripts/disabled/writeCoordinates.js"></script>
 	<script src="./scripts/others/resetGame.js"></script>
+	<script src="./scripts/playMode/handlePlayModeChange.js"></script>
+	<script src="./scripts/others/handleEnableDisableField.js"></script>
 </head>
 
 <body>
@@ -84,7 +85,7 @@
 
 		<label>
 			Choose Play Mode:
-			<select id="play-mode" onchange="onPlayModeChange(event)" required >	
+			<select id="play-mode" required >	
 				<option selected value="free_play" label="Free Play">
 				<option value="1_vs_1" label="1 vs 1">
 				<option value="1_vs_cpu" label="1 vs CPU">
