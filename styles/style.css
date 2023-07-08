@@ -4,6 +4,8 @@ html {
 body {
     font-family: sans-serif;
     height: 100%;
+    margin: 0;
+    padding: 10px;
 }
 
 #field {
@@ -18,7 +20,7 @@ body {
     transition: all 1s;
 }
 
-#ball {
+.ball {
     top: 0px;
     left: 0px;
     position: absolute;
@@ -28,7 +30,7 @@ body {
     border-radius: 50%;
 }
 
-#ball img {
+.ball img {
     transform-origin: center;
     border-radius: 50%;
     box-shadow: 0 0 4px 2px white;
@@ -105,7 +107,7 @@ body {
     background-color: black;
     opacity: 0.7;
     z-index: 10;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;

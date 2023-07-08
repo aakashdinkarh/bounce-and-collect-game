@@ -1,0 +1,11 @@
+.free-play > img {
+    box-shadow: 0 0 4px 2px white;
+}
+
+.one-vs-one > img {
+    box-shadow: 0 0 4px 2px green;
+}
+
+.one-vs-cpu > img {
+    box-shadow: 0 0 4px 2px green;
+}
