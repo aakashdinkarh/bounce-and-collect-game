@@ -11,7 +11,10 @@ function checkIfScoreDotTouchBall(scoreDot, ball){
         r: scoreDot.width / 2,
     }
 
-    const distance = Math.sqrt( (ballCenter.x - scoreDotCenter.x) ** 2 + (ballCenter.y - scoreDotCenter.y) ** 2 );
+    const distance = Math.sqrt(
+        (ballCenter.x - scoreDotCenter.x) ** 2 +
+        (ballCenter.y - scoreDotCenter.y) ** 2
+    );
 
     if(distance <= ballCenter.r + scoreDotCenter.r){
         return true;

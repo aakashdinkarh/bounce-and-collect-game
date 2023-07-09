@@ -1,4 +1,4 @@
-function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
+function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
     clearInterval(intervalId);
     
     clearScoreDots();
@@ -8,9 +8,8 @@ function projectileMotion({vy = 0, vx = 1, dy = 1, dx = 1} = {}) {
     intervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
-            
-            highestScore = Math.max(currentScore, highestScore);
-            updateHighestScore(highestScore);
+            handleTurnEnd();
+            return;
         }
 
         removeScoreDotIfEarned();

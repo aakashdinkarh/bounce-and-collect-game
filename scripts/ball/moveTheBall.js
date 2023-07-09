@@ -27,6 +27,11 @@ function moveTheBall(e){
     clearTimeout(timeoutId);
     clearInterval(intervalId);
 
+    if(playMode !== 'free_play'){
+        isPlaygroundDisabled = true;
+        makePlaygroundDisable();
+    }
+
     timeoutId = setTimeout(() => {
         projectileMotion({
             vx: initialHorizontalSpeed,
