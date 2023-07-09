@@ -1,11 +1,11 @@
 const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
-       ${fieldLabel} : 
-        <input name="${fieldName}" type="text" value="${fieldValue}" required />
+        <div>${fieldLabel}</div>
+        <input name="${fieldName}" type="text" value="${fieldValue}" placeholder="Enter Name" required />
     </label>`;
 
 function handlePlayModeChange(event) {
     const numberOfRoundsField = `<label>
-        Number of Rounds: 
+        <div>Number of Rounds</div>
         <input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
     </label>`;
 
