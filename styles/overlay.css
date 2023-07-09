@@ -32,6 +32,12 @@
     animation: liveWritingAnimation 3s linear forwards;
 }
 
+.score-details {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+
 @keyframes liveWritingAnimation {
     0% {
         width: 0;

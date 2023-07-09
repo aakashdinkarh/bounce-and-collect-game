@@ -1,18 +1,10 @@
-function getWinText(){
+function getWinText({ score1 = 0, score2 = 0 }){
     const winTextMapping = {
         one: `Congratulations, ${playerOneName} Won!!`,
         two: `Congratulations, ${playerTwoName} Won!!`,
         cpu: 'Such a Loser, Try again!',
         tie: "It's a tie! Play again and make a win..."
     }
-
-    const { score1, score2 } = scoresArray.reduce(
-        ({ score1, score2 }, [player1, player2]) => ({
-            score1: player1 + score1,
-            score2: player2 + score2,
-        }),
-        { score1: 0, score2: 0 }
-    );
 
     if (playMode === '1_vs_1') {
         if (score1 > score2) return winTextMapping.one;
@@ -46,16 +38,34 @@ function handleTurnEnd(){
 
         updateScoresTable();
 
-        if (numberOfRoundsPassed >= totalNumberOfRounds) { //game-finished
+        if (numberOfRoundsPassed >= totalNumberOfRounds) { // game-finished
+            const { score1, score2 } = scoresArray.reduce(
+                ({ score1, score2 }, [player1, player2]) => ({
+                    score1: player1 + score1,
+                    score2: player2 + score2,
+                }),
+                { score1: 0, score2: 0 }
+            );
+
             const overlayDiv = document.createElement('div');
             overlayDiv.className = 'overlay game-finished';
-            overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText()}</div>
-                <button class="restart-button" onclick="resetGame()">Replay</button>`;
+            overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
+                <div class="score-details">${playerOneName} : ${score1}</div>
+                <div class="score-details">${playMode === '1_vs_1' ? playerTwoName : 'CPU'} : ${score2}</div>
+            <button class="restart-button">Replay</button>`;
 
-            overlayDiv.addEventListener('click', () => overlayDiv.remove());
+            overlayDiv.addEventListener('click', () => {
+                overlayDiv.remove();
+                resetGame(true);
+            });
             document.body.append(overlayDiv);
-        } else {
-            handleModeChangeEffects({ togglePlayer : true });
+            return;
+        }
+
+        handleModeChangeEffects({ togglePlayer : true });
+
+        if (playMode === '1_vs_cpu' && currentPlayerSelected === 'cpu') {
+            cpuTurn();
         }
     }
 }

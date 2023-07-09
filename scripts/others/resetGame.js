@@ -1,4 +1,4 @@
-function resetGame(){
+function resetGame(playerToggle = false){
     ball.style.top = (field.clientHeight - ball.clientHeight) + 'px';
     ball.style.left = 0 + 'px';
 
@@ -23,7 +23,7 @@ function resetGame(){
         scoreBoard.classList.remove('show');
     }
 
-    handleModeChangeEffects();
+    handleModeChangeEffects({ togglePlayer : playerToggle });
 
     clearInterval(intervalId);
 }

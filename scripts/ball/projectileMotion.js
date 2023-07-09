@@ -9,6 +9,7 @@ function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
             clearInterval(intervalId);
             handleTurnEnd();
+            return;
         }
 
         removeScoreDotIfEarned();
