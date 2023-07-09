@@ -73,34 +73,53 @@
 		</label>
 	</div>
 
-	<form class="form" onsubmit="handleSubmit(event)" >
-		<label>
-			Elasticity constant, e =
-			<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" required />
-		</label>
+	<div class="game-details" >
+		<form class="form" onsubmit="handleSubmit(event)" >
+			<label>
+				<div>Elasticity constant, e</div>
+				<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" required />
+			</label>
+	
+			<label>
+				<div>Gravity constant, g (px / (<span id="frame-rate" ></span> ms)<sup>2</sup>)</div>
+				<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
+				
+			</label>
+			
+			<label>
+				<div>Maximum points</div>
+				<input name="max-points" type="number" max="60" min="2" step="1" required />
+			</label>
+	
+			<label>
+				<div>Choose Play Mode</div>
+				<select name="play-mode" required onchange="handlePlayModeChange(event)" >	
+					<option value="free_play" label="Free Play">
+					<option value="1_vs_1" label="1 vs 1">
+					<option value="1_vs_cpu" label="1 vs CPU">
+				</select>
+			</label>
+			
+			<div class="submit-button-container" >
+				<button type="submit">Save and Restart</button>
+			</div>
+		</form>
 
-		<label>
-			Gravity constant, g = 
-			<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
-			px / (<span id="frame-rate" ></span> ms)<sup>2</sup>
-		</label>
-		
-		<label>
-			Maximum points : 
-			<input name="max-points" type="number" max="60" min="2" step="1" required />
-		</label>
+		<div class="score-board">
+			<table>
+				<thead>
+					<tr>
+						<th>Player 1</th>
+						<th>Player 2</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-		<label>
-			Choose Play Mode:
-			<select name="play-mode" required onchange="handlePlayModeChange(event)" >	
-				<option value="free_play" label="Free Play">
-				<option value="1_vs_1" label="1 vs 1">
-				<option value="1_vs_cpu" label="1 vs CPU">
-			</select>
-		</label>
-		
-		<button type="submit">Save and Restart</button>
-	</form>
+
 
 	<br />
 
@@ -118,18 +137,6 @@
 
 			<p id="highest-score-earned">Highest Score : 0</p>
 			<p id="score-earned">Current Score : 0</p>
-			<div class="score-board">
-				<table>
-					<thead>
-						<tr>
-							<th>Player 1</th>
-							<th>Player 2</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
 		</div>
 
 		<p class="field-dimension" >
