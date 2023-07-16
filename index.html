@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="./styles/alertPopover.css">
 	<link rel="stylesheet" href="./styles/scoreBoard.css">
 	<link rel="stylesheet" href="./styles/overlay.css">
+	<link rel="stylesheet" href="./styles/gameIntro.css">
 
 	<script src="./scripts/others/alertPopover.js"></script>
 	<script src="./scripts/score/checkIfScoreDotTouchBall.js"></script>
@@ -47,6 +48,7 @@
 	<script src="./scripts/form/handlePlayModeChange.js"></script>
 	<script src="./scripts/playMode/updateScoresTable.js"></script>
 	<script src="./scripts/playMode/cpuTurn.js"></script>
+	<script src="./scripts/accordion/accordionEventListener.js"></script>
 </head>
 
 <body>
@@ -56,15 +58,52 @@
 		</span>
 	</div>
 
-	<h3 style="margin-top: 0;" >Click on the field to move the ball there.</h3>
+	<h1 class="game-intro-heading">Welcome to the Bounce and Collect Game!</h1>
 
-	<p>
-		<i>Instructions:  </i> Once you click in the field anywhere, the ball will follow the path in a certain time.
-		<br />
-		The ball will then follow a projectile motion under the effect of <strong>g</strong> and <strong>e</strong>.
-	</p>
-	<p>Gravity is here, be careful. 🤓</p>
-	<br />
+	<button class="accordion">About the Game</button>
+	<div class="panel">
+		<p>Get ready for an exhilarating adventure where you control a ball within a dynamic field. Your objective is to
+			collect randomly generated points while mastering the effects of gravity and elasticity.</p>
+		<p>Experience the thrill of guiding the ball through a world where <span class="highlight">gravity</span> (g) and
+			<span class="highlight">elasticity</span> (e) play a crucial role in your success.
+		</p>
+	</div>
+	
+	<button class="accordion">How to Play</button>
+	<div class="panel">
+		<p>Click anywhere within the field to launch the ball along a direct path. The ball will follow the projectile
+			motion and be influenced by the forces of gravity and elasticity.</p>
+		<p>As you navigate the field, collect the randomly generated points to increase your score. Challenge yourself by
+			adjusting the gravity (g) and elasticity constant (e) to test different gameplay scenarios.</p>
+	</div>
+	
+	<button class="accordion">Game Modes</button>
+	<div class="panel">
+		<button class="accordion">Free Play</button>
+		<div class="panel nested">
+			<p>In this mode, there are no winning or losing conditions. Enjoy the freedom to practice and improve your
+				skills without any constraints.</p>
+		</div>
+	
+		<button class="accordion">1 vs 1</button>
+		<div class="panel nested">
+			<p>Challenge a friend in a thrilling head-to-head competition. Enter the names of the players and specify the
+				number of rounds for the game. The player with the highest total score at the end will be declared the
+				winner.</p>
+		</div>
+	
+		<button class="accordion">1 vs CPU</button>
+		<div class="panel nested">
+			<p>Test your skills against the computer. Enter your name and select the number of rounds you wish to play. Can
+				you outsmart the CPU and secure victory?</p>
+		</div>
+	</div>
+	
+	<button class="accordion">Let the Game Begin!</button>
+	<div class="panel">
+		<p>Get ready to put your skills to the test, strategize your moves, and collect as many points as you can!</p>
+		<p><span class="emphasis">Have fun and enjoy the game!</span></p>
+	</div>
 
 	<div class="theme-toggle" >
 		<label class="switch">
@@ -107,6 +146,7 @@
 
 		<div class="score-board">
 			<table>
+				<caption>Score Board</caption>
 				<thead>
 					<tr>
 						<th>Player 1</th>

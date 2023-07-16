@@ -24,3 +24,4 @@ const overlay = document.querySelector('.overlay.start');
 
 const fieldWidth = document.querySelector('.field-width');
 const fieldHeight = document.querySelector('.field-height');
+const accordions = document.querySelectorAll(".accordion");
