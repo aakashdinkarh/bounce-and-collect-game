@@ -10,11 +10,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    > span {
-        color: white;
-        font-size: 5em;
-    }
+.overlay > span {
+    color: white;
+    font-size: 5em;
 }
 
 .overlay.game-finished {
@@ -30,30 +30,12 @@
     text-align: center;
     white-space: nowrap;
     animation: liveWritingAnimation 3s linear forwards;
-
-    @media (max-width: 576px) {
-        white-space: wrap;
-        font-size: 24px;
-    }
 }
 
 .score-details {
     font-size: 28px;
     font-weight: bold;
     color: #fff;
-
-    @media (max-width: 576px) {
-        font-size: 20px;
-    }
-}
-
-@keyframes liveWritingAnimation {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
 }
   
 .restart-button {
@@ -72,4 +54,26 @@
     transform: scale(1.1);
     outline: 1px solid red;
     outline-offset: 4px;
+}
+
+@media (max-width: 576px) {
+    .celebrating-text {
+        white-space: wrap;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .score-details {
+        font-size: 20px;
+    }
+}
+
+@keyframes liveWritingAnimation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
