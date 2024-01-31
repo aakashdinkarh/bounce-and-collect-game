@@ -6,9 +6,9 @@ function resetGame(turnToggle = false){
     resetHighestScore();
 
     clearTrajectory();
-
     clearScoreDots();
     showScoreDots();
+    makePlaygroundEnable();
 
     scoresArray = [];
     numberOfRoundsPassed = 0;

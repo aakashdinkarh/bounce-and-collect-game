@@ -68,6 +68,7 @@
 @media (max-width: 1024px) {
     .form {
         width: 100%;
+        margin-right: 0;
     }
 }
 

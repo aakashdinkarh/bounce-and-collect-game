@@ -1,7 +1,7 @@
 let g = 0.08; //default gravity
 let e = 0.8; //default elasticty
 let playMode = 'free_play' //default play mode
-let maximumPossiblePoints = 15; //maximum points that can be earned
+let maximumPossibleScore = 15; //maximum points that can be earned
 let totalNumberOfRounds = 3; //number of rounds to decide who wins in case of multiplayer
 let e_x = Math.min(e * 1.2, 0.99); //e effect on horizontal velocity when ball touch on vertical edges
 

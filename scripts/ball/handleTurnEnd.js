@@ -22,15 +22,27 @@ function getWinText({ score1 = 0, score2 = 0 }) {
 	return winTextMapping.tie;
 }
 
-function handleTurnEnd() {
+async function handleTurnEnd() {
 	highestScore = Math.max(currentScore, highestScore);
 	updateHighestScore(highestScore);
 
-	makePlaygroundEnable();
-
+	clearTrajectory();
     clearScoreDots();
 	showScoreDots();
-	clearTrajectory();
+
+	await new Promise((resolve) => {
+		if(currentScore === maximumPossibleScore){
+			perfectScoreTextDiv.classList.toggle('show');
+			setTimeout(() => {
+				perfectScoreTextDiv.classList.toggle('show');
+				resolve();
+			}, 3000)
+		} else {
+			resolve();
+		}
+	})
+
+	makePlaygroundEnable();
 
 	if (playMode === 'free_play') {
 		return;

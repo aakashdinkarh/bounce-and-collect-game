@@ -132,7 +132,7 @@
 
 			<label>
 				<div>Maximum points</div>
-				<input name="max-points" type="number" max="60" min="2" step="1" required />
+				<input name="max-score" type="number" max="60" min="2" step="1" required />
 			</label>
 
 			<label>
@@ -178,10 +178,13 @@
 						<img src="./image/ball.svg" alt="ball">
 					</div>
 				</div>
+				<div class="perfect-score-animate">Perfect &#9733;</div>
 			</div>
 
-			<p id="highest-score-earned">Highest Score : 0</p>
-			<p id="score-earned">Current Score : 0</p>
+			<div class="score-points">
+				<p id="score-earned">Current Score : 0</p>
+				<p id="highest-score-earned">Highest Score : 0</p>
+			</div>
 		</div>
 
 		<p class="field-dimension">
