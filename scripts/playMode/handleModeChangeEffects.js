@@ -7,7 +7,7 @@ function handleModeChangeEffects({ togglePlayer = false } = {}){
     }
 
     if (togglePlayer) {
-        currentPlayerSelected = turnToogleMapping[playMode][currentPlayerSelected];
+        currentPlayerSelected = turnToggleMapping[playMode][currentPlayerSelected];
     }
 
     ball.className = classNameMapping[currentPlayerSelected] || '';

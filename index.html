@@ -3,10 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Move The Ball (FreeFall)</title>
-    <link rel="stylesheet" href="./styles/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Move The Ball (FreeFall)</title>
+	<link rel="stylesheet" href="./styles/style.css">
 	<link rel="stylesheet" href="./styles/toggle.css">
 	<link rel="stylesheet" href="./styles/developerModeRelated.css">
 	<link rel="stylesheet" href="./styles/form.css">
@@ -64,19 +64,21 @@
 	<div class="panel">
 		<p>Get ready for an exhilarating adventure where you control a ball within a dynamic field. Your objective is to
 			collect randomly generated points while mastering the effects of gravity and elasticity.</p>
-		<p>Experience the thrill of guiding the ball through a world where <span class="highlight">gravity</span> (g) and
+		<p>Experience the thrill of guiding the ball through a world where <span class="highlight">gravity</span> (g)
+			and
 			<span class="highlight">elasticity</span> (e) play a crucial role in your success.
 		</p>
 	</div>
-	
+
 	<button class="accordion">How to Play</button>
 	<div class="panel">
 		<p>Click anywhere within the field to launch the ball along a direct path. The ball will follow the projectile
 			motion and be influenced by the forces of gravity and elasticity.</p>
-		<p>As you navigate the field, collect the randomly generated points to increase your score. Challenge yourself by
-			adjusting the gravity (g) and elasticity constant (e) to test different gameplay scenarios.</p>
+		<p>As you navigate the field, collect the randomly generated points to increase your score. Challenge yourself
+			by
+			adjusting the gravity (g) and elasticity constant (e) to test different game play scenarios.</p>
 	</div>
-	
+
 	<button class="accordion">Game Modes</button>
 	<div class="panel">
 		<button class="accordion">Free Play</button>
@@ -84,62 +86,64 @@
 			<p>In this mode, there are no winning or losing conditions. Enjoy the freedom to practice and improve your
 				skills without any constraints.</p>
 		</div>
-	
+
 		<button class="accordion">1 vs 1</button>
 		<div class="panel nested">
-			<p>Challenge a friend in a thrilling head-to-head competition. Enter the names of the players and specify the
+			<p>Challenge a friend in a thrilling head-to-head competition. Enter the names of the players and specify
+				the
 				number of rounds for the game. The player with the highest total score at the end will be declared the
 				winner.</p>
 		</div>
-	
+
 		<button class="accordion">1 vs CPU</button>
 		<div class="panel nested">
-			<p>Test your skills against the computer. Enter your name and select the number of rounds you wish to play. Can
+			<p>Test your skills against the computer. Enter your name and select the number of rounds you wish to play.
+				Can
 				you outsmart the CPU and secure victory?</p>
 		</div>
 	</div>
-	
+
 	<button class="accordion">Let the Game Begin!</button>
 	<div class="panel">
-		<p>Get ready to put your skills to the test, strategize your moves, and collect as many points as you can!</p>
+		<p>Get ready to put your skills to the test, strategies your moves, and collect as many points as you can!</p>
 		<p><span class="emphasis">Have fun and enjoy the game!</span></p>
 	</div>
 
-	<div class="theme-toggle" >
+	<div class="theme-toggle">
 		<label class="switch">
 			<input id="theme" type="checkbox">
 			<span class="slider round"></span>
 		</label>
 	</div>
 
-	<div class="game-details" >
-		<form class="form" onsubmit="handleSubmit(event)" >
+	<div class="game-details">
+		<form class="form" onsubmit="handleSubmit(event)">
 			<label>
 				<div>Elasticity constant, e</div>
 				<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" required />
 			</label>
-	
+
 			<label>
-				<div>Gravity constant, g (px / (<span id="frame-rate" ></span> ms)<sup>2</sup>)</div>
+				<div>Gravity constant, g (px / (<span id="frame-rate"></span> ms)<sup>2</sup>)</div>
 				<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
-				
+
 			</label>
-			
+
 			<label>
 				<div>Maximum points</div>
 				<input name="max-points" type="number" max="60" min="2" step="1" required />
 			</label>
-	
+
 			<label>
 				<div>Choose Play Mode</div>
-				<select name="play-mode" required onchange="handlePlayModeChange(event)" >	
+				<select name="play-mode" required onchange="handlePlayModeChange(event)">
 					<option value="free_play" label="Free Play">
 					<option value="1_vs_1" label="1 vs 1">
 					<option value="1_vs_cpu" label="1 vs CPU">
 				</select>
 			</label>
-			
-			<div class="submit-button-container" >
+
+			<div class="submit-button-container">
 				<button type="submit">Save and Restart</button>
 			</div>
 		</form>
@@ -165,12 +169,12 @@
 
 	<section>
 		<div>
-			<div class="field-container" >
+			<div class="field-container">
 				<div id="field">
 					<div class="direction-line"></div>
 					<div id="ball" class="ball">
 
-						<img src="./image/ball.svg"  alt="ball">
+						<img src="./image/ball.svg" alt="ball">
 					</div>
 				</div>
 			</div>
@@ -179,9 +183,9 @@
 			<p id="score-earned">Current Score : 0</p>
 		</div>
 
-		<p class="field-dimension" >
-			<div class="field-width"></div>
-			<div class="field-height"></div>
+		<p class="field-dimension">
+		<div class="field-width"></div>
+		<div class="field-height"></div>
 		</p>
 	</section>
 
@@ -189,7 +193,7 @@
 
 	<!-- <section class="coords">
 		<section class="mouse-coords" >
-			Mouse corrdinates: 
+			Mouse coordinates: 
 			<div class="coordinates"></div>
 			<div class="coordinates"></div>
 		</section>
@@ -221,7 +225,8 @@
 		<span class="close-button">x</span>
 		<style contenteditable>.developer-mode > style {
 	background-color: #e2e2e2;
-}</style>
+}
+		</style>
 	</div>
 
 	<audio id="ball-hit-audio" src="./sound/ball-hits-sound.mp3"></audio>
@@ -231,4 +236,5 @@
 	<script src="scripts/elementSelectConstants.js"></script>
 	<script src="scripts/index.js"></script>
 </body>
+
 </html>

@@ -6,11 +6,11 @@ function showTrajectory(){
         top: top + ball.clientHeight / 2,
     };
 
-    const trajecotryPoint = document.createElement('span');
+    const trajectoryPoint = document.createElement('span');
 
-    trajecotryPoint.style.top = ballCenter.top + 'px';
-    trajecotryPoint.style.left = ballCenter.left + 'px';
-    trajecotryPoint.className = 'trajectory-point';
+    trajectoryPoint.style.top = ballCenter.top + 'px';
+    trajectoryPoint.style.left = ballCenter.left + 'px';
+    trajectoryPoint.className = 'trajectory-point';
 
-    field.append(trajecotryPoint);
+    field.append(trajectoryPoint);
 }

@@ -45,7 +45,7 @@ const prefillCss = `
     }
 `;
 
-const sampelCss = `
+const sampleCss = `
     .developer-mode > style {
         background-color: #e2e2e2;
     }
@@ -75,7 +75,7 @@ function handleThemeChange(e){
     if(isChecked){
         editableStyleTag.textContent = prefillCss;
     } else {
-        editableStyleTag.textContent = sampelCss;
+        editableStyleTag.textContent = sampleCss;
     }
 }
 

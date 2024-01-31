@@ -10,7 +10,7 @@ function handleSubmit(event) {
     playerOneName = (form['player-1'] || {}).value || playerOneName;
     playerTwoName = (form['player-2'] || {}).value || playerTwoName;
 
-    currentPlayerSelected = Object.keys(turnToogleMapping[playMode])[0];
+    currentPlayerSelected = Object.keys(turnToggleMapping[playMode])[0];
 
     resetGame();
 }
