@@ -1,6 +1,7 @@
 let audioTimeoutId;
 
 function makeBallHitSound(){
+    clearTimeout(audioTimeoutId);
     const audio = document.getElementById('ball-hit-audio');
 
     audio.currentTime = 0;
