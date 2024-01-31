@@ -26,10 +26,11 @@ function handleTurnEnd() {
 	highestScore = Math.max(currentScore, highestScore);
 	updateHighestScore(highestScore);
 
-	if (isPlaygroundDisabled) {
-		isPlaygroundDisabled = false;
-		makePlaygroundEnable();
-	}
+	makePlaygroundEnable();
+
+    clearScoreDots();
+	showScoreDots();
+	clearTrajectory();
 
 	if (playMode === 'free_play') {
 		return;

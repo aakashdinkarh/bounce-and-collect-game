@@ -62,7 +62,7 @@
 
 .game-details {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
 @media (max-width: 1024px) {
