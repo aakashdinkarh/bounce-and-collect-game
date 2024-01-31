@@ -4,14 +4,14 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 70%;
-    margin-right: 20px;
-    border: 1px solid #0d6dfd42;
-    border-radius: 4px;
-    padding: 12px;
+    margin-right: 1.25rem;
+    border: 0.0625rem solid #0d6dfd42;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
 }
 
 .form > * {
-    margin-top: 26px;
+    margin-top: 1.625rem;
     width: 48%;
 }
 
@@ -22,19 +22,19 @@
 }
 
 .form label:has([name="gravity"]) div {
-    margin-bottom: -4px;
+    margin-bottom: -0.25rem;
 }
 
 .form label input,
 .form label select {
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
+    padding: 0.625rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid #ccc;
+    margin-top: 0.625rem;
     background: transparent;
     color: #333;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .form label input:focus,
@@ -55,9 +55,9 @@
 .form button {
     background-color: #0d6efd;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     border: none;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
 }
 
 .game-details {
