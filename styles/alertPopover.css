@@ -2,12 +2,12 @@
     position: fixed;
     width: fit-content;
     max-width: 70%;
-    min-width: 200px;
+    min-width: 12.5rem;
     text-align: center;
-    padding: 8px 12px;
+    padding: 0.5rem 0.75rem;
     color: white;
     background-color: green;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     animation: animate-popover 3s;
 }
 
@@ -23,12 +23,12 @@
         transform: translateX(-50%);
     }
     20% {
-        top: 10px;
+        top: 0.625rem;
         left: 50%;
         transform: translateX(-50%);
     }
     80% {
-        top: 10px;
+        top: 0.625rem;
         left: 50%;
         transform: translateX(-50%);
     }

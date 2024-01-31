@@ -1,14 +1,14 @@
 .theme-toggle {
 	position: absolute;
-	top: 4px;
-	right: 4px;
+	top: 0.25rem;
+	right: 0.25rem;
 }
 
 .switch {
 	position: relative;
 	display: inline-block;
-	width: 40px;
-	height: 24px;
+	width: 2.5rem;
+	height: 1.5rem;
 }
 
 .switch input {
@@ -45,7 +45,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-	box-shadow: 0 0 1px #a7bc04;
+	box-shadow: 0 0 0.0625rem #a7bc04;
 }
 
 input:checked + .slider:before {
@@ -53,7 +53,7 @@ input:checked + .slider:before {
 }
 
 .slider.round {
-	border-radius: 34px;
+	border-radius: 2.125rem;
 }
 
 .slider.round:before {

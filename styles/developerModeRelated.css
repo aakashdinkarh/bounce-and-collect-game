@@ -1,6 +1,6 @@
 .developer-mode-secret-button {
-    width: 10px;
-    height: 10px;
+    width: 0.625rem;
+    height: 0.625rem;
     cursor: pointer;
     position: fixed;
     right: 0;
@@ -11,7 +11,7 @@
     width: 0;
     overflow: hidden;
     transition: all 0.2s;
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
     background-color: white;
@@ -21,19 +21,19 @@
     width: max(20vw, 300px);
     height: 100vh;
     overflow: auto;
-    padding: 10px;
-    padding-left: 30px;
+    padding: 0.625rem;
+    padding-left: 1.875rem;
 }
 
 .close-button {
     border-radius: 50%;
-    box-shadow: 0 0 3px #0000008b;
-    height: 18px;
-    width: 18px;
-    line-height: 16px;
+    box-shadow: 0 0 0.1875rem #0000008b;
+    height: 1.125rem;
+    width: 1.125rem;
+    line-height: 1rem;
     position: absolute;
-    left: 4px;
-    top: 8px;
+    left: 0.25rem;
+    top: 0.5rem;
     text-align: center;
     cursor: pointer;
 }
@@ -42,9 +42,9 @@
     display: block;
     white-space: pre;
     background-color: #e2e2e2;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     min-height: 80%;
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 0.625rem;
+    padding: 0.625rem;
     overflow: auto;
 }
