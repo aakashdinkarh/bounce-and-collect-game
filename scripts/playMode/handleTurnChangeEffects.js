@@ -1,4 +1,4 @@
-function handleModeChangeEffects({ togglePlayer = false } = {}){
+function handleTurnChangeEffects({ togglePlayer = false } = {}){
     const popoverTextMapping = {
         one: [playerOneName],
         two: [playerTwoName, 'yellow'],

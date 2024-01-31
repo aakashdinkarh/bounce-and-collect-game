@@ -23,7 +23,7 @@ function resetGame(playerToggle = false){
         scoreBoard.classList.remove('show');
     }
 
-    handleModeChangeEffects({ togglePlayer : playerToggle });
+    handleTurnChangeEffects({ togglePlayer : playerToggle });
 
     clearInterval(intervalId);
 }

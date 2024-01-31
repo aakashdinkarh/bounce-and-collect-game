@@ -7,7 +7,7 @@ let e_x = Math.min(e * 1.2, 0.99); //e effect on horizontal velocity when ball t
 
 const minimumHorizontalSpeedToMove = 0.01;
 const rotateFactor = 0.2;
-const frameRate = 10;
+const frameRate = 10; // 1 frame / (frameRate) ms
 let currentScore = 0;
 let highestScore = 0;
 let numberOfRoundsPassed = 0;
