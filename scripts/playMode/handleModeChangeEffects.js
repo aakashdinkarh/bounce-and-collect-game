@@ -12,5 +12,5 @@ function handleModeChangeEffects({ togglePlayer = false } = {}){
 
     ball.className = classNameMapping[currentPlayerSelected] || '';
 
-    alertPopover(...popoverTextMapping[currentPlayerSelected]);
+    toast(...popoverTextMapping[currentPlayerSelected]);
 }

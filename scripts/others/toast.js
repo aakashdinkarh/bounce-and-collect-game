@@ -1,4 +1,4 @@
-function alertPopover(text = '', className = ''){
+function toast(text = '', className = ''){
     const div = document.createElement('div');
     div.className = 'alert-popover' + ' ' + className;
     div.innerHTML = text;
