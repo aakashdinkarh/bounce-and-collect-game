@@ -6,16 +6,20 @@ function getWinText({ score1 = 0, score2 = 0 }) {
 		tie: "It's a tie! Play again and make a win..."
 	}
 
-	if (playMode === '1_vs_1') {
-		if (score1 > score2) return winTextMapping.one;
-		if (score1 < score2) return winTextMapping.two;
-		return winTextMapping.tie;
-	} else if (playMode === '1_vs_cpu') {
-		if (score1 > score2) return winTextMapping.one;
-		if (score1 < score2) return winTextMapping.cpu;
-		return winTextMapping.tie;
+	if (score1 > score2) {
+		return winTextMapping.one;
 	}
-	return '';
+
+	if (score1 < score2) {
+		if(playMode === '1_vs_1'){
+			return winTextMapping.two;
+		}
+
+		if(playMode === '1_vs_cpu'){
+			return winTextMapping.cpu;
+		}
+	}
+	return winTextMapping.tie;
 }
 
 function handleTurnEnd() {
@@ -65,7 +69,7 @@ function handleTurnEnd() {
 		return;
 	}
 
-	handleTurnChangeEffects({ togglePlayer: true });
+	handleTurnChangeEffects({ turnToggle: true });
 
 	if (playMode === '1_vs_cpu' && currentPlayerSelected === 'cpu') {
 		cpuTurn();
