@@ -14,6 +14,9 @@ function makePlaygroundDisable (){
     field.style.cursor = 'not-allowed';
 
     isPlaygroundDisabled = true;
+
+    statusTextContainer.innerText = 'Please wait...';
+    statusTextContainer.className = 'wait';
 }
 
 function makePlaygroundEnable(){
@@ -36,4 +39,7 @@ function makePlaygroundEnable(){
     field.style.cursor = '';
 
     isPlaygroundDisabled = false;
+
+    statusTextContainer.innerText = 'Throw...';
+    statusTextContainer.className = 'throw';
 }

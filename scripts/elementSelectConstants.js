@@ -2,6 +2,7 @@ const ball = document.getElementById('ball');
 const field = document.getElementById('field');
 
 const [perfectScoreTextDiv] = document.getElementsByClassName('perfect-score-animate');
+const statusTextContainer = document.getElementById('status-text');
 
 const currentScoreCount = document.getElementById('score-earned');
 const highestScoreCount = document.getElementById('highest-score-earned');
