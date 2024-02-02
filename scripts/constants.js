@@ -16,7 +16,7 @@ let intervalId;
 let timeoutId;
 let isMouseDown = false;
 let isLongClick = false;
-let isPlaygroundDisabled = false;
+let isPlaygroundDisabled = true;
 
 let currentPlayerSelected = 'none';
 let scoresArray = [];

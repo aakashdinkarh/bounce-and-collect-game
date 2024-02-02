@@ -72,7 +72,7 @@ async function handleTurnEnd() {
 		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
                 <div class="score-details">${playerOneName} : ${score1}</div>
                 <div class="score-details">${playMode === '1_vs_1' ? playerTwoName : 'CPU'} : ${score2}</div>
-            <button class="restart-button">Replay</button>`;
+            <button class="restart-button">Click anywhere to replay</button>`;
 
 		overlayDiv.addEventListener('click', () => {
 			overlayDiv.remove();

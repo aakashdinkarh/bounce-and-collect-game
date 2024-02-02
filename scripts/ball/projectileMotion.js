@@ -10,8 +10,6 @@ function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
 
         removeScoreDotIfEarned();
 
-        showDirectionOfThrow({ clientX: storedMouseCoordinates.x, clientY: storedMouseCoordinates.y });
-
         showTrajectory();
 
         if(!isEdgeTouch('bottom') || vy !== 0){

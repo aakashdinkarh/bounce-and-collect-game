@@ -11,13 +11,15 @@ function getRelativeToField(elemCoords){
 
 function getCoords(id, relativeToField = false) {
     const elem = document.getElementById(id);
+    
+    const elemBorderWidth = parseFloat(getComputedStyle(elem).borderWidth);
     const { left, top } = elem.getBoundingClientRect();
 
     let elemCoords = {
-        left: left + elem.clientLeft, //elemX + elemBorderLeftWidth
-        right: left + elem.clientLeft + elem.clientWidth,
-        top: top + elem.clientTop, //elemY + elemBorderTopWidth
-        bottom: top + elem.clientTop + elem.clientHeight,
+        left: left + elemBorderWidth, //elemX + elemBorderLeftWidth
+        right: left + elemBorderWidth + elem.clientWidth,
+        top: top + elemBorderWidth, //elemY + elemBorderTopWidth
+        bottom: top + elemBorderWidth + elem.clientHeight,
     };
 
     if(relativeToField) {
