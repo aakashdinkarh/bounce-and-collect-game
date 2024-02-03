@@ -1,21 +1,47 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Bounce and Collect</title>
+	<title>Bounce and Collect Game</title>
+	<meta name="description"
+		content="Experience endless fun with our addictive bounce-and-collect game! Get ready to throw the ball in the gravity affected field. Play Free Play or vs CPU or vs your friends. Experience gravity and effects of elasticity.">
+	<meta name="keywords" content="Ball, Field, Bounce, Bounce and collect, game, gravity, elasticity">
+
+	<meta property="og:title" content="Bounce and Collect Game">
+	<meta property="og:description"
+		content="Experience fun with bounce-and-collect game! Get ready to throw the ball in the gravity affected field.">
+	<meta property="og:image" content="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg">
+
+	<link rel="canonical" href="https://aakashdinkarh.github.io/bounce-and-collect-game/">
+	<meta name="robots" content="index, follow">
+
 	<link rel="icon" href="./image/ball.svg" type="image/svg+xml" />
-	<link rel="stylesheet" href="./styles/style.css">
-	<link rel="stylesheet" href="./styles/toggle.css">
-	<link rel="stylesheet" href="./styles/developerModeRelated.css">
-	<link rel="stylesheet" href="./styles/form.css">
-	<link rel="stylesheet" href="./styles/playModes.css">
-	<link rel="stylesheet" href="./styles/toast.css">
-	<link rel="stylesheet" href="./styles/scoreBoard.css">
-	<link rel="stylesheet" href="./styles/overlay.css">
-	<link rel="stylesheet" href="./styles/gameIntro.css">
+
+	<link rel="preload" href="./styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/overlay.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/scoreBoard.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/gameIntro.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/toggle.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/developerModeRelated.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/form.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/playModes.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="./styles/toast.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+	<noscript>
+		<link rel="stylesheet" href="./styles/style.css">
+		<link rel="stylesheet" href="./styles/overlay.css">
+		<link rel="stylesheet" href="./styles/scoreBoard.css">
+		<link rel="stylesheet" href="./styles/gameIntro.css">
+		<link rel="stylesheet" href="./styles/toggle.css">
+		<link rel="stylesheet" href="./styles/developerModeRelated.css">
+		<link rel="stylesheet" href="./styles/form.css">
+		<link rel="stylesheet" href="./styles/playModes.css">
+		<link rel="stylesheet" href="./styles/toast.css">
+	</noscript>
 
 	<script src="./scripts/others/toast.js"></script>
 	<script src="./scripts/score/checkIfScoreDotTouchBall.js"></script>
@@ -62,8 +88,9 @@
 
 	<button class="accordion">About the Game</button>
 	<div class="panel">
-		<p>Get ready for an exhilarating adventure where you control a ball within a dynamic field. Your objective is to
-			collect randomly generated points while mastering the effects of gravity and elasticity.</p>
+		<p>Get ready for the adventure where you throw a ball in the field. Your objective is to
+			collect as much as possible randomly generated points while mastering the effects of gravity and elasticity.
+		</p>
 		<p>Experience the thrill of guiding the ball through a world where <span class="highlight">gravity</span> (g)
 			and
 			<span class="highlight">elasticity</span> (e) play a crucial role in your success.
@@ -72,11 +99,13 @@
 
 	<button class="accordion">How to Play</button>
 	<div class="panel">
-		<p>Click anywhere within the field to launch the ball along a direct path. The ball will follow the projectile
-			motion and be influenced by the forces of gravity and elasticity.</p>
+		<p>Click or tap anywhere within the field to launch the ball along a direct path. The ball will follow a
+			straight path till that point and then projectile
+			motion after that point and be influenced by elasticity and the force of gravity.</p>
 		<p>As you navigate the field, collect the randomly generated points to increase your score. Challenge yourself
 			by
-			adjusting the gravity (g) and elasticity constant (e) to test different gameplay scenarios.</p>
+			adjusting the <span class="highlight">gravity</span> (g) and <span class="highlight">elasticity</span> (e)
+			to test different gameplay scenarios.</p>
 	</div>
 
 	<button class="accordion">Game Modes</button>
@@ -84,7 +113,7 @@
 		<button class="accordion">Free Play</button>
 		<div class="panel nested">
 			<p>In this mode, there are no winning or losing conditions. Enjoy the freedom to practice and improve your
-				skills without any constraints.</p>
+				skills.</p>
 		</div>
 
 		<button class="accordion">1 vs 1</button>
@@ -110,7 +139,7 @@
 	</div>
 
 	<div class="theme-toggle">
-		<label class="switch">
+		<label class="switch" for="theme">
 			<input id="theme" type="checkbox">
 			<span class="slider round"></span>
 		</label>
