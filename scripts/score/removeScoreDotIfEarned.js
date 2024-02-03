@@ -9,6 +9,7 @@ function removeScoreDotIfEarned(){
         if(checkIfScoreDotTouchBall(coords, ballCoords)){
             scoreDot.remove();
             makeCoinCollectSound();
+            playSound('ball-hit-audio');
 
             updateCurrentScore(++currentScore);
         }

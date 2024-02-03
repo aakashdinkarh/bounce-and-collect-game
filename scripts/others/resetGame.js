@@ -1,4 +1,4 @@
-function resetGame(playerToggle = false){
+function resetGame(turnToggle = false){
     ball.style.top = (field.clientHeight - ball.clientHeight) + 'px';
     ball.style.left = 0 + 'px';
 
@@ -6,9 +6,9 @@ function resetGame(playerToggle = false){
     resetHighestScore();
 
     clearTrajectory();
-
     clearScoreDots();
     showScoreDots();
+    makePlaygroundEnable();
 
     scoresArray = [];
     numberOfRoundsPassed = 0;
@@ -23,7 +23,7 @@ function resetGame(playerToggle = false){
         scoreBoard.classList.remove('show');
     }
 
-    handleModeChangeEffects({ togglePlayer : playerToggle });
+    handleTurnChangeEffects({ turnToggle });
 
     clearInterval(intervalId);
 }

@@ -28,6 +28,12 @@
     font-size: 1.25rem;
 }
 
+.perfect-score-star {
+    color: #e2a12b;
+    margin-left: 0.25rem;
+    line-height: 1rem;
+}
+
 @media (max-width: 1024px) {
     .score-board {
         margin-top: 2rem;

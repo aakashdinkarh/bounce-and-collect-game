@@ -1,6 +1,6 @@
 function assignDefaultValues(){
     form.elasticity.value = e;
     form.gravity.value = g;
-    form['max-points'].value = maximumPossiblePoints;
+    form['max-score'].value = maximumPossibleScore;
     form['play-mode'].value = (((form['play-mode'] || {}).options || [])[0] || {}).value;
 }

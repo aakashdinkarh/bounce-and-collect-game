@@ -4,7 +4,7 @@ function handleSubmit(event) {
 
     e = +form.elasticity.value || e;
     g = +form.gravity.value || g;
-    maximumPossiblePoints = +form['max-points'].value || maximumPossiblePoints;
+    maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;
     playMode = form['play-mode'].value || 'free_play';
     totalNumberOfRounds = (form['number-of-rounds'] || {}).value || totalNumberOfRounds;
     playerOneName = (form['player-1'] || {}).value || playerOneName;
