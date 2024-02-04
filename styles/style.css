@@ -86,6 +86,7 @@ body {
 
 #status-text {
     margin: 1rem 0 0.5rem;
+    min-height: 1.5rem;
 }
 
 #status-text.throw {
@@ -105,12 +106,15 @@ body {
 }
 
 .direction-line::after {
-    content: '>';
+    content: '';
     position: absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid red;
+    border-color: red red transparent transparent;
     right: 0;
-    top: -0.125rem;
-    color: red;
-    transform: translateY(-43%);
+    transform: rotateX(65deg) rotateZ(45deg) translate3d(-2px, 0px, 10.4px);
 }
 
 .info:hover .info-text {
@@ -191,5 +195,11 @@ body {
 @media (max-width: 1024px) {
     .coords {
         display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    #field {
+        height: 60vh;
     }
 }

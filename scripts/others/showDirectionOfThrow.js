@@ -2,6 +2,11 @@ function showDirectionOfThrow(e){
     if(!isMouseDown){
         return;
     }
+    const isMobileEvent = e.type.includes('touch');
+
+    if(e.type === 'touchmove'){
+        e.preventDefault();
+    }
 
     const { left, top } = getCoords('ball', true);
 
@@ -11,9 +16,9 @@ function showDirectionOfThrow(e){
     };
 
     const newLocation = getRelativeToField({
-        left: e.clientX,
-        top: e.clientY,
-    })
+        left: isMobileEvent ? e.changedTouches[0].clientX : e.clientX,
+        top: isMobileEvent ? e.changedTouches[0].clientY : e.clientY,
+    });
 
     const lengthX = newLocation.left - ballCenter.left;
     const lengthY = newLocation.top - ballCenter.top;

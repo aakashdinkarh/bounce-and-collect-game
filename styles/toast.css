@@ -1,40 +1,36 @@
 .alert-popover {
     position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
     width: fit-content;
     max-width: 70%;
     min-width: 12.5rem;
     text-align: center;
     padding: 0.5rem 0.75rem;
-    color: white;
-    background-color: green;
+    color: #000;
+    font-weight: 600;
+    background-color: #00ff00;
+    box-shadow: 0px 6px 6px 0px #0000003d;
     border-radius: 0.25rem;
     animation: animate-popover 3s;
 }
 
-.alert-popover.yellow {
-    background-color: #e2e257;
+.alert-popover.orange {
+    background-color: #ffb300;
     color: #000;
 }
 
 @keyframes animate-popover {
     0% {
         top: -100%;
-        left: 50%;
-        transform: translateX(-50%);
     }
     20% {
         top: 0.625rem;
-        left: 50%;
-        transform: translateX(-50%);
     }
     80% {
         top: 0.625rem;
-        left: 50%;
-        transform: translateX(-50%);
     }
     100% {
         top: -100%;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
