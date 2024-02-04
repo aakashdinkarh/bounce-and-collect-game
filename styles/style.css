@@ -106,12 +106,15 @@ body {
 }
 
 .direction-line::after {
-    content: '>';
+    content: '';
     position: absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid red;
+    border-color: red red transparent transparent;
     right: 0;
-    top: -0.125rem;
-    color: red;
-    transform: translateY(-43%);
+    transform: rotateX(65deg) rotateZ(45deg) translate3d(-2px, 0px, 10.4px);
 }
 
 .info:hover .info-text {
