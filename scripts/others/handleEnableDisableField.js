@@ -43,14 +43,13 @@ function makePlaygroundEnable(){
     field.addEventListener('mouseup', handleMouseUp);
 
     // mobile
-    field.addEventListener('touchend', moveTheBall, { passive: true });
-
     field.addEventListener('touchmove', showDirectionOfThrow, { passive: false });
 
     field.addEventListener('touchstart', handleMouseDown, { passive: true });
     field.addEventListener('touchstart', showDirectionOfThrow, { passive: true });
 
     field.addEventListener('touchend', handleMouseUp, { passive: true });
+    field.addEventListener('touchend', moveTheBall, { passive: true });
 
     field.style.cursor = '';
 
