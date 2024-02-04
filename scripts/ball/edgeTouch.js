@@ -2,7 +2,7 @@ function isEdgeTouch(edge = ''){
     const fieldCoords = getCoords('field', true);
     const ballCoords = getCoords('ball', true);
 
-    return fieldCoords[edge] === ballCoords[edge];
+    return +(fieldCoords[edge].toFixed(2)) === +(ballCoords[edge].toFixed(2));
 }
 
 function verticallyEdgeTouchEffect({ vx, vy, dy }){
