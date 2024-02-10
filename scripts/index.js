@@ -8,11 +8,8 @@ overlay.addEventListener('click', function() {
 assignDefaultValues();
 
 showScoreDots();
-// writeFieldCoords();
 
 frameRateText.innerHTML = frameRate;
-
-// document.addEventListener('mousemove', writeMouseCoords);
 
 theme.addEventListener('change', handleThemeChange);
 
