@@ -22,9 +22,6 @@ let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
 
-let playerOneName = '';
-let playerTwoName = '';
-
 const storedMouseCoordinates = {
     x: 0,
     y: 0,
@@ -50,3 +47,9 @@ const turnToggleMapping = {
         cpu: 'one',
     },
 }
+
+let playerNameLabelMapping = {
+    cpu: 'CPU',
+    one: '',
+    two: '',
+};

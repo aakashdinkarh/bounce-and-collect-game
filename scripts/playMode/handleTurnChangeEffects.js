@@ -1,8 +1,8 @@
 function handleTurnChangeEffects({ turnToggle = false } = {}) {
 	// move this mapping outside
 	const popoverTextMapping = {
-		one: [playerOneName],
-		two: [playerTwoName, 'orange'],
+		one: [playerNameLabelMapping.one],
+		two: [playerNameLabelMapping.two, 'orange'],
 		cpu: ['CPU', 'orange'],
 		none: ['Free Play'],
 	};

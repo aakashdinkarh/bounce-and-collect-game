@@ -27,8 +27,8 @@ function handlePlayModeChange(event) {
 
     const playModeField = form.querySelector('label:has([name=play-mode])');
 
-    const player1Field = playerNameField('player-1', 'Player 1 Name', playerOneName);
-    const player2Field = playerNameField('player-2', 'Player 2 Name', playerTwoName);
+    const player1Field = playerNameField('player-1', 'Player 1 Name', playerNameLabelMapping.one);
+    const player2Field = playerNameField('player-2', 'Player 2 Name', playerNameLabelMapping.two);
 
     let additionalFields = player1Field;
 
@@ -49,10 +49,10 @@ function handleSubmit(event) {
     maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;
     playMode = form['play-mode'].value || 'free_play';
     totalNumberOfRounds = (form['number-of-rounds'] || {}).value || totalNumberOfRounds;
-    playerOneName = (form['player-1'] || {}).value || playerOneName;
-    playerTwoName = (form['player-2'] || {}).value || playerTwoName;
+    playerNameLabelMapping.one = (form['player-1'] || {}).value || playerNameLabelMapping.one;
+    playerNameLabelMapping.two = (form['player-2'] || {}).value || playerNameLabelMapping.two;
 
-    currentPlayerSelected = Object.keys(turnToggleMapping[playMode])[0];
+    currentSelectedPlayer = Object.keys(turnToggleMapping[playMode])[0];
 
     resetGame();
 }
