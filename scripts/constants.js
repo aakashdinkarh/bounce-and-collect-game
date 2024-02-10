@@ -18,7 +18,7 @@ let isMouseDown = false;
 let isLongClick = false;
 let isPlaygroundDisabled = true;
 
-let currentPlayerSelected = 'none';
+let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
 

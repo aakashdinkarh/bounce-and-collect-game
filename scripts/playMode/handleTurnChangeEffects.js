@@ -7,10 +7,10 @@ function handleTurnChangeEffects({ turnToggle = false } = {}) {
 	};
 
 	if (turnToggle) {
-		currentPlayerSelected = turnToogleMapping[playMode][currentPlayerSelected];
+		currentSelectedPlayer = turnToogleMapping[playMode][currentSelectedPlayer];
 	}
 
-	ball.className = classNameMapping[currentPlayerSelected] || '';
+	ball.className = classNameMapping[currentSelectedPlayer] || '';
 
-	toast(...popoverTextMapping[currentPlayerSelected]);
+	toast(...popoverTextMapping[currentSelectedPlayer]);
 }

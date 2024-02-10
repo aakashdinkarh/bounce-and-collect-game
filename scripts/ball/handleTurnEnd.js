@@ -84,7 +84,7 @@ async function handleTurnEnd() {
 
 	handleTurnChangeEffects({ turnToggle: true });
 
-	if (playMode === '1_vs_cpu' && currentPlayerSelected === 'cpu') {
+	if (playMode === '1_vs_cpu' && currentSelectedPlayer === 'cpu') {
 		cpuTurn();
 	}
 }
