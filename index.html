@@ -44,36 +44,25 @@
 	</noscript>
 
 	<script src="./scripts/others/toast.js"></script>
-	<script src="./scripts/score/checkIfScoreDotTouchBall.js"></script>
-	<script src="./scripts/score/clearScoreDots.js"></script>
-	<script src="./scripts/trajectory/clearTrajectory.js"></script>
 	<script src="./scripts/developerMode/developerModeEventListeners.js"></script>
 	<script src="./scripts/ball/edgeTouch.js"></script>
-	<script src="./scripts/disabled/fillDots.js"></script>
 	<script src="./scripts/others/generateRandomCoordinates.js"></script>
 	<script src="./scripts/others/getCoords.js"></script>
 	<script src="./scripts/others/playSound.js"></script>
 	<script src="./scripts/others/mouseEvents.js"></script>
-	<script src="./scripts/ball/moveBallTo.js"></script>
 	<script src="./scripts/ball/moveTheBall.js"></script>
-	<script src="./scripts/ball/moveTheBallHorizontally.js"></script>
-	<script src="./scripts/ball/moveTheBallVertically.js"></script>
 	<script src="./scripts/ball/projectileMotion.js"></script>
 	<script src="./scripts/score/removeScoreDotIfEarned.js"></script>
 	<script src="./scripts/score/scoreCallbacks.js"></script>
 	<script src="./scripts/others/showDirectionOfThrow.js"></script>
 	<script src="./scripts/score/showScoreDots.js"></script>
 	<script src="./scripts/trajectory/showTrajectory.js"></script>
-	<script src="./scripts/form/submitForm.js"></script>
-	<script src="./scripts/disabled/writeCoordinates.js"></script>
+	<script src="./scripts/form/form.js"></script>
 	<script src="./scripts/others/resetGame.js"></script>
 	<script src="./scripts/playMode/handleTurnChangeEffects.js"></script>
 	<script src="./scripts/others/handleEnableDisableField.js"></script>
 	<script src="./scripts/ball/handleTurnEnd.js"></script>
-	<script src="./scripts/form/assignDefaultValues.js"></script>
-	<script src="./scripts/form/handlePlayModeChange.js"></script>
 	<script src="./scripts/playMode/updateScoresTable.js"></script>
-	<script src="./scripts/playMode/cpuTurn.js"></script>
 	<script src="./scripts/accordion/accordionEventListener.js"></script>
 </head>
 
@@ -87,10 +76,12 @@
 	<h1 class="game-intro-heading">Welcome to the Bounce and Collect Game!</h1>
 
 	<button class="accordion">About the Game</button>
+
 	<div class="panel">
 		<p>Get ready for the adventure where you throw a ball in the field. Your objective is to
 			collect as much as possible randomly generated points while mastering the effects of gravity and elasticity.
 		</p>
+
 		<p>Experience the thrill of guiding the ball through a world where <span class="highlight">gravity</span> (g)
 			and
 			<span class="highlight">elasticity</span> (e) play a crucial role in your success.
@@ -98,10 +89,12 @@
 	</div>
 
 	<button class="accordion">How to Play</button>
+
 	<div class="panel">
 		<p>Click or tap anywhere within the field to launch the ball along a direct path. The ball will follow a
 			straight path till that point and then projectile
 			motion after that point and be influenced by elasticity and the force of gravity.</p>
+
 		<p>As you navigate the field, collect the randomly generated points to increase your score. Challenge yourself
 			by
 			adjusting the <span class="highlight">gravity</span> (g) and <span class="highlight">elasticity</span> (e)
@@ -109,14 +102,17 @@
 	</div>
 
 	<button class="accordion">Game Modes</button>
+
 	<div class="panel">
 		<button class="accordion">Free Play</button>
+
 		<div class="panel nested">
 			<p>In this mode, there are no winning or losing conditions. Enjoy the freedom to practice and improve your
 				skills.</p>
 		</div>
 
 		<button class="accordion">1 vs 1</button>
+
 		<div class="panel nested">
 			<p>Challenge a friend in a thrilling head-to-head competition. Enter the names of the players and specify
 				the
@@ -125,22 +121,25 @@
 		</div>
 
 		<button class="accordion">1 vs CPU</button>
+
 		<div class="panel nested">
 			<p>Test your skills against the computer. Enter your name and select the number of rounds you wish to play.
-				Can
-				you outsmart the CPU and secure victory?</p>
+				Can you outsmart the CPU and secure victory?</p>
 		</div>
 	</div>
 
 	<button class="accordion">Let the Game Begin!</button>
+
 	<div class="panel">
 		<p>Get ready to put your skills to test, strategies your moves, and collect as many points as you can!</p>
+
 		<p><span class="emphasis">Have fun and enjoy the game!</span></p>
 	</div>
 
 	<div class="theme-toggle">
 		<label class="switch" for="theme">
-			<input id="theme" type="checkbox">
+			<input id="theme" type="checkbox" />
+
 			<span class="slider round"></span>
 		</label>
 	</div>
@@ -149,25 +148,30 @@
 		<form class="form" onsubmit="handleSubmit(event)">
 			<label>
 				<div>Elasticity constant, e</div>
+
 				<input name="elasticity" type="number" max="0.99" min="0.1" step="0.01" required />
 			</label>
 
 			<label>
 				<div>Gravity constant, g (px / (<span id="frame-rate"></span> ms)<sup>2</sup>)</div>
-				<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
 
+				<input name="gravity" type="number" max="1" min="0.01" step="0.01" required />
 			</label>
 
 			<label>
 				<div>Maximum points</div>
+
 				<input name="max-score" type="number" max="60" min="2" step="1" required />
 			</label>
 
 			<label>
 				<div>Choose Play Mode</div>
+
 				<select name="play-mode" required onchange="handlePlayModeChange(event)">
 					<option value="free_play" label="Free Play">
+
 					<option value="1_vs_1" label="1 vs 1">
+
 					<option value="1_vs_cpu" label="1 vs CPU">
 				</select>
 			</label>
@@ -180,14 +184,16 @@
 		<div class="score-board">
 			<table>
 				<caption>Score Board</caption>
+
 				<thead>
 					<tr>
 						<th>Player 1</th>
+
 						<th>Player 2</th>
 					</tr>
 				</thead>
-				<tbody>
-				</tbody>
+
+				<tbody></tbody>
 			</table>
 		</div>
 	</div>
@@ -201,60 +207,30 @@
 			<div class="field-container">
 				<div id="field" oncontextmenu="return false;" style="user-select: none;">
 					<div class="direction-line"></div>
-					<div id="ball" class="ball">
 
+					<div id="ball" class="ball">
 						<img src="./image/ball.svg" alt="ball">
 					</div>
 				</div>
+
 				<div class="perfect-score-animate">Perfect &#9733;</div>
 			</div>
 
 			<div class="score-points">
 				<p id="score-earned">Current Score : 0</p>
+
 				<p id="highest-score-earned">Highest Score : 0</p>
 			</div>
 		</div>
-
-		<p class="field-dimension">
-		<div class="field-width"></div>
-		<div class="field-height"></div>
-		</p>
 	</section>
-
-	</div>
-
-	<!-- <section class="coords">
-		<section class="mouse-coords" >
-			Mouse coordinates: 
-			<div class="coordinates"></div>
-			<div class="coordinates"></div>
-		</section>
-
-		<br />
-
-		<section class="field-coords">
-			Field Coordinates:
-			<section class="outer-coords">
-				Outer:
-				<div class="coordinates"></div>
-				<div class="coordinates"></div>	
-			</section>
-
-			<br />
-
-			<section class="inner-coords">
-				Inner:
-				<div class="coordinates"></div>
-				<div class="coordinates"></div>	
-			</section>
-		</section>
-	</section> -->
 
 	<div class="developer-mode-secret-button"></div>
 
 	<div class="developer-mode">
 		<b>Welcome to Developer Mode... Write css in your own style</b>
+
 		<span class="close-button">x</span>
+
 		<style contenteditable>
 			.developer-mode>style {
 				background-color: #e2e2e2;
