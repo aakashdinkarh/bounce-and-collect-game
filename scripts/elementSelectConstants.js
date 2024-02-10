@@ -23,7 +23,6 @@ const developerModeCloseButton = developerModeDiv.querySelector('.close-button')
 const editableStyleTag = developerModeDiv.querySelector('style');
 
 const theme = document.getElementById('theme');
-const overlay = document.querySelector('.overlay.start');
 
 const fieldWidth = document.querySelector('.field-width');
 const fieldHeight = document.querySelector('.field-height');

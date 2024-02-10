@@ -1,5 +1,5 @@
-overlay.addEventListener('click', function() {
-    overlay.remove();
+document.querySelector('.overlay.start').addEventListener('click', function(e) {
+    this.remove();
     
     makePlaygroundDisable();
     projectileMotion();
