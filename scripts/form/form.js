@@ -44,6 +44,8 @@ function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
 
+    field.scrollIntoView({ behavior: 'smooth' });
+
     e = +form.elasticity.value || e;
     g = +form.gravity.value || g;
     maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;

@@ -49,9 +49,9 @@ async function handleTurnEnd() {
 		}
 	})
 
-	makePlaygroundEnable();
-
+	
 	if (playMode === 'free_play') {
+		makePlaygroundEnable();
 		return;
 	}
 
@@ -79,7 +79,7 @@ async function handleTurnEnd() {
 		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
                 <div class="score-details">${playerNameLabelMapping.one} : ${score1}</div>
                 <div class="score-details">${playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu} : ${score2}</div>
-            <button class="restart-button">Click anywhere to replay</button>`;
+            <button class="restart-button">Click anywhere to restart</button>`;
 
 		overlayDiv.addEventListener('click', () => {
 			overlayDiv.remove();
@@ -90,6 +90,7 @@ async function handleTurnEnd() {
 	}
 
 	handleTurnChangeEffects({ turnToggle: true });
+	makePlaygroundEnable();
 
 	if (playMode === '1_vs_cpu' && currentSelectedPlayer === 'cpu') {
 		cpuTurn();
