@@ -60,11 +60,6 @@ body {
     z-index: 1;
 }
 
-.outer-coords,
-.inner-coords {
-    padding-left: 0.625rem;
-}
-
 .field-container {
     display: flex;
     position: relative;
@@ -115,10 +110,6 @@ body {
     border-color: red red transparent transparent;
     right: 0;
     transform: rotateX(65deg) rotateZ(45deg) translate3d(-2px, 0px, 10.4px);
-}
-
-.info:hover .info-text {
-    display: block;
 }
 
 .trajectory-point {

@@ -1,4 +1,5 @@
 function handleTurnChangeEffects({ turnToggle = false } = {}) {
+	// move this mapping outside
 	const popoverTextMapping = {
 		one: [playerOneName],
 		two: [playerTwoName, 'orange'],
@@ -7,7 +8,7 @@ function handleTurnChangeEffects({ turnToggle = false } = {}) {
 	};
 
 	if (turnToggle) {
-		currentPlayerSelected = turnToogleMapping[playMode][currentPlayerSelected];
+		currentPlayerSelected = turnToggleMapping[playMode][currentPlayerSelected];
 	}
 
 	ball.className = classNameMapping[currentPlayerSelected] || '';
