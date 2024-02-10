@@ -4,8 +4,10 @@ function moveTheBall(e){
     const { left: fieldLeft, top: fieldTop } = getCoords('field');
     const { left: ballInitialLeft, top: ballInitialTop } = getCoords('ball', true);
 
-    let mouseX = e.clientX - fieldLeft;
-    let mouseY = e.clientY - fieldTop;
+    const isMobileEvent = e.type?.includes('touch');
+
+    let mouseX = (isMobileEvent ? e.changedTouches[0].clientX : e.clientX) - fieldLeft;
+    let mouseY = (isMobileEvent ? e.changedTouches[0].clientY : e.clientY) - fieldTop;
 
     let ballX = Math.max(mouseX - ballWidth/2, 0); //left edge case
     let ballY = Math.max(mouseY - ballHeight/2, 0); //top edge case
@@ -27,10 +29,7 @@ function moveTheBall(e){
     clearTimeout(timeoutId);
     clearInterval(intervalId);
 
-    if(playMode !== 'free_play'){
-        isPlaygroundDisabled = true;
-        makePlaygroundDisable();
-    }
+    makePlaygroundDisable();
 
     timeoutId = setTimeout(() => {
         projectileMotion({

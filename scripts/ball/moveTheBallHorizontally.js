@@ -14,7 +14,7 @@ function moveTheBallHorizontally({ dx = 1, vx = 0 }){
     if (diffX <= vx) { //horizontally touch condition
         ball.style.left = (movingToRight ? fieldRight - ball.clientWidth : 0) + 'px';
 
-        makeBallHitSound();
+        playSound('ball-hit-audio');
     } else {
         ball.style.left = left + (dx * vx) + 'px';
     }

@@ -1,21 +1,21 @@
 .game-intro-heading {
     color: #333;
-    font-size: 28px;
+    font-size: 1.75rem;
 }
 
 .accordion {
     background-color: #f9f9f9;
     color: #333;
     cursor: pointer;
-    padding: 12px;
+    padding: 0.75rem;
     width: 100%;
     text-align: left;
-    font-size: medium;
+    font-size: 1rem;
     border: none;
     outline: none;
     transition: 0.4s;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+    border-bottom: 0.0625rem solid #ddd;
+    margin-bottom: 0.625rem;
 }
 
 .active, .accordion:hover {
@@ -28,7 +28,7 @@
     font-weight: bold;
     font-size: large;
     float: right;
-    margin-left: 5px;
+    margin-left: 0.3125rem;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .panel {
-    padding: 0 18px;
+    padding: 0 1.125rem;
     background-color: white;
     max-height: 0;
     overflow: hidden;
@@ -46,7 +46,7 @@
 
 p {
     color: #666;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.5;
 }
 

@@ -4,7 +4,7 @@ function showScoreDots(){
     const ballHalfWidth = width / 2;
     const ballHalfHeight = height / 2;
 
-    const randomCoordinates = [...Array(maximumPossiblePoints).keys()].map(() => {
+    const randomCoordinates = [...Array(maximumPossibleScore).keys()].map(() => {
         const randomX = generateRandomCoordinates(0 + ballHalfWidth, field.clientWidth - ballHalfWidth);
         const randomY = generateRandomCoordinates(0 + ballHalfHeight, field.clientHeight - ballHalfHeight);
 

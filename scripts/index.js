@@ -1,17 +1,18 @@
 overlay.addEventListener('click', function() {
     overlay.remove();
+    
+    makePlaygroundDisable();
     projectileMotion();
 })
 
 assignDefaultValues();
 
+showScoreDots();
 // writeFieldCoords();
 
 frameRateText.innerHTML = frameRate;
 
 // document.addEventListener('mousemove', writeMouseCoords);
-
-makePlaygroundEnable();
 
 theme.addEventListener('change', handleThemeChange);
 

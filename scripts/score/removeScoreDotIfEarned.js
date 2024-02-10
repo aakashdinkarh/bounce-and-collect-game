@@ -8,7 +8,7 @@ function removeScoreDotIfEarned(){
 
         if(checkIfScoreDotTouchBall(coords, ballCoords)){
             scoreDot.remove();
-            makeCoinCollectSound();
+            playSound('coin-collect-sound');
 
             updateCurrentScore(++currentScore);
         }

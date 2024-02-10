@@ -1,16 +1,6 @@
 .score-board {
     display: none;
-
-    @media (max-width: 992px) {
-        margin-top: 32px;
-    }
-    @media (max-width: 576px) {
-        margin-top: 32px;
-        
-        > table {
-            width: 90%;
-        }
-    }
+    flex: 1;
 }
 
 .score-board.show {
@@ -20,15 +10,44 @@
 .score-board > table td,
 .score-board > table th {
     text-align: left;
-    padding: 8px 6px;
-    border: 1px solid black;
+    padding: 0.5rem 0.375rem;
+    border: 0.0625rem solid black;
 }
 
 .score-board > table {
     border-collapse: collapse;
+    width: 100%;
 }
 
 .score-board > table td {
     border-style: dashed;
-    padding: 6px;
+    padding: 0.375rem;
+}
+
+.score-board > table > caption {
+    font-size: 1.25rem;
+}
+
+.perfect-score-star {
+    color: #e2a12b;
+    margin-left: 0.25rem;
+    line-height: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .score-board {
+        margin-top: 2rem;
+        width: 100%;
+    }
+    .score-board > table {
+        margin: auto;
+        min-width: 50%;
+        width: fit-content;
+    }
+}
+
+@media (max-width: 576px) {
+    .score-board > table {
+        width: 100%;
+    }
 }
