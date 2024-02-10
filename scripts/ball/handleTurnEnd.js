@@ -22,6 +22,13 @@ function getWinText({ score1 = 0, score2 = 0 }) {
 	return winTextMapping.tie;
 }
 
+function cpuTurn(){
+    const clientX = generateRandomCoordinates(0, field.clientWidth);
+    const clientY = generateRandomCoordinates(0, field.clientHeight);
+
+    moveTheBall({ clientX, clientY });
+}
+
 async function handleTurnEnd() {
 	highestScore = Math.max(currentScore, highestScore);
 	updateHighestScore(highestScore);
