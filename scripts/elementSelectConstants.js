@@ -19,6 +19,5 @@ const developerModeCloseButton = developerModeDiv.querySelector('.close-button')
 const editableStyleTag = developerModeDiv.querySelector('style');
 
 const theme = document.getElementById('theme');
-const overlay = document.querySelector('.overlay.start');
 
 const accordions = document.querySelectorAll(".accordion");

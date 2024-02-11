@@ -1,17 +1,17 @@
 function handleTurnChangeEffects({ turnToggle = false } = {}) {
 	// move this mapping outside
 	const popoverTextMapping = {
-		one: [playerOneName],
-		two: [playerTwoName, 'orange'],
+		one: [playerNameLabelMapping.one],
+		two: [playerNameLabelMapping.two, 'orange'],
 		cpu: ['CPU', 'orange'],
 		none: ['Free Play'],
 	};
 
 	if (turnToggle) {
-		currentPlayerSelected = turnToggleMapping[playMode][currentPlayerSelected];
+		currentSelectedPlayer = turnToggleMapping[playMode][currentSelectedPlayer];
 	}
 
-	ball.className = classNameMapping[currentPlayerSelected] || '';
+	ball.className = classNameMapping[currentSelectedPlayer] || '';
 
-	toast(...popoverTextMapping[currentPlayerSelected]);
+	toast(...popoverTextMapping[currentSelectedPlayer]);
 }
