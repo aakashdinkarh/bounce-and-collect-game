@@ -1,5 +1,5 @@
 let g = 0.08; //default gravity
-let e = 0.8; //default elasticty
+let e = 0.8; //default elasticity
 let playMode = 'free_play' //default play mode
 let maximumPossibleScore = 15; //maximum points that can be earned
 let totalNumberOfRounds = 3; //number of rounds to decide who wins in case of multiplayer
@@ -18,12 +18,9 @@ let isMouseDown = false;
 let isLongClick = false;
 let isPlaygroundDisabled = true;
 
-let currentPlayerSelected = 'none';
+let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
-
-let playerOneName = '';
-let playerTwoName = '';
 
 const storedMouseCoordinates = {
     x: 0,
@@ -37,7 +34,7 @@ const classNameMapping = {
     none: 'ball free-play',
 }
 
-const turnToogleMapping = {
+const turnToggleMapping = {
     'free_play': {
         none: 'none',
     },
@@ -50,3 +47,9 @@ const turnToogleMapping = {
         cpu: 'one',
     },
 }
+
+let playerNameLabelMapping = {
+    cpu: 'CPU',
+    one: '',
+    two: '',
+};

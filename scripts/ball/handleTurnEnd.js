@@ -1,7 +1,7 @@
 function getWinText({ score1 = 0, score2 = 0 }) {
 	const winTextMapping = {
-		one: `Congratulations, ${playerOneName} Won!!`,
-		two: `Congratulations, ${playerTwoName} Won!!`,
+		one: `Congratulations, ${playerNameLabelMapping.one} Won!!`,
+		two: `Congratulations, ${playerNameLabelMapping.two} Won!!`,
 		cpu: 'Such a Loser, Try again!',
 		tie: "It's a tie! Play again and make a win..."
 	}
@@ -20,6 +20,13 @@ function getWinText({ score1 = 0, score2 = 0 }) {
 		}
 	}
 	return winTextMapping.tie;
+}
+
+function cpuTurn(){
+    const clientX = generateRandomCoordinates(0, field.clientWidth);
+    const clientY = generateRandomCoordinates(0, field.clientHeight);
+
+    moveTheBall({ clientX, clientY });
 }
 
 async function handleTurnEnd() {
@@ -42,9 +49,9 @@ async function handleTurnEnd() {
 		}
 	})
 
-	makePlaygroundEnable();
-
+	
 	if (playMode === 'free_play') {
+		makePlaygroundEnable();
 		return;
 	}
 
@@ -70,21 +77,24 @@ async function handleTurnEnd() {
 		const overlayDiv = document.createElement('div');
 		overlayDiv.className = 'overlay game-finished';
 		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
-                <div class="score-details">${playerOneName} : ${score1}</div>
-                <div class="score-details">${playMode === '1_vs_1' ? playerTwoName : 'CPU'} : ${score2}</div>
-            <button class="restart-button">Click anywhere to replay</button>`;
+                <div class="score-details">${playerNameLabelMapping.one} : ${score1}</div>
+                <div class="score-details">${playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu} : ${score2}</div>
+            <button class="restart-button">Click anywhere to restart</button>`;
 
 		overlayDiv.addEventListener('click', () => {
 			overlayDiv.remove();
 			resetGame(true);
 		});
 		document.body.append(overlayDiv);
+		
+		document.activeElement.blur();
 		return;
 	}
 
 	handleTurnChangeEffects({ turnToggle: true });
+	makePlaygroundEnable();
 
-	if (playMode === '1_vs_cpu' && currentPlayerSelected === 'cpu') {
+	if (playMode === '1_vs_cpu' && currentSelectedPlayer === 'cpu') {
 		cpuTurn();
 	}
 }

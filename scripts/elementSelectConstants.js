@@ -7,10 +7,6 @@ const statusTextContainer = document.getElementById('status-text');
 const currentScoreCount = document.getElementById('score-earned');
 const highestScoreCount = document.getElementById('highest-score-earned');
 
-const fieldOuterCoords = document.querySelectorAll('.field-coords .outer-coords .coordinates');
-const fieldInnerCoords = document.querySelectorAll('.field-coords .inner-coords .coordinates');
-const mouseCoords = document.querySelectorAll('.mouse-coords .coordinates');
-
 const form = document.querySelector('form');
 const directionLine = document.querySelector('.direction-line');
 const frameRateText = document.querySelector('#frame-rate');
@@ -23,8 +19,5 @@ const developerModeCloseButton = developerModeDiv.querySelector('.close-button')
 const editableStyleTag = developerModeDiv.querySelector('style');
 
 const theme = document.getElementById('theme');
-const overlay = document.querySelector('.overlay.start');
 
-const fieldWidth = document.querySelector('.field-width');
-const fieldHeight = document.querySelector('.field-height');
 const accordions = document.querySelectorAll(".accordion");

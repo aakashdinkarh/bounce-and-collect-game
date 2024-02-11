@@ -1,5 +1,5 @@
-overlay.addEventListener('click', function() {
-    overlay.remove();
+document.querySelector('.overlay.start').addEventListener('click', function(e) {
+    this.remove();
     
     makePlaygroundDisable();
     projectileMotion();
@@ -8,11 +8,8 @@ overlay.addEventListener('click', function() {
 assignDefaultValues();
 
 showScoreDots();
-// writeFieldCoords();
 
 frameRateText.innerHTML = frameRate;
-
-// document.addEventListener('mousemove', writeMouseCoords);
 
 theme.addEventListener('change', handleThemeChange);
 
@@ -21,4 +18,4 @@ developerModeButton.addEventListener('mouseup', onMouseUp);
 developerModeCloseButton.addEventListener('click', closeDeveloperModeDiv)
 editableStyleTag.addEventListener('keydown', handleKeyDown);
 
-accordions.forEach((accordion) => accordion.addEventListener('click', accordionEventListener))
+accordions.forEach((accordion) => accordion.addEventListener('click', accordionEventListener));
