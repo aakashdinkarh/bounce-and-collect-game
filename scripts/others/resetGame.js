@@ -8,12 +8,12 @@ function resetGame(turnToggle = false){
     clearTrajectory();
     clearScoreDots();
     showScoreDots();
-    makePlaygroundEnable();
 
     scoresArray = [];
     numberOfRoundsPassed = 0;
 
     if (playMode !== 'free_play') {
+        // need refactoring here
         scoreBoard.classList.add('show');
         updateScoresTable();
         const [firstPlayer, secondPlayer] = scoreBoard.querySelectorAll('table thead th');
@@ -24,6 +24,7 @@ function resetGame(turnToggle = false){
     }
 
     handleTurnChangeEffects({ turnToggle });
-
     clearInterval(intervalId);
+    
+    makePlaygroundEnable();
 }
