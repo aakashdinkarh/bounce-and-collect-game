@@ -86,6 +86,8 @@ async function handleTurnEnd() {
 			resetGame(true);
 		});
 		document.body.append(overlayDiv);
+		
+		document.activeElement.blur();
 		return;
 	}
 

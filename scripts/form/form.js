@@ -43,6 +43,8 @@ function handlePlayModeChange(event) {
 function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
+    
+    document.activeElement.blur();
 
     field.scrollIntoView({ behavior: 'smooth' });
 
