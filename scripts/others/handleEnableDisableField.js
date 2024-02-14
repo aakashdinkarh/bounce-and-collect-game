@@ -4,7 +4,7 @@ function updateStatusText({ isWait = true } = {}) {
 		statusTextContainer.className = 'wait';
 	} else {
 		statusTextContainer.innerHTML = `Throw... ${
-			playMode !== 'free_play' ? `<strong style="color: initial" >(${playerNameLabelMapping[currentSelectedPlayer]})</strong>` : ''
+			playMode !== 'free_play' ? `<strong style="color: initial" >(${PLAYER_NAME_LABEL_MAPPING[currentSelectedPlayer]})</strong>` : ''
 		}`;
 		statusTextContainer.className = 'throw';
 	}

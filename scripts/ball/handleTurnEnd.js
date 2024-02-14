@@ -1,7 +1,7 @@
 function getWinText({ score1 = 0, score2 = 0 }) {
 	const winTextMapping = {
-		one: `Congratulations, ${playerNameLabelMapping.one} Won!!`,
-		two: `Congratulations, ${playerNameLabelMapping.two} Won!!`,
+		one: `Congratulations, ${PLAYER_NAME_LABEL_MAPPING.one} Won!!`,
+		two: `Congratulations, ${PLAYER_NAME_LABEL_MAPPING.two} Won!!`,
 		cpu: 'Such a Loser, Try again!',
 		tie: "It's a tie! Play again and make a win..."
 	}
@@ -77,8 +77,8 @@ async function handleTurnEnd() {
 		const overlayDiv = document.createElement('div');
 		overlayDiv.className = 'overlay game-finished';
 		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
-                <div class="score-details">${playerNameLabelMapping.one} : ${score1}</div>
-                <div class="score-details">${playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu} : ${score2}</div>
+                <div class="score-details">${PLAYER_NAME_LABEL_MAPPING.one} : ${score1}</div>
+                <div class="score-details">${playMode === '1_vs_1' ? PLAYER_NAME_LABEL_MAPPING.two : PLAYER_NAME_LABEL_MAPPING.cpu} : ${score2}</div>
             <button class="restart-button">Click anywhere to restart</button>`;
 
 		overlayDiv.addEventListener('click', () => {

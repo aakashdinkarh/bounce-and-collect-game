@@ -17,8 +17,8 @@ function resetGame(turnToggle = false){
         scoreBoard.classList.add('show');
         updateScoresTable();
         const [firstPlayer, secondPlayer] = scoreBoard.querySelectorAll('table thead th');
-        firstPlayer.innerText = playerNameLabelMapping.one;
-        secondPlayer.innerText = playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu;
+        firstPlayer.innerText = PLAYER_NAME_LABEL_MAPPING.one;
+        secondPlayer.innerText = playMode === '1_vs_1' ? PLAYER_NAME_LABEL_MAPPING.two : PLAYER_NAME_LABEL_MAPPING.cpu;
     } else {
         scoreBoard.classList.remove('show');
     }

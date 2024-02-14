@@ -22,19 +22,14 @@ let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
 
-const storedMouseCoordinates = {
-    x: 0,
-    y: 0,
-}
-
-const classNameMapping = {
+const CLASS_NAME_MAPPING = {
     one: 'ball one',
     two: 'ball cpu',
     cpu: 'ball two',
     none: 'ball free-play',
 }
 
-const turnToggleMapping = {
+const TURN_TOGGLE_MAPPING = {
     'free_play': {
         none: 'none',
     },
@@ -48,8 +43,17 @@ const turnToggleMapping = {
     },
 }
 
-let playerNameLabelMapping = {
+let PLAYER_NAME_LABEL_MAPPING = {
     cpu: 'CPU',
     one: '',
     two: '',
+};
+
+const NUM_TO_WORD_MAPPING = {
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six'
 };
