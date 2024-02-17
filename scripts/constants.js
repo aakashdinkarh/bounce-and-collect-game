@@ -26,16 +26,25 @@ let currentScores = [];
 
 const ARRAY_FOR_ITERATION = (n = 0) => Array.from({ length: n }, (_, index) => index);
 
-const CLASS_NAME_MAPPING = {
-	one: 'ball one',
-	two: 'ball two',
-	three: 'ball three',
-	four: 'ball four',
-	five: 'ball five',
-	six: 'ball six',
-	cpu: 'ball cpu',
-	none: 'ball free-play',
+const PLAYER_COLOR_MAPPING = {
+	one: '#8cd521',
+	two: '#e3692c',
+	three: '#6a29cc',
+	four: '#d572d5',
+	five: '#8bbcf7',
+	six: '#f3d66b',
+	cpu: '#e3692c',
+	none: '',
 };
+
+const getToastProps = () => {
+	const color = PLAYER_COLOR_MAPPING[currentSelectedPlayer];
+	switch(currentSelectedPlayer) {
+		case 'cpu' : return ['CPU', color];
+		case 'none' : return ['Free Play', color];
+		default : return [PLAYER_NAME_LABEL_MAPPING[currentSelectedPlayer], color];
+	}
+}
 
 const FREE_PLAY = 'free_play';
 const MULTIPLAYER = 'multiplayer';

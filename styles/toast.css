@@ -15,11 +15,6 @@
     animation: animate-popover 3s;
 }
 
-.alert-popover.orange {
-    background-color: #ffb300;
-    color: #000;
-}
-
 @keyframes animate-popover {
     0% {
         top: -100%;

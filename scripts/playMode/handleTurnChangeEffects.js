@@ -1,18 +1,4 @@
 function handleTurnChangeEffects({ turnToggle = false } = {}) {
-	// move this mapping outside
-	const popoverTextMapping = {
-		one: [PLAYER_NAME_LABEL_MAPPING.one],
-		two: [PLAYER_NAME_LABEL_MAPPING.two, 'orange'],
-		// change here mapping colors
-		three: [PLAYER_NAME_LABEL_MAPPING.three],
-		four: [PLAYER_NAME_LABEL_MAPPING.four],
-		five: [PLAYER_NAME_LABEL_MAPPING.five],
-		six: [PLAYER_NAME_LABEL_MAPPING.six],
-
-		cpu: ['CPU', 'orange'],
-		none: ['Free Play'],
-	};
-
 	if (turnToggle) {
 		if (playMode === 'multiplayer') {
 			if (WORD_TO_NUM_MAPPING[currentSelectedPlayer] >= numberOfPlayers) {
@@ -25,7 +11,7 @@ function handleTurnChangeEffects({ turnToggle = false } = {}) {
 		}
 	}
 
-	ball.className = CLASS_NAME_MAPPING[currentSelectedPlayer] || CLASS_NAME_MAPPING.one;
+	ball.style.color = PLAYER_COLOR_MAPPING[currentSelectedPlayer] || '';
 
-	toast(...popoverTextMapping[currentSelectedPlayer]);
+	toast(...getToastProps());
 }
