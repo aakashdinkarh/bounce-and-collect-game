@@ -108,3 +108,5 @@ const WIN_TEXT_MAPPING = {
 	cpu: 'Such a Loser &#129315; Try again!&#9917;',
 	tie: "It's a tie!&#128528; Play again and make a win...&#128521;",
 };
+
+const getPlayerName = (num) => PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[num]];

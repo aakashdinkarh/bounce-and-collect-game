@@ -23,7 +23,7 @@ function handleNumberOfPlayersChange(event) {
 			playerNameField(
 				`player-${index + 1}`,
 				`Player ${index + 1} Name`,
-				persistedPlayerNames[index] ?? PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
+				persistedPlayerNames[index] ?? getPlayerName(index + 1)
 			)
 		)
 		.reduce((prev, curr) => prev + curr, '');
@@ -52,43 +52,43 @@ function handlePlayModeChange(event) {
 	if (value === ONE_VS_CPU) {
 		const addToAfterElement = playerDetailsContainer;
 
-		const player1Field = playerNameField('player-1', 'Player 1 Name', persistedPlayerNames[0] ?? PLAYER_NAME_LABEL_MAPPING.one);
+		const player1Field = playerNameField(
+			'player-1',
+			'Player 1 Name',
+			persistedPlayerNames[0] ?? PLAYER_NAME_LABEL_MAPPING.one
+		);
 
 		let additionalFields = player1Field;
 		additionalFields += numberOfRoundsField;
 
 		addToAfterElement.insertAdjacentHTML('afterend', additionalFields);
 		return;
-	} else {
-		// Multiplayer
-		playerDetailsContainer.classList.add('have-children');
-		const addToAfterElement = form.querySelector('label:has([name=play-mode])');
-
-		// todo: refactor wrt maxNumberOfMultiplayer
-		const newNumberOfPlayersField = `<label>
-            <div>Number of Players</div>
-            <select name="number-of-players" required onChange="handleNumberOfPlayersChange(event)">
-                <option value="2" label="2"></option>
-                <option value="3" label="3"></option>
-                <option value="4" label="4"></option>
-                <option value="5" label="5"></option>
-                <option value="6" label="6"></option>
-            </select>
-        </label>`;
-
-		const playerFields = ARRAY_FOR_ITERATION(2) // 2 = min count for multiplayer
-			.map((index) =>
-				playerNameField(
-					`player-${index + 1}`,
-					`Player ${index + 1} Name`,
-					persistedPlayerNames[index] ?? PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
-				)
-			)
-			.reduce((prev, curr) => prev + curr, '');
-
-		addToAfterElement.insertAdjacentHTML('afterend', newNumberOfPlayersField);
-		playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField);
 	}
+	// Multiplayer
+	playerDetailsContainer.classList.add('have-children');
+	const addToAfterElement = form.querySelector('label:has([name=play-mode])');
+
+	const newNumberOfPlayersField = `<label>
+		<div>Number of Players</div>
+		<select name="number-of-players" required onChange="handleNumberOfPlayersChange(event)">
+			${ARRAY_FOR_ITERATION(maxNumberOfMultiplayer)
+				.slice(1)
+				.map((index) => `<option value='${index + 1}' label='${index + 1}'></option>`)}
+		</select>
+	</label>`;
+
+	const playerFields = ARRAY_FOR_ITERATION(2) // 2 = min count for multiplayer
+		.map((index) =>
+			playerNameField(
+				`player-${index + 1}`,
+				`Player ${index + 1} Name`,
+				persistedPlayerNames[index] ?? getPlayerName(index + 1)
+			)
+		)
+		.reduce((prev, curr) => prev + curr, '');
+
+	addToAfterElement.insertAdjacentHTML('afterend', newNumberOfPlayersField);
+	playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField);
 }
 
 function handleSubmit(event) {
@@ -107,15 +107,27 @@ function handleSubmit(event) {
 
 	ARRAY_FOR_ITERATION(maxNumberOfMultiplayer).forEach((index) => {
 		PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]] =
-			(form[`player-${index + 1}`] || {}).value || PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]];
+			(form[`player-${index + 1}`] || {}).value || getPlayerName(index + 1);
 	});
 
 	currentSelectedPlayer = Object.keys(TURN_TOGGLE_MAPPING[playMode])[0];
 	e_x = Math.min(e * 1.1, 0.99);
 
-	if(playMode === '1_vs_cpu'){
+	if (playMode === ONE_VS_CPU) {
 		numberOfPlayers = 2;
 	}
 
 	resetGame();
+}
+
+function playerNameWrapper(callback) {
+	return function (_, index, array) {
+		let playerName;
+		if (playMode === ONE_VS_CPU && index === array.length - 1) {
+			playerName = PLAYER_NAME_LABEL_MAPPING.cpu;
+		} else {
+			playerName = getPlayerName(index + 1);
+		}
+		return callback.call(this, playerName, ...arguments);
+	};
 }

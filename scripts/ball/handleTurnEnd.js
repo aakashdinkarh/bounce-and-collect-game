@@ -17,15 +17,17 @@ function getWinText(cumulativeScoresArray = []) {
 		return WIN_TEXT_MAPPING.cpu;
 	}
 
-	if(isClearWin && !isCpuWin){
-		return WIN_TEXT_MAPPING.playerWin(PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]);
+	if (isClearWin && !isCpuWin) {
+		return WIN_TEXT_MAPPING.playerWin(getPlayerName(maxScoreIndices[0] + 1));
 	}
 
 	if (numberOfPlayers <= 2) {
 		return WIN_TEXT_MAPPING.tie;
 	}
 
-	return WIN_TEXT_MAPPING.playersWin(maxScoreIndices.map((playerIndex) => PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[playerIndex + 1]]));
+	return WIN_TEXT_MAPPING.playersWin(
+		maxScoreIndices.map((playerIndex) => getPlayerName(playerIndex + 1))
+	);
 }
 
 function cpuTurn() {
@@ -55,26 +57,21 @@ function handleGameFinish() {
 
 	overlayDivHtmlContent += `${cumulativeScoresArray
 		.slice(0, -1)
-		.map((score, index) =>
-			getScoreDetailDivElement({
-				playerName: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[index + 1]],
-				playerScore: score,
-			})
+		.map(
+			playerNameWrapper((playerName, score) =>
+				getScoreDetailDivElement({
+					playerName: playerName,
+					playerScore: score,
+				})
+			)
 		)
-		.join('')}
-		${getScoreDetailDivElement({
-			playerName:
-				playMode === ONE_VS_CPU
-					? PLAYER_NAME_LABEL_MAPPING.cpu
-					: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[cumulativeScoresArray.length]],
-			playerScore: cumulativeScoresArray[cumulativeScoresArray.length - 1],
-		})}`;
+		.join('')}`;
 
 	overlayDivHtmlContent += `<button class="restart-button">Click anywhere to restart</button>`;
 
 	overlayDiv.innerHTML = overlayDivHtmlContent;
 
-	overlayDiv.addEventListener('click', function() {
+	overlayDiv.addEventListener('click', function () {
 		this.remove();
 		resetGame(true);
 	});

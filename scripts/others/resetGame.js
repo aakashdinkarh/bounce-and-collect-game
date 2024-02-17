@@ -1,42 +1,35 @@
-function resetGame(turnToggle = false){
-    ball.style.top = (field.clientHeight - ball.clientHeight) + 'px';
-    ball.style.left = 0 + 'px';
+function resetGame(turnToggle = false) {
+	ball.style.top = field.clientHeight - ball.clientHeight + 'px';
+	ball.style.left = 0 + 'px';
 
-    resetCurrentScore();
-    resetHighestScore();
+	resetCurrentScore();
+	resetHighestScore();
 
-    clearTrajectory();
-    clearScoreDots();
-    showScoreDots();
+	clearTrajectory();
+	clearScoreDots();
+	showScoreDots();
 
-    scoresArray = [];
-    numberOfRoundsPassed = 0;
+	scoresArray = [];
+	numberOfRoundsPassed = 0;
 
-    if(playMode === '1_vs_cpu'){
-        // need refactoring here
-        scoreBoard.classList.add('show');
-        updateScoresTable();
+	if (playMode === FREE_PLAY) {
+		scoreBoard.classList.remove('show');
+	} else {
+        // todo : what if already added
+		scoreBoard.classList.add('show');
+		updateScoresTable();
 
-        const tableHeadRow = scoreBoard.querySelector('table thead tr');
+		const tableHeadRow = scoreBoard.querySelector('table thead tr');
+		const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers)
+			.map(playerNameWrapper((playerName) => `<th>${playerName}</th>`))
+			.join('');
 
-        const tableHeadData = `<th>${PLAYER_NAME_LABEL_MAPPING.one}</th>` + `<th>${PLAYER_NAME_LABEL_MAPPING.cpu}</th>`;
-        tableHeadRow.innerHTML = tableHeadData;
-    } else if (playMode === 'multiplayer') {
-        // need refactoring here
-        scoreBoard.classList.add('show');
-        updateScoresTable();
+		tableHeadRow.innerHTML = tableHeadData;
+	}
 
-        const tableHeadRow = scoreBoard.querySelector('table thead tr');
+	handleTurnChangeEffects({ turnToggle });
+	clearInterval(intervalId);
 
-        const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers).map((index) => `<th>${PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index+1}`]]}</th>`).join('');
-        tableHeadRow.innerHTML = tableHeadData;
-    } else {
-        scoreBoard.classList.remove('show');
-    }
-
-    handleTurnChangeEffects({ turnToggle });
-    clearInterval(intervalId);
-    
-    field.scrollIntoView({ behavior: 'smooth' });
-    makePlaygroundEnable();
+	field.scrollIntoView({ behavior: 'smooth' });
+	makePlaygroundEnable();
 }
