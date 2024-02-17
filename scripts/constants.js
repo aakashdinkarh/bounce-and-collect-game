@@ -31,6 +31,25 @@ const CLASS_NAME_MAPPING = {
 	none: 'ball free-play',
 };
 
+const FREE_PLAY = 'free_play';
+const MULTIPLAYER = 'multiplayer';
+const ONE_VS_CPU = '1_vs_cpu';
+
+const PLAY_MODE_OPTIONS = [
+	{
+		label: 'Free Play',
+		value: FREE_PLAY,
+	},
+	{
+		label: 'Multiplayer',
+		value: MULTIPLAYER,
+	},
+	{
+		label: '1 vs CPU',
+		value: ONE_VS_CPU,
+	},
+];
+
 const TURN_TOGGLE_MAPPING = {
 	free_play: {
 		none: 'none',
