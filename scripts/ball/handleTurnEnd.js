@@ -1,10 +1,4 @@
 function getWinText(cumulativeScoresArray = []) {
-	const winTextMapping = {
-		one: `Congratulations &#127881; ${PLAYER_NAME_LABEL_MAPPING.one} Won!!`,
-		cpu: 'Such a Loser, Try again!',
-		tie: "It's a tie! Play again and make a win...",
-	};
-
 	const maxScore = Math.max(...cumulativeScoresArray);
 	const maxScoreIndices = [];
 
@@ -14,33 +8,24 @@ function getWinText(cumulativeScoresArray = []) {
 		}
 	}
 
-	const clearWin = maxScoreIndices.length === 1;
-	const isCpuWin = clearWin && maxScoreIndices[0] === cumulativeScoresArray.length - 1;
-	const isTie = !clearWin;
+	const cpuScore = playMode === ONE_VS_CPU ? cumulativeScoresArray[cumulativeScoresArray.length - 1] : null;
 
-	if (playMode === '1_vs_cpu') {
-		if (isCpuWin) {
-			return winTextMapping.cpu;
-		}
-		if (isTie) {
-			return winTextMapping.tie;
-		}
-		return `Congratulations &#127881; ${
-			PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]
-		} Won!!`;
+	const isClearWin = maxScoreIndices.length === 1;
+	const isCpuWin = isClearWin && maxScore === cpuScore;
+
+	if (isCpuWin) {
+		return WIN_TEXT_MAPPING.cpu;
 	}
-	// Multiplayer
-	if (clearWin) {
-		return `Congratulations &#127881; ${
-			PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]
-		} Won!!`;
+
+	if(isClearWin && !isCpuWin){
+		return WIN_TEXT_MAPPING.playerWin(PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]);
 	}
+
 	if (numberOfPlayers <= 2) {
-		return winTextMapping.tie;
+		return WIN_TEXT_MAPPING.tie;
 	}
-	return `Congratulations &#127881; ${maxScoreIndices
-		.map((playerIndex) => PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[playerIndex + 1]])
-		.join(', ')} are Winners!!`;
+
+	return WIN_TEXT_MAPPING.playersWin(maxScoreIndices.map((playerIndex) => PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[playerIndex + 1]]));
 }
 
 function cpuTurn() {

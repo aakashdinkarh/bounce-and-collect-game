@@ -97,3 +97,10 @@ const WORD_TO_NUM_MAPPING = {
 	'five': 5,
 	'six': 6,
 };
+
+const WIN_TEXT_MAPPING = {
+	playerWin: (playerName) => `Congratulations &#127881; ${playerName} Won!!&#128526;`,
+	playersWin: (playersNames = []) => `Congratulations &#127881; ${playersNames.join(', ')} are Winners!!&#128526;`,
+	cpu: 'Such a Loser &#129315; Try again!&#9917;',
+	tie: "It's a tie!&#128528; Play again and make a win...&#128521;",
+};
