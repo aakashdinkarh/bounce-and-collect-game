@@ -50,6 +50,54 @@ function cpuTurn() {
 	moveTheBall({ clientX, clientY });
 }
 
+function getScoreDetailDivElement({ playerName = '', playerScore = 0 }) {
+	return `<div class='score-details'>${playerName} : ${playerScore}</div>`;
+}
+
+function handleGameFinish() {
+	const cumulativeScoresArray = scoresArray.reduce(
+		(cumulativeScores, perRoundScoresArray) =>
+			perRoundScoresArray.map((score, index) => score + cumulativeScores[index]),
+		Array(numberOfPlayers).fill(0)
+	);
+
+	const overlayDiv = document.createElement('div');
+	overlayDiv.className = 'overlay game-finished';
+
+	let overlayDivHtmlContent = `<div class="celebrating-text">
+		<div class="winning-text">${getWinText(cumulativeScoresArray)}</div>
+	</div>`;
+
+	overlayDivHtmlContent += `${cumulativeScoresArray
+		.slice(0, -1)
+		.map((score, index) =>
+			getScoreDetailDivElement({
+				playerName: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[index + 1]],
+				playerScore: score,
+			})
+		)
+		.join('')}
+		${getScoreDetailDivElement({
+			playerName:
+				playMode === ONE_VS_CPU
+					? PLAYER_NAME_LABEL_MAPPING.cpu
+					: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[cumulativeScoresArray.length]],
+			playerScore: cumulativeScoresArray[cumulativeScoresArray.length - 1],
+		})}`;
+
+	overlayDivHtmlContent += `<button class="restart-button">Click anywhere to restart</button>`;
+
+	overlayDiv.innerHTML = overlayDivHtmlContent;
+
+	overlayDiv.addEventListener('click', function() {
+		this.remove();
+		resetGame(true);
+	});
+	document.body.append(overlayDiv);
+
+	document.activeElement.blur();
+}
+
 async function handleTurnEnd() {
 	highestScore = Math.max(currentScore, highestScore);
 	updateHighestScore(highestScore);
@@ -86,41 +134,7 @@ async function handleTurnEnd() {
 	updateScoresTable();
 
 	if (numberOfRoundsPassed >= totalNumberOfRounds) {
-		// game-finished
-		const cumulativeScoresArray = scoresArray.reduce(
-			(cumulativeScores, perRoundScoresArray) =>
-				perRoundScoresArray.map((score, index) => score + cumulativeScores[index]),
-			Array(numberOfPlayers).fill(0)
-		);
-
-		const overlayDiv = document.createElement('div');
-		overlayDiv.className = 'overlay game-finished';
-		overlayDiv.innerHTML = `<div class="celebrating-text"><div class="winning-text">${getWinText(
-			cumulativeScoresArray
-		)}</div></div>
-				${cumulativeScoresArray
-					.slice(0, -1)
-					.map(
-						(score, index) =>
-							`<div class="score-details">${
-								PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[index + 1]]
-							} : ${score}</div>`
-					)
-					.join('')}
-                <div class="score-details">${
-					playMode === '1_vs_cpu'
-						? PLAYER_NAME_LABEL_MAPPING.cpu
-						: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[cumulativeScoresArray.length]]
-				} : ${cumulativeScoresArray[cumulativeScoresArray.length - 1]}</div>
-            <button class="restart-button">Click anywhere to restart</button>`;
-
-		overlayDiv.addEventListener('click', () => {
-			overlayDiv.remove();
-			resetGame(true);
-		});
-		document.body.append(overlayDiv);
-
-		document.activeElement.blur();
+		handleGameFinish();
 		return;
 	}
 

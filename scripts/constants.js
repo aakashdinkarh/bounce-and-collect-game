@@ -24,6 +24,8 @@ let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
 
+const NUMBER_OF_PLAYERS_ITERATION_ARRAY = Array.from({ length: numberOfPlayers }, (_, index) => index);
+
 const CLASS_NAME_MAPPING = {
 	one: 'ball one',
 	two: 'ball cpu',
