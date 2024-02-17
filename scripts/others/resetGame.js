@@ -37,5 +37,6 @@ function resetGame(turnToggle = false){
     handleTurnChangeEffects({ turnToggle });
     clearInterval(intervalId);
     
+    field.scrollIntoView({ behavior: 'smooth' });
     makePlaygroundEnable();
 }
