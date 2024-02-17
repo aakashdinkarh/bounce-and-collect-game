@@ -56,7 +56,6 @@ function handleGameFinish() {
 	</div>`;
 
 	overlayDivHtmlContent += `${cumulativeScoresArray
-		.slice(0, -1)
 		.map(
 			playerNameWrapper((playerName, score) =>
 				getScoreDetailDivElement({
