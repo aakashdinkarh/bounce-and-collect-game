@@ -1,10 +1,3 @@
-function assignDefaultValues() {
-	form.elasticity.value = e;
-	form.gravity.value = g;
-	form['max-score'].value = maximumPossibleScore;
-	form['play-mode'].value = PLAY_MODE_OPTIONS[0].value;
-}
-
 const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
         <div>${fieldLabel}</div>
         <input name="${fieldName}" type="text" value="${fieldValue}" placeholder="Enter Name" required />
