@@ -4,21 +4,26 @@ const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
     </label>`;
 
 function removePlayerFields() {
+	const playerInputFields = form.querySelectorAll('input[name^="player-"]');
+	const persistedPlayerNameValues = Array.from(playerInputFields).map((playerInput) => playerInput.value);
+
 	const playerFields = form.querySelectorAll('label:has([name^="player-"])');
-	playerFields.forEach((field) => field.remove());
+	Array.from(playerFields).forEach((field) => field.remove());
+
+	return persistedPlayerNameValues;
 }
 
 function handleNumberOfPlayersChange(event) {
 	const value = +event.target.value;
 
-	removePlayerFields();
+	const persistedPlayerNames = removePlayerFields();
 
-	const newPlayerFields = [...Array(value).keys()]
+	const newPlayerFields = ARRAY_FOR_ITERATION(value)
 		.map((index) =>
 			playerNameField(
 				`player-${index + 1}`,
 				`Player ${index + 1} Name`,
-				PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
+				persistedPlayerNames[index] ?? PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
 			)
 		)
 		.reduce((prev, curr) => prev + curr, '');
@@ -37,17 +42,17 @@ function handlePlayModeChange(event) {
 	const roundsField = form.querySelector('label:has([name=number-of-rounds])');
 	const numberOfPlayersField = form.querySelector('label:has([name=number-of-players])');
 
-	removePlayerFields();
+	const persistedPlayerNames = removePlayerFields();
 	roundsField && roundsField.remove();
 	numberOfPlayersField && numberOfPlayersField.remove();
 	playerDetailsContainer.classList.remove('have-children');
 
-	if (value === 'free_play') return;
+	if (value === FREE_PLAY) return;
 
-	if (value === '1_vs_cpu') {
+	if (value === ONE_VS_CPU) {
 		const addToAfterElement = playerDetailsContainer;
 
-		const player1Field = playerNameField('player-1', 'Player 1 Name', PLAYER_NAME_LABEL_MAPPING.one);
+		const player1Field = playerNameField('player-1', 'Player 1 Name', persistedPlayerNames[0] ?? PLAYER_NAME_LABEL_MAPPING.one);
 
 		let additionalFields = player1Field;
 		additionalFields += numberOfRoundsField;
@@ -71,12 +76,12 @@ function handlePlayModeChange(event) {
             </select>
         </label>`;
 
-		const playerFields = [...Array(2).keys()]
+		const playerFields = ARRAY_FOR_ITERATION(2) // 2 = min count for multiplayer
 			.map((index) =>
 				playerNameField(
 					`player-${index + 1}`,
 					`Player ${index + 1} Name`,
-					PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
+					persistedPlayerNames[index] ?? PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]]
 				)
 			)
 			.reduce((prev, curr) => prev + curr, '');
@@ -94,11 +99,13 @@ function handleSubmit(event) {
 
 	e = +form.elasticity.value || e;
 	g = +form.gravity.value || g;
+
 	maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;
-	playMode = form['play-mode'].value || 'free_play';
+	playMode = form['play-mode'].value || FREE_PLAY;
 	numberOfPlayers = +(form['number-of-players'] || {}).value || numberOfPlayers;
 	totalNumberOfRounds = +(form['number-of-rounds'] || {}).value || totalNumberOfRounds;
-	[...Array(maxNumberOfMultiplayer).keys()].forEach((index) => {
+
+	ARRAY_FOR_ITERATION(maxNumberOfMultiplayer).forEach((index) => {
 		PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]] =
 			(form[`player-${index + 1}`] || {}).value || PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]];
 	});

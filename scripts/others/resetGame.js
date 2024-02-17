@@ -28,7 +28,7 @@ function resetGame(turnToggle = false){
 
         const tableHeadRow = scoreBoard.querySelector('table thead tr');
 
-        const tableHeadData = [...Array(numberOfPlayers).keys()].map((index) => `<th>${PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index+1}`]]}</th>`).join('');
+        const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers).map((index) => `<th>${PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index+1}`]]}</th>`).join('');
         tableHeadRow.innerHTML = tableHeadData;
     } else {
         scoreBoard.classList.remove('show');

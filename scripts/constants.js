@@ -24,7 +24,7 @@ let currentSelectedPlayer = 'none';
 let scoresArray = [];
 let currentScores = [];
 
-const NUMBER_OF_PLAYERS_ITERATION_ARRAY = Array.from({ length: numberOfPlayers }, (_, index) => index);
+const ARRAY_FOR_ITERATION = (n = 0) => Array.from({ length: n }, (_, index) => index);
 
 const CLASS_NAME_MAPPING = {
 	one: 'ball one',

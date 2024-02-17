@@ -5,10 +5,10 @@ function getTableData(score) {
 }
 
 function updateScoresTable() {
-	const mergedArray = [...scoresArray, currentScores, ...[...Array(totalNumberOfRounds - 1).keys()].map(() => [])];
+	const mergedArray = [...scoresArray, currentScores, ...ARRAY_FOR_ITERATION(totalNumberOfRounds).map(() => [])];
 
 	const tRows = mergedArray.slice(0, totalNumberOfRounds).reduce((prev, curr) => {
-		prev += `<tr>${[...Array(numberOfPlayers).keys()].map((index) => getTableData(curr[index])).join('')}</tr>`;
+		prev += `<tr>${ARRAY_FOR_ITERATION(numberOfPlayers).map((index) => getTableData(curr[index])).join('')}</tr>`;
 		return prev;
 	}, '');
 
