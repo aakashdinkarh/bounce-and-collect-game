@@ -1,11 +1,27 @@
 .ball.free-play > img {
-    box-shadow: 0 0 0.25rem 0.125rem #fff;
+    color: #fff;
 }
 
 .ball.one > img {
-    box-shadow: 0 0 0.25rem 0.125rem #00ff00;
+    color: #8cd521;
 }
 
-.ball.cpu > img, .ball.two > img {
-    box-shadow: 0 0 0.25rem 0.125rem #ffb300;
+.ball.two > img, .ball.cpu > img {
+    color: #e3692c;
+}
+
+.ball.three > img {
+    color: #6a29cc;
+}
+
+.ball.four > img {
+    color: #d572d5;
+}
+
+.ball.five > img {
+    color: #8bbcf7;
+}
+
+.ball.six > img {
+    color: #f3d66b;
 }

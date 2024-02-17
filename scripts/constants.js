@@ -28,8 +28,12 @@ const NUMBER_OF_PLAYERS_ITERATION_ARRAY = Array.from({ length: numberOfPlayers }
 
 const CLASS_NAME_MAPPING = {
 	one: 'ball one',
-	two: 'ball cpu',
-	cpu: 'ball two',
+	two: 'ball two',
+	three: 'ball three',
+	four: 'ball four',
+	five: 'ball five',
+	six: 'ball six',
+	cpu: 'ball cpu',
 	none: 'ball free-play',
 };
 
