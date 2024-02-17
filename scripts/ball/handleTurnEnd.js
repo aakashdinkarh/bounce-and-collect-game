@@ -1,32 +1,53 @@
-function getWinText({ score1 = 0, score2 = 0 }) {
+function getWinText(cumulativeScoresArray = []) {
 	const winTextMapping = {
-		one: `Congratulations, ${PLAYER_NAME_LABEL_MAPPING.one} Won!!`,
-		two: `Congratulations, ${PLAYER_NAME_LABEL_MAPPING.two} Won!!`,
+		one: `Congratulations &#127881; ${PLAYER_NAME_LABEL_MAPPING.one} Won!!`,
 		cpu: 'Such a Loser, Try again!',
-		tie: "It's a tie! Play again and make a win..."
-	}
+		tie: "It's a tie! Play again and make a win...",
+	};
 
-	if (score1 > score2) {
-		return winTextMapping.one;
-	}
+	const maxScore = Math.max(...cumulativeScoresArray);
+	const maxScoreIndices = [];
 
-	if (score1 < score2) {
-		if(playMode === '1_vs_1'){
-			return winTextMapping.two;
+	for (let i = 0; i < numberOfPlayers; i++) {
+		if (cumulativeScoresArray[i] === maxScore) {
+			maxScoreIndices.push(i);
 		}
+	}
 
-		if(playMode === '1_vs_cpu'){
+	const clearWin = maxScoreIndices.length === 1;
+	const isCpuWin = clearWin && maxScoreIndices[0] === cumulativeScoresArray.length - 1;
+	const isTie = !clearWin;
+
+	if (playMode === '1_vs_cpu') {
+		if (isCpuWin) {
 			return winTextMapping.cpu;
 		}
+		if (isTie) {
+			return winTextMapping.tie;
+		}
+		return `Congratulations &#127881; ${
+			PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]
+		} Won!!`;
 	}
-	return winTextMapping.tie;
+	// Multiplayer
+	if (clearWin) {
+		return `Congratulations &#127881; ${
+			PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[maxScoreIndices[0] + 1]]
+		} Won!!`;
+	}
+	if (numberOfPlayers <= 2) {
+		return winTextMapping.tie;
+	}
+	return `Congratulations &#127881; ${maxScoreIndices
+		.map((playerIndex) => PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[playerIndex + 1]])
+		.join(', ')} are Winners!!`;
 }
 
-function cpuTurn(){
-    const clientX = generateRandomCoordinates(0, field.clientWidth);
-    const clientY = generateRandomCoordinates(0, field.clientHeight);
+function cpuTurn() {
+	const clientX = generateRandomCoordinates(0, field.clientWidth);
+	const clientY = generateRandomCoordinates(0, field.clientHeight);
 
-    moveTheBall({ clientX, clientY });
+	moveTheBall({ clientX, clientY });
 }
 
 async function handleTurnEnd() {
@@ -34,28 +55,27 @@ async function handleTurnEnd() {
 	updateHighestScore(highestScore);
 
 	clearTrajectory();
-    clearScoreDots();
+	clearScoreDots();
 	showScoreDots();
 
 	await new Promise((resolve) => {
-		if(currentScore === maximumPossibleScore){
+		if (currentScore === maximumPossibleScore) {
 			perfectScoreTextDiv.classList.toggle('show');
 			setTimeout(() => {
 				perfectScoreTextDiv.classList.toggle('show');
 				resolve();
-			}, 3000)
+			}, 3000);
 		} else {
 			resolve();
 		}
-	})
+	});
 
-	
 	if (playMode === 'free_play') {
 		makePlaygroundEnable();
 		return;
 	}
 
-	if (currentScores.length >= 1) {
+	if (currentScores.length >= numberOfPlayers - 1) {
 		scoresArray.push([...currentScores, currentScore]);
 		numberOfRoundsPassed += 1;
 		currentScores = [];
@@ -65,20 +85,33 @@ async function handleTurnEnd() {
 
 	updateScoresTable();
 
-	if (numberOfRoundsPassed >= totalNumberOfRounds) { // game-finished
-		const { score1, score2 } = scoresArray.reduce(
-			({ score1, score2 }, [player1, player2]) => ({
-				score1: player1 + score1,
-				score2: player2 + score2,
-			}),
-			{ score1: 0, score2: 0 }
+	if (numberOfRoundsPassed >= totalNumberOfRounds) {
+		// game-finished
+		const cumulativeScoresArray = scoresArray.reduce(
+			(cumulativeScores, perRoundScoresArray) =>
+				perRoundScoresArray.map((score, index) => score + cumulativeScores[index]),
+			Array(numberOfPlayers).fill(0)
 		);
 
 		const overlayDiv = document.createElement('div');
 		overlayDiv.className = 'overlay game-finished';
-		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
-                <div class="score-details">${PLAYER_NAME_LABEL_MAPPING.one} : ${score1}</div>
-                <div class="score-details">${playMode === '1_vs_1' ? PLAYER_NAME_LABEL_MAPPING.two : PLAYER_NAME_LABEL_MAPPING.cpu} : ${score2}</div>
+		overlayDiv.innerHTML = `<div class="celebrating-text"><div class="winning-text">${getWinText(
+			cumulativeScoresArray
+		)}</div></div>
+				${cumulativeScoresArray
+					.slice(0, -1)
+					.map(
+						(score, index) =>
+							`<div class="score-details">${
+								PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[index + 1]]
+							} : ${score}</div>`
+					)
+					.join('')}
+                <div class="score-details">${
+					playMode === '1_vs_cpu'
+						? PLAYER_NAME_LABEL_MAPPING.cpu
+						: PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[cumulativeScoresArray.length]]
+				} : ${cumulativeScoresArray[cumulativeScoresArray.length - 1]}</div>
             <button class="restart-button">Click anywhere to restart</button>`;
 
 		overlayDiv.addEventListener('click', () => {
@@ -86,7 +119,7 @@ async function handleTurnEnd() {
 			resetGame(true);
 		});
 		document.body.append(overlayDiv);
-		
+
 		document.activeElement.blur();
 		return;
 	}

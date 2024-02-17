@@ -21,3 +21,5 @@ const editableStyleTag = developerModeDiv.querySelector('style');
 const theme = document.getElementById('theme');
 
 const accordions = document.querySelectorAll(".accordion");
+
+const playerDetailsContainer = form.querySelector('.players-details-container');

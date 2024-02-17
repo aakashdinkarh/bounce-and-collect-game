@@ -1,10 +1,12 @@
 let g = 0.08; //default gravity
 let e = 0.8; //default elasticity
-let playMode = 'free_play' //default play mode
+let playMode = 'free_play'; //default play mode
 let maximumPossibleScore = 15; //maximum points that can be earned
 let totalNumberOfRounds = 3; //number of rounds to decide who wins in case of multiplayer
-let e_x = Math.min(e * 1.2, 0.99); //e effect on horizontal velocity when ball touch on vertical edges
+let e_x = Math.min(e * 1.1, 0.99); //e effect on horizontal velocity when ball touch on vertical edges
+let numberOfPlayers = 1;
 
+const maxNumberOfMultiplayer = 6;
 const minimumHorizontalSpeedToMove = 0.01;
 const rotateFactor = 0.2;
 const frameRate = 10; // 1 frame / (frameRate) ms
@@ -23,37 +25,54 @@ let scoresArray = [];
 let currentScores = [];
 
 const CLASS_NAME_MAPPING = {
-    one: 'ball one',
-    two: 'ball cpu',
-    cpu: 'ball two',
-    none: 'ball free-play',
-}
+	one: 'ball one',
+	two: 'ball cpu',
+	cpu: 'ball two',
+	none: 'ball free-play',
+};
 
 const TURN_TOGGLE_MAPPING = {
-    'free_play': {
-        none: 'none',
-    },
-    '1_vs_1': {
-        one: 'two',
-        two: 'one',
-    },
-    '1_vs_cpu': {
-        one: 'cpu',
-        cpu: 'one',
-    },
-}
+	free_play: {
+		none: 'none',
+	},
+	'multiplayer': {
+		one: 'two',
+		two: 'three',
+		three: 'four',
+		four: 'five',
+		five: 'six',
+		six: 'one',
+	},
+	'1_vs_cpu': {
+		one: 'cpu',
+		cpu: 'one',
+	},
+};
 
 let PLAYER_NAME_LABEL_MAPPING = {
-    cpu: 'CPU',
-    one: '',
-    two: '',
+	cpu: 'CPU',
+	one: '',
+	two: '',
+	three: '',
+	four: '',
+	five: '',
+	six: '',
 };
 
 const NUM_TO_WORD_MAPPING = {
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six'
+	1: 'one',
+	2: 'two',
+	3: 'three',
+	4: 'four',
+	5: 'five',
+	6: 'six',
+};
+
+const WORD_TO_NUM_MAPPING = {
+	'one': 1,
+	'two': 2,
+	'three': 3,
+	'four': 4,
+	'five': 5,
+	'six': 6,
 };

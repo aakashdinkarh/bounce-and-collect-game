@@ -12,13 +12,24 @@ function resetGame(turnToggle = false){
     scoresArray = [];
     numberOfRoundsPassed = 0;
 
-    if (playMode !== 'free_play') {
+    if(playMode === '1_vs_cpu'){
         // need refactoring here
         scoreBoard.classList.add('show');
         updateScoresTable();
-        const [firstPlayer, secondPlayer] = scoreBoard.querySelectorAll('table thead th');
-        firstPlayer.innerText = PLAYER_NAME_LABEL_MAPPING.one;
-        secondPlayer.innerText = playMode === '1_vs_1' ? PLAYER_NAME_LABEL_MAPPING.two : PLAYER_NAME_LABEL_MAPPING.cpu;
+
+        const tableHeadRow = scoreBoard.querySelector('table thead tr');
+
+        const tableHeadData = `<th>${PLAYER_NAME_LABEL_MAPPING.one}</th>` + `<th>${PLAYER_NAME_LABEL_MAPPING.cpu}</th>`;
+        tableHeadRow.innerHTML = tableHeadData;
+    } else if (playMode === 'multiplayer') {
+        // need refactoring here
+        scoreBoard.classList.add('show');
+        updateScoresTable();
+
+        const tableHeadRow = scoreBoard.querySelector('table thead tr');
+
+        const tableHeadData = [...Array(numberOfPlayers).keys()].map((index) => `<th>${PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index+1}`]]}</th>`).join('');
+        tableHeadRow.innerHTML = tableHeadData;
     } else {
         scoreBoard.classList.remove('show');
     }

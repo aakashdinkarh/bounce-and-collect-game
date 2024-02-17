@@ -1,14 +1,16 @@
-function getTableData(score){
-    return `<td>${score ?? '-'}${score === maximumPossibleScore ? '<span class="perfect-score-star">&#9733;</span>' : ''}</td>`;
+function getTableData(score) {
+	return `<td>${score ?? '-'}${
+		score === maximumPossibleScore ? '<span class="perfect-score-star">&#9733;</span>' : ''
+	}</td>`;
 }
 
-function updateScoresTable(){
-    const mergedArray = [...scoresArray, currentScores, ...[...Array(totalNumberOfRounds - 1).keys()].map(() => [])];
+function updateScoresTable() {
+	const mergedArray = [...scoresArray, currentScores, ...[...Array(totalNumberOfRounds - 1).keys()].map(() => [])];
 
-    const tRows = mergedArray.slice(0,totalNumberOfRounds).reduce((prev, [score1, score2]) => {
-        prev += `<tr>${getTableData(score1)}${getTableData(score2)}</tr>`;
-        return prev;
-    }, '');
+	const tRows = mergedArray.slice(0, totalNumberOfRounds).reduce((prev, curr) => {
+		prev += `<tr>${[...Array(numberOfPlayers).keys()].map((index) => getTableData(curr[index])).join('')}</tr>`;
+		return prev;
+	}, '');
 
-    scoreTableBody.innerHTML = tRows;
+	scoreTableBody.innerHTML = tRows;
 }

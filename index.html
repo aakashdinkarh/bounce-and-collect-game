@@ -179,17 +179,19 @@
 					<input name="max-score" type="number" max="60" min="2" step="1" required />
 				</label>
 
-				<label>
-					<div>Choose Play Mode</div>
+				<div class="players-details-container">
+					<label>
+						<div>Choose Play Mode</div>
 
-					<select name="play-mode" required onchange="handlePlayModeChange(event)">
-						<option value="free_play" label="Free Play"></option>
+						<select name="play-mode" required onchange="handlePlayModeChange(event)">
+							<option value="free_play" label="Free Play"></option>
 
-						<option value="1_vs_1" label="1 vs 1"></option>
+							<option value="multiplayer" label="Multiplayer"></option>
 
-						<option value="1_vs_cpu" label="1 vs CPU"></option>
-					</select>
-				</label>
+							<option value="1_vs_cpu" label="1 vs CPU"></option>
+						</select>
+					</label>
+				</div>
 
 				<div class="submit-button-container">
 					<button type="submit">Save and Restart</button>
@@ -203,11 +205,7 @@
 					</caption>
 
 					<thead>
-						<tr>
-							<th>Player 1</th>
-
-							<th>Player 2</th>
-						</tr>
+						<tr></tr>
 					</thead>
 
 					<tbody></tbody>
@@ -248,9 +246,10 @@
 
 			<span class="close-button">x</span>
 
-			<style contenteditable>.developer-mode > style {
-	background-color: #e2e2e2;
-}
+			<style contenteditable>
+				.developer-mode > style {
+					background-color: #e2e2e2;
+				}
 			</style>
 		</div>
 
