@@ -110,7 +110,7 @@ function handleSubmit(event) {
 			(form[`player-${index + 1}`] || {}).value || getPlayerName(index + 1);
 	});
 
-	currentSelectedPlayer = Object.keys(TURN_TOGGLE_MAPPING[playMode])[0];
+	currentSelectedPlayer = INITIAL_TURN_MAPPING[playMode];
 	e_x = Math.min(e * 1.1, 0.99);
 
 	if (playMode === ONE_VS_CPU) {

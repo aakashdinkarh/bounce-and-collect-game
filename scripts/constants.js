@@ -65,23 +65,11 @@ const PLAY_MODE_OPTIONS = [
 	},
 ];
 
-const TURN_TOGGLE_MAPPING = {
-	free_play: {
-		none: 'none',
-	},
-	'multiplayer': {
-		one: 'two',
-		two: 'three',
-		three: 'four',
-		four: 'five',
-		five: 'six',
-		six: 'one',
-	},
-	'1_vs_cpu': {
-		one: 'cpu',
-		cpu: 'one',
-	},
-};
+const INITIAL_TURN_MAPPING = {
+	[FREE_PLAY]: 'none',
+	[MULTIPLAYER]: 'one',
+	[ONE_VS_CPU]: 'one',
+}
 
 let PLAYER_NAME_LABEL_MAPPING = {
 	cpu: 'CPU',
