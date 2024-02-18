@@ -20,7 +20,6 @@ function resetGame(initialCall = false) {
 	if (PLAY_MODE === FREE_PLAY) {
 		scoreBoard.classList.remove('show');
 	} else {
-		// todo : what if already added
 		scoreBoard.classList.add('show');
 		updateScoresTable();
 

@@ -39,28 +39,7 @@ function handlePlayModeChange(event) {
 
 	if (value === FREE_PLAY) return;
 
-	if (value === ONE_VS_CPU) {
-		const addToAfterElement = playerDetailsContainer;
-
-		const player1Field = playerNameField(
-			'player-1',
-			'Player 1 Name',
-			persistedPlayerNames[0] ?? PLAYER_NAME_KEY_LABEL_MAPPING.one
-		);
-
-		let additionalFields = player1Field;
-		additionalFields += numberOfRoundsField();
-
-		addToAfterElement.insertAdjacentHTML('afterend', additionalFields);
-		return;
-	}
-	// Multiplayer
-	playerDetailsContainer.classList.add('have-children');
-	const addToAfterElement = form.querySelector('[name=play-mode]').closest('label');
-
-	const newNumberOfPlayersField = getNumberOfPlayersElem();
-
-	const playerFields = ARRAY_FOR_ITERATION(2) // 2 = min count for multiplayer
+	const playerFields = ARRAY_FOR_ITERATION(value === ONE_VS_CPU ? 1 : 2) // n = min number of players required for specific type of value.
 		.map((index) =>
 			playerNameField(
 				`player-${index + 1}`,
@@ -70,8 +49,15 @@ function handlePlayModeChange(event) {
 		)
 		.reduce((prev, curr) => prev + curr, '');
 
-	addToAfterElement.insertAdjacentHTML('afterend', newNumberOfPlayersField);
 	playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField());
+
+	if (value === ONE_VS_CPU) return;
+
+	playerDetailsContainer.classList.add('have-children');
+
+	const addToAfterElement = form.querySelector('[name=play-mode]').closest('label');
+
+	addToAfterElement.insertAdjacentHTML('afterend', getNumberOfPlayersElem());
 }
 
 function handleSubmit(event) {

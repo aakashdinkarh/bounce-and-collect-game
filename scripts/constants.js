@@ -15,7 +15,6 @@ const ONE_VS_CPU = '1_vs_cpu';
 
 const MAX_NUMBER_OF_MULTIPLAYER = 6;
 const MINIMUM_HORIZONTAL_SPEED_TO_MOVE = 0.01;
-// const ROTATE_FACTOR = 0.2;
 const FRAME_RATE = 10; // 1 frame / (FRAME_RATE) ms
 
 const INITIAL_TURN_MAPPING = {
