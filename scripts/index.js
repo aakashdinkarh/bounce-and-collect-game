@@ -28,3 +28,5 @@ developerModeCloseButton.addEventListener('click', closeDeveloperModeDiv)
 editableStyleTag.addEventListener('keydown', handleKeyDown);
 
 accordions.forEach((accordion) => accordion.addEventListener('click', accordionEventListener));
+
+resetGame(true);

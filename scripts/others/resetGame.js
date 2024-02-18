@@ -1,6 +1,10 @@
-function resetGame() {
-	ball.style.top = field.clientHeight - ball.clientHeight + 'px';
-	ball.style.left = 0 + 'px';
+function resetGame(initialCall = false) {
+	if(!initialCall) {
+		ball.style.top = field.clientHeight - ball.clientHeight + 'px';
+		ball.style.left = 0 + 'px';
+	}
+
+	console.log('reset')
 
 	currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
 
