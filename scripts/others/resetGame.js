@@ -19,12 +19,16 @@ function resetGame(turnToggle = false) {
 		scoreBoard.classList.add('show');
 		updateScoresTable();
 
-		const tableHeadRow = scoreBoard.querySelector('table thead tr');
-		const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers)
+		const scoreTable = scoreBoard.querySelector('table');
+
+		const tableColgroup = scoreTable.querySelector('colgroup');
+		const tableHeadRow = scoreTable.querySelector('thead tr');
+		const tableHeadHtmlContent = ARRAY_FOR_ITERATION(numberOfPlayers)
 			.map(playerNameKeyWrapper(getPlayerNameThElem))
 			.join('');
 
-		tableHeadRow.innerHTML = tableHeadData;
+		tableHeadRow.innerHTML = tableHeadHtmlContent;
+		tableColgroup.outerHTML = getTableColGroup();
 	}
 
 	handleTurnChangeEffects({ turnToggle });

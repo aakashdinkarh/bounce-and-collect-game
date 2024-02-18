@@ -58,3 +58,14 @@ function getTrElem(scoreArray) {
 		.map((index) => getTdElem(scoreArray[index]))
 		.join('')}</tr>`;
 }
+
+function getTableColGroup() {
+	return `<colgroup>${ARRAY_FOR_ITERATION(numberOfPlayers)
+		.map(
+			playerNameKeyWrapper(
+				(playerNameKey) =>
+					`<col style="background: linear-gradient(${PLAYER_COLOR_MAPPING[playerNameKey]}, transparent 1.5rem, transparent)" span="1">`
+			)
+		)
+		.join('')}</colgroup>`;
+}

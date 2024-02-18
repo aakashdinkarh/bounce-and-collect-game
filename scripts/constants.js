@@ -44,7 +44,7 @@ const ARRAY_FOR_ITERATION = (n = 0) => Array.from({ length: n }, (_, index) => i
 const PLAYER_COLOR_MAPPING = {
 	[PLAYER_NAME_KEY.one]: '#8cd521',
 	[PLAYER_NAME_KEY.two]: '#e3692c',
-	[PLAYER_NAME_KEY.three]: '#6a29cc',
+	[PLAYER_NAME_KEY.three]: '#d5778e',
 	[PLAYER_NAME_KEY.four]: '#d572d5',
 	[PLAYER_NAME_KEY.five]: '#8bbcf7',
 	[PLAYER_NAME_KEY.six]: '#f3d66b',
