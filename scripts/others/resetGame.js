@@ -15,13 +15,13 @@ function resetGame(turnToggle = false) {
 	if (playMode === FREE_PLAY) {
 		scoreBoard.classList.remove('show');
 	} else {
-        // todo : what if already added
+		// todo : what if already added
 		scoreBoard.classList.add('show');
 		updateScoresTable();
 
 		const tableHeadRow = scoreBoard.querySelector('table thead tr');
 		const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers)
-			.map(playerNameWrapper(getPlayerNameThElem))
+			.map(playerNameKeyWrapper(getPlayerNameThElem))
 			.join('');
 
 		tableHeadRow.innerHTML = tableHeadData;

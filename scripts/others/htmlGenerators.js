@@ -43,8 +43,8 @@ function getCurrentPlayerNameElem() {
 	return `<strong style="color: initial" >(${PLAYER_NAME_LABEL_MAPPING[currentSelectedPlayer]})</strong>`;
 }
 
-function getPlayerNameThElem(playerName) {
-	return `<th>${playerName}</th>`;
+function getPlayerNameThElem(playerNameKey) {
+	return `<th>${PLAYER_NAME_LABEL_MAPPING[playerNameKey]}</th>`;
 }
 
 function getTdElem(score) {

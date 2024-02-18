@@ -103,14 +103,14 @@ function handleSubmit(event) {
 	resetGame();
 }
 
-function playerNameWrapper(callback) {
+function playerNameKeyWrapper(callback) {
 	return function (_, index, array) {
-		let playerName;
+		let playerNameKey;
 		if (playMode === ONE_VS_CPU && index === array.length - 1) {
-			playerName = PLAYER_NAME_LABEL_MAPPING.cpu;
+			playerNameKey = PLAYER_NAME_KEY.cpu;
 		} else {
-			playerName = getPlayerName(index + 1);
+			playerNameKey = NUM_TO_WORD_MAPPING[index + 1];
 		}
-		return callback.call(this, playerName, ...arguments);
+		return callback.call(this, playerNameKey, ...arguments);
 	};
 }

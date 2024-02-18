@@ -32,9 +32,7 @@ function getWinText(cumulativeScoresArray = []) {
 		return WIN_TEXT_MAPPING.tie;
 	}
 
-	return WIN_TEXT_MAPPING.playersWin(
-		maxScoreIndices.map((playerIndex) => getPlayerName(playerIndex + 1))
-	);
+	return WIN_TEXT_MAPPING.playersWin(maxScoreIndices.map((playerIndex) => getPlayerName(playerIndex + 1)));
 }
 
 function handleGameFinish() {
@@ -47,13 +45,13 @@ function handleGameFinish() {
 	const overlayDiv = document.createElement('div');
 	overlayDiv.className = 'overlay game-finished';
 
-	let overlayDivHtmlContent = getCelebratingDivElem({cumulativeScoresArray});
+	let overlayDivHtmlContent = getCelebratingDivElem({ cumulativeScoresArray });
 
 	overlayDivHtmlContent += `${cumulativeScoresArray
 		.map(
-			playerNameWrapper((playerName, score) =>
+			playerNameKeyWrapper((playerNameKey, score) =>
 				getScoreDetailDivElement({
-					playerName: playerName,
+					playerName: PLAYER_NAME_LABEL_MAPPING[playerNameKey],
 					playerScore: score,
 				})
 			)
@@ -93,7 +91,7 @@ async function handleTurnEnd() {
 		}
 	});
 
-	if (playMode === 'free_play') {
+	if (playMode === FREE_PLAY) {
 		makePlaygroundEnable();
 		return;
 	}
@@ -116,7 +114,7 @@ async function handleTurnEnd() {
 	handleTurnChangeEffects({ turnToggle: true });
 	makePlaygroundEnable();
 
-	if (playMode === '1_vs_cpu' && currentSelectedPlayer === 'cpu') {
+	if (playMode === ONE_VS_CPU && currentSelectedPlayer === PLAYER_NAME_KEY.cpu) {
 		cpuTurn();
 	}
 }
