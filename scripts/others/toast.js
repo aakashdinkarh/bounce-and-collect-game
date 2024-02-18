@@ -1,6 +1,7 @@
-function toast(text = '', className = ''){
+function toast(text = '', bgColor = ''){
     const div = document.createElement('div');
-    div.className = 'alert-popover' + ' ' + className;
+    div.className = 'alert-popover';
+    div.style.backgroundColor = bgColor;
     div.innerHTML = text;
 
     document.body.append(div);

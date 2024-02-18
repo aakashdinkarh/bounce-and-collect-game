@@ -1,62 +1,101 @@
-function assignDefaultValues(){
-    form.elasticity.value = e;
-    form.gravity.value = g;
-    form['max-score'].value = maximumPossibleScore;
-    form['play-mode'].value = (((form['play-mode'] || {}).options || [])[0] || {}).value;
+function removePlayerFields() {
+	const playerInputFields = form.querySelectorAll('input[name^="player-"]');
+	const persistedPlayerNameValues = Array.from(playerInputFields).map((playerInput) => playerInput.value);
+
+	const playerFields = Array.from(playerInputFields).map((elem) => elem.closest('label'));
+	Array.from(playerFields).forEach((field) => field.remove());
+
+	return persistedPlayerNameValues;
 }
 
-const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
-        <div>${fieldLabel}</div>
-        <input name="${fieldName}" type="text" value="${fieldValue}" placeholder="Enter Name" required />
-    </label>`;
+function handleNumberOfPlayersChange(event) {
+	const value = +event.target.value;
+
+	const persistedPlayerNames = removePlayerFields();
+
+	const newPlayerFields = ARRAY_FOR_ITERATION(value)
+		.map((index) =>
+			playerNameField(
+				`player-${index + 1}`,
+				`Player ${index + 1} Name`,
+				persistedPlayerNames[index] ?? getPlayerName(index + 1)
+			)
+		)
+		.reduce((prev, curr) => prev + curr, '');
+
+	playerDetailsContainer.insertAdjacentHTML('afterend', newPlayerFields);
+}
 
 function handlePlayModeChange(event) {
-    const numberOfRoundsField = `<label>
-        <div>Number of Rounds</div>
-        <input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
-    </label>`;
+	const value = event.target.value;
 
-    const value = event.target.value;
+	const roundsField = form.querySelector('[name=number-of-rounds]')?.closest('label');
+	const numberOfPlayersField = form.querySelector('[name=number-of-players]')?.closest('label');
 
-    const roundsField = form.querySelector('label:has([name=number-of-rounds])');
-    const playerFields = form.querySelectorAll('label:has([name^="player-"])');
-    roundsField && roundsField.remove();
-    playerFields.forEach((field) => field.remove());
+	const persistedPlayerNames = removePlayerFields();
+	roundsField && roundsField.remove();
+	numberOfPlayersField && numberOfPlayersField.remove();
+	playerDetailsContainer.classList.remove('have-children');
 
-    if(value === 'free_play') return;
+	if (value === FREE_PLAY) return;
 
-    const playModeField = form.querySelector('label:has([name=play-mode])');
+	const playerFields = ARRAY_FOR_ITERATION(value === ONE_VS_CPU ? 1 : 2) // n = min number of players required for specific type of value.
+		.map((index) =>
+			playerNameField(
+				`player-${index + 1}`,
+				`Player ${index + 1} Name`,
+				persistedPlayerNames[index] ?? getPlayerName(index + 1)
+			)
+		)
+		.reduce((prev, curr) => prev + curr, '');
 
-    const player1Field = playerNameField('player-1', 'Player 1 Name', playerNameLabelMapping.one);
-    const player2Field = playerNameField('player-2', 'Player 2 Name', playerNameLabelMapping.two);
+	playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField());
 
-    let additionalFields = player1Field;
+	if (value === ONE_VS_CPU) return;
 
-    if(value === '1_vs_1'){
-        additionalFields += player2Field;
-    }
-    additionalFields += numberOfRoundsField;
+	playerDetailsContainer.classList.add('have-children');
 
-    playModeField.insertAdjacentHTML('afterend', additionalFields);
+	const addToAfterElement = form.querySelector('[name=play-mode]').closest('label');
+
+	addToAfterElement.insertAdjacentHTML('afterend', getNumberOfPlayersElem());
 }
 
 function handleSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-    
-    document.activeElement.blur();
+	event.preventDefault();
+	const form = event.target;
 
-    field.scrollIntoView({ behavior: 'smooth' });
+	document.activeElement.blur();
 
-    e = +form.elasticity.value || e;
-    g = +form.gravity.value || g;
-    maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;
-    playMode = form['play-mode'].value || 'free_play';
-    totalNumberOfRounds = (form['number-of-rounds'] || {}).value || totalNumberOfRounds;
-    playerNameLabelMapping.one = (form['player-1'] || {}).value || playerNameLabelMapping.one;
-    playerNameLabelMapping.two = (form['player-2'] || {}).value || playerNameLabelMapping.two;
+	E = +form.elasticity.value || E;
+	G = +form.gravity.value || G;
 
-    currentSelectedPlayer = Object.keys(turnToggleMapping[playMode])[0];
+	MAXIMUM_POSSIBLE_SCORE = +form['max-score'].value || MAXIMUM_POSSIBLE_SCORE;
+	PLAY_MODE = form['play-mode'].value || FREE_PLAY;
+	NUMBER_OF_PLAYERS = +(form['number-of-players'] || {}).value || NUMBER_OF_PLAYERS;
+	TOTAL_NUMBER_OF_ROUNDS = +(form['number-of-rounds'] || {}).value || TOTAL_NUMBER_OF_ROUNDS;
 
-    resetGame();
+	ARRAY_FOR_ITERATION(MAX_NUMBER_OF_MULTIPLAYER).forEach((index) => {
+		PLAYER_NAME_KEY_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]] =
+			(form[`player-${index + 1}`] || {}).value || getPlayerName(index + 1);
+	});
+
+	E_X = Math.min(E * 1.1, 0.99);
+
+	if (PLAY_MODE === ONE_VS_CPU) {
+		NUMBER_OF_PLAYERS = 2;
+	}
+
+	resetGame();
+}
+
+function playerNameKeyWrapper(callback) {
+	return function (_, index, array) {
+		let playerNameKey;
+		if (PLAY_MODE === ONE_VS_CPU && index === array.length - 1) {
+			playerNameKey = PLAYER_NAME_KEY.cpu;
+		} else {
+			playerNameKey = NUM_TO_WORD_MAPPING[index + 1];
+		}
+		return callback.call(this, playerNameKey, ...arguments);
+	};
 }

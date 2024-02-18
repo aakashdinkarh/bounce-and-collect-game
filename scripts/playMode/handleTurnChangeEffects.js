@@ -1,17 +1,16 @@
-function handleTurnChangeEffects({ turnToggle = false } = {}) {
-	// move this mapping outside
-	const popoverTextMapping = {
-		one: [playerNameLabelMapping.one],
-		two: [playerNameLabelMapping.two, 'orange'],
-		cpu: ['CPU', 'orange'],
-		none: ['Free Play'],
-	};
+function handleTurnChangeEffects({ isTurnChange = false } = {}) {
+	if (isTurnChange) {
+		const isCPU = currentSelectedPlayer === PLAYER_NAME_KEY.cpu;
+		const playerNum = isCPU ? 2 : WORD_TO_NUM_MAPPING[currentSelectedPlayer];
 
-	if (turnToggle) {
-		currentSelectedPlayer = turnToggleMapping[playMode][currentSelectedPlayer];
+		if (playerNum >= NUMBER_OF_PLAYERS) {
+			currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
+		} else {
+			currentSelectedPlayer = PLAY_MODE === ONE_VS_CPU ? PLAYER_NAME_KEY.cpu : NUM_TO_WORD_MAPPING[playerNum + 1];
+		}
 	}
 
-	ball.className = classNameMapping[currentSelectedPlayer] || '';
+	ball.style.color = PLAYER_COLOR_MAPPING[currentSelectedPlayer] || '';
 
-	toast(...popoverTextMapping[currentSelectedPlayer]);
+	toast(...getToastProps());
 }

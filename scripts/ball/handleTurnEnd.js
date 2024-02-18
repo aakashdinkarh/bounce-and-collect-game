@@ -1,32 +1,70 @@
-function getWinText({ score1 = 0, score2 = 0 }) {
-	const winTextMapping = {
-		one: `Congratulations, ${playerNameLabelMapping.one} Won!!`,
-		two: `Congratulations, ${playerNameLabelMapping.two} Won!!`,
-		cpu: 'Such a Loser, Try again!',
-		tie: "It's a tie! Play again and make a win..."
-	}
+function cpuTurn() {
+	const clientX = generateRandomCoordinates(0, field.clientWidth);
+	const clientY = generateRandomCoordinates(0, field.clientHeight);
 
-	if (score1 > score2) {
-		return winTextMapping.one;
-	}
-
-	if (score1 < score2) {
-		if(playMode === '1_vs_1'){
-			return winTextMapping.two;
-		}
-
-		if(playMode === '1_vs_cpu'){
-			return winTextMapping.cpu;
-		}
-	}
-	return winTextMapping.tie;
+	moveTheBall({ clientX, clientY });
 }
 
-function cpuTurn(){
-    const clientX = generateRandomCoordinates(0, field.clientWidth);
-    const clientY = generateRandomCoordinates(0, field.clientHeight);
+function getWinText(cumulativeScoresArray = []) {
+	const maxScore = Math.max(...cumulativeScoresArray);
+	const maxScoreIndices = [];
 
-    moveTheBall({ clientX, clientY });
+	for (let i = 0; i < NUMBER_OF_PLAYERS; i++) {
+		if (cumulativeScoresArray[i] === maxScore) {
+			maxScoreIndices.push(i);
+		}
+	}
+
+	const cpuScore = PLAY_MODE === ONE_VS_CPU ? cumulativeScoresArray[cumulativeScoresArray.length - 1] : null;
+
+	const isClearWin = maxScoreIndices.length === 1;
+	const isCpuWin = isClearWin && maxScore === cpuScore;
+
+	if (isCpuWin) {
+		return WIN_TEXT_MAPPING.cpu;
+	}
+
+	if (isClearWin && !isCpuWin) {
+		return WIN_TEXT_MAPPING.playerWin(getPlayerName(maxScoreIndices[0] + 1));
+	}
+
+	if (NUMBER_OF_PLAYERS <= 2) {
+		return WIN_TEXT_MAPPING.tie;
+	}
+
+	return WIN_TEXT_MAPPING.playersWin(maxScoreIndices.map((playerIndex) => getPlayerName(playerIndex + 1)));
+}
+
+function handleGameFinish() {
+	const cumulativeScoresArray = getTotalsTillNow(overallScoresArray);
+
+	const overlayDiv = document.createElement('div');
+	overlayDiv.className = 'overlay game-finished';
+
+	let overlayDivHtmlContent = getCelebratingDivElem({ cumulativeScoresArray });
+
+	overlayDivHtmlContent += `${cumulativeScoresArray
+		.map(
+			playerNameKeyWrapper((playerNameKey, score) =>
+				getScoreDetailDivElement({
+					playerName: PLAYER_NAME_KEY_LABEL_MAPPING[playerNameKey],
+					playerScore: score,
+				})
+			)
+		)
+		.join('')}`;
+
+	overlayDivHtmlContent += restartButton;
+
+	overlayDiv.innerHTML = overlayDivHtmlContent;
+
+	overlayDiv.addEventListener('click', function () {
+		this.remove();
+		resetGame();
+	});
+	document.body.append(overlayDiv);
+
+	document.activeElement.blur();
 }
 
 async function handleTurnEnd() {
@@ -34,67 +72,45 @@ async function handleTurnEnd() {
 	updateHighestScore(highestScore);
 
 	clearTrajectory();
-    clearScoreDots();
+	clearScoreDots();
 	showScoreDots();
 
 	await new Promise((resolve) => {
-		if(currentScore === maximumPossibleScore){
+		if (currentScore === MAXIMUM_POSSIBLE_SCORE) {
 			perfectScoreTextDiv.classList.toggle('show');
 			setTimeout(() => {
 				perfectScoreTextDiv.classList.toggle('show');
 				resolve();
-			}, 3000)
+			}, 3000);
 		} else {
 			resolve();
 		}
-	})
+	});
 
-	
-	if (playMode === 'free_play') {
+	if (PLAY_MODE === FREE_PLAY) {
 		makePlaygroundEnable();
 		return;
 	}
 
-	if (currentScores.length >= 1) {
-		scoresArray.push([...currentScores, currentScore]);
+	if (currentScoresArray.length >= NUMBER_OF_PLAYERS - 1) {
+		overallScoresArray.push([...currentScoresArray, currentScore]);
 		numberOfRoundsPassed += 1;
-		currentScores = [];
+		currentScoresArray = [];
 	} else {
-		currentScores.push(currentScore);
+		currentScoresArray.push(currentScore);
 	}
 
 	updateScoresTable();
 
-	if (numberOfRoundsPassed >= totalNumberOfRounds) { // game-finished
-		const { score1, score2 } = scoresArray.reduce(
-			({ score1, score2 }, [player1, player2]) => ({
-				score1: player1 + score1,
-				score2: player2 + score2,
-			}),
-			{ score1: 0, score2: 0 }
-		);
-
-		const overlayDiv = document.createElement('div');
-		overlayDiv.className = 'overlay game-finished';
-		overlayDiv.innerHTML = `<div class="celebrating-text">${getWinText({ score1, score2 })}</div>
-                <div class="score-details">${playerNameLabelMapping.one} : ${score1}</div>
-                <div class="score-details">${playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu} : ${score2}</div>
-            <button class="restart-button">Click anywhere to restart</button>`;
-
-		overlayDiv.addEventListener('click', () => {
-			overlayDiv.remove();
-			resetGame(true);
-		});
-		document.body.append(overlayDiv);
-		
-		document.activeElement.blur();
+	if (numberOfRoundsPassed >= TOTAL_NUMBER_OF_ROUNDS) {
+		handleGameFinish();
 		return;
 	}
 
-	handleTurnChangeEffects({ turnToggle: true });
+	handleTurnChangeEffects({ isTurnChange: true });
 	makePlaygroundEnable();
 
-	if (playMode === '1_vs_cpu' && currentSelectedPlayer === 'cpu') {
+	if (PLAY_MODE === ONE_VS_CPU && currentSelectedPlayer === PLAYER_NAME_KEY.cpu) {
 		cpuTurn();
 	}
 }

@@ -32,7 +32,6 @@
 		<link rel="preload" href="./styles/form.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" href="./styles/gameIntro.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" href="./styles/overlay.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-		<link rel="preload" href="./styles/playModes.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" href="./styles/scoreBoard.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" href="./styles/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 		<link rel="preload" href="./styles/toast.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -43,7 +42,6 @@
 			<link rel="stylesheet" href="./styles/form.css" />
 			<link rel="stylesheet" href="./styles/gameIntro.css" />
 			<link rel="stylesheet" href="./styles/overlay.css" />
-			<link rel="stylesheet" href="./styles/playModes.css" />
 			<link rel="stylesheet" href="./styles/scoreBoard.css" />
 			<link rel="stylesheet" href="./styles/style.css" />
 			<link rel="stylesheet" href="./styles/toast.css" />
@@ -59,6 +57,7 @@
 		<script src="./scripts/others/handleEnableDisableField.js"></script>
 		<script src="./scripts/playMode/handleTurnChangeEffects.js"></script>
 		<script src="./scripts/ball/handleTurnEnd.js"></script>
+		<script src="./scripts/others/htmlGenerators.js"></script>
 		<script src="./scripts/others/mouseEvents.js"></script>
 		<script src="./scripts/ball/moveTheBall.js"></script>
 		<script src="./scripts/others/playSound.js"></script>
@@ -179,17 +178,13 @@
 					<input name="max-score" type="number" max="60" min="2" step="1" required />
 				</label>
 
-				<label>
-					<div>Choose Play Mode</div>
+				<div class="players-details-container">
+					<label>
+						<div>Choose Play Mode</div>
 
-					<select name="play-mode" required onchange="handlePlayModeChange(event)">
-						<option value="free_play" label="Free Play"></option>
-
-						<option value="1_vs_1" label="1 vs 1"></option>
-
-						<option value="1_vs_cpu" label="1 vs CPU"></option>
-					</select>
-				</label>
+						<select name="play-mode" required onchange="handlePlayModeChange(event)"></select>
+					</label>
+				</div>
 
 				<div class="submit-button-container">
 					<button type="submit">Save and Restart</button>
@@ -198,16 +193,13 @@
 
 			<div class="score-board">
 				<table>
+					<colgroup></colgroup>
 					<caption>
 						Score Board
 					</caption>
 
 					<thead>
-						<tr>
-							<th>Player 1</th>
-
-							<th>Player 2</th>
-						</tr>
+						<tr></tr>
 					</thead>
 
 					<tbody></tbody>

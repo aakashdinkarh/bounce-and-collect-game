@@ -1,30 +1,42 @@
-function resetGame(turnToggle = false){
-    ball.style.top = (field.clientHeight - ball.clientHeight) + 'px';
-    ball.style.left = 0 + 'px';
+function resetGame(initialCall = false) {
+	if(!initialCall) {
+		ball.style.top = field.clientHeight - ball.clientHeight + 'px';
+		ball.style.left = 0 + 'px';
+	}
 
-    resetCurrentScore();
-    resetHighestScore();
+	currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
 
-    clearTrajectory();
-    clearScoreDots();
-    showScoreDots();
+	resetCurrentScore();
+	resetHighestScore();
+	clearTrajectory();
+	clearScoreDots();
 
-    scoresArray = [];
-    numberOfRoundsPassed = 0;
+	currentScoresArray = [];
+	overallScoresArray = [];
+	numberOfRoundsPassed = 0;
 
-    if (playMode !== 'free_play') {
-        // need refactoring here
-        scoreBoard.classList.add('show');
-        updateScoresTable();
-        const [firstPlayer, secondPlayer] = scoreBoard.querySelectorAll('table thead th');
-        firstPlayer.innerText = playerNameLabelMapping.one;
-        secondPlayer.innerText = playMode === '1_vs_1' ? playerNameLabelMapping.two : playerNameLabelMapping.cpu;
-    } else {
-        scoreBoard.classList.remove('show');
-    }
+	clearInterval(projectileMotionIntervalId);
 
-    handleTurnChangeEffects({ turnToggle });
-    clearInterval(intervalId);
-    
-    makePlaygroundEnable();
+	if (PLAY_MODE === FREE_PLAY) {
+		scoreBoard.classList.remove('show');
+	} else {
+		scoreBoard.classList.add('show');
+		updateScoresTable();
+
+		const tableColgroup = scoreTable.querySelector('colgroup');
+		const tableHeadRow = scoreTable.querySelector('thead tr');
+		const tableHeadHtmlContent = ARRAY_FOR_ITERATION(NUMBER_OF_PLAYERS)
+			.map(playerNameKeyWrapper(getPlayerNameThElem))
+			.join('');
+
+		tableHeadRow.innerHTML = tableHeadHtmlContent;
+		tableColgroup.outerHTML = getTableColGroup();
+	}
+
+	handleTurnChangeEffects();
+
+	field.scrollIntoView({ behavior: 'smooth' });
+
+	showScoreDots();
+	makePlaygroundEnable();
 }

@@ -1,5 +1,5 @@
 function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
-    vy += dy * g;
+    vy += dy * G;
     const freeFall = dy >= 0;
 
     if(vy < 0 && !freeFall){
@@ -25,7 +25,7 @@ function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
 }
 
 function moveTheBallHorizontally({ dx = 1, vx = 0 }){
-    if(vx < minimumHorizontalSpeedToMove) {
+    if(vx < MINIMUM_HORIZONTAL_SPEED_TO_MOVE) {
         vx = 0;
         return [vx, dx];
     }
@@ -49,11 +49,11 @@ function moveTheBallHorizontally({ dx = 1, vx = 0 }){
 }
 
 function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
-    clearInterval(intervalId);
+    clearInterval(projectileMotionIntervalId);
 
-    intervalId = setInterval(() => {
+    projectileMotionIntervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
-            clearInterval(intervalId);
+            clearInterval(projectileMotionIntervalId);
             handleTurnEnd();
             return;
         }
@@ -74,5 +74,5 @@ function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
         if(isEdgeTouch('left') || isEdgeTouch('right')){
             [vx, dx] = horizontallyEdgeTouchEffect({ vx, dx });
         }
-    }, frameRate)
+    }, FRAME_RATE)
 }
