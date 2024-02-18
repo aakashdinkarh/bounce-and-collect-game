@@ -21,3 +21,10 @@ function clearScoreDots(){
 
     scoreDots.forEach((scoreDot) => scoreDot.remove());
 }
+
+function getTotalsTillNow(arrayOfScores = []) {
+	return arrayOfScores.reduce(
+		(acc, curr) => acc.map((prevScore, index) => prevScore + (curr[index] ?? 0)),
+		Array(NUMBER_OF_PLAYERS).fill(0)
+	);
+}

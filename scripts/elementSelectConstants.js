@@ -11,7 +11,8 @@ const form = document.querySelector('form');
 const directionLine = document.querySelector('.direction-line');
 const frameRateText = document.querySelector('#frame-rate');
 const scoreBoard = document.querySelector('.score-board');
-const scoreTableBody = scoreBoard.querySelector('tbody');
+const scoreTable = scoreBoard.querySelector('table');
+const scoreTableBody = scoreTable.querySelector('tbody');
 
 const developerModeButton = document.querySelector('.developer-mode-secret-button');
 const developerModeDiv = document.querySelector('.developer-mode');

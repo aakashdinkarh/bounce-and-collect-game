@@ -36,11 +36,7 @@ function getWinText(cumulativeScoresArray = []) {
 }
 
 function handleGameFinish() {
-	const cumulativeScoresArray = overallScoresArray.reduce(
-		(cumulativeScores, perRoundScoresArray) =>
-			perRoundScoresArray.map((score, index) => score + cumulativeScores[index]),
-		Array(NUMBER_OF_PLAYERS).fill(0)
-	);
+	const cumulativeScoresArray = getTotalsTillNow(overallScoresArray);
 
 	const overlayDiv = document.createElement('div');
 	overlayDiv.className = 'overlay game-finished';

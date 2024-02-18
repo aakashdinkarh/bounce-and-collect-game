@@ -4,8 +4,6 @@ function resetGame(initialCall = false) {
 		ball.style.left = 0 + 'px';
 	}
 
-	console.log('reset')
-
 	currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
 
 	resetCurrentScore();
@@ -25,8 +23,6 @@ function resetGame(initialCall = false) {
 		// todo : what if already added
 		scoreBoard.classList.add('show');
 		updateScoresTable();
-
-		const scoreTable = scoreBoard.querySelector('table');
 
 		const tableColgroup = scoreTable.querySelector('colgroup');
 		const tableHeadRow = scoreTable.querySelector('thead tr');
