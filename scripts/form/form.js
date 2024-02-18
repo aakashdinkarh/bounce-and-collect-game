@@ -3,11 +3,16 @@ const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
         <input name="${fieldName}" type="text" value="${fieldValue}" placeholder="Enter Name" required />
     </label>`;
 
+const numberOfRoundsField = () => `<label>
+		<div>Number of Rounds</div>
+		<input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
+	</label>`;
+
 function removePlayerFields() {
 	const playerInputFields = form.querySelectorAll('input[name^="player-"]');
 	const persistedPlayerNameValues = Array.from(playerInputFields).map((playerInput) => playerInput.value);
 
-	const playerFields = form.querySelectorAll('label:has([name^="player-"])');
+	const playerFields = Array.from(playerInputFields).map((elem) => elem.closest('label'));
 	Array.from(playerFields).forEach((field) => field.remove());
 
 	return persistedPlayerNameValues;
@@ -32,15 +37,10 @@ function handleNumberOfPlayersChange(event) {
 }
 
 function handlePlayModeChange(event) {
-	const numberOfRoundsField = `<label>
-        <div>Number of Rounds</div>
-        <input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
-    </label>`;
-
 	const value = event.target.value;
 
-	const roundsField = form.querySelector('label:has([name=number-of-rounds])');
-	const numberOfPlayersField = form.querySelector('label:has([name=number-of-players])');
+	const roundsField = form.querySelector('[name=number-of-rounds]')?.closest('label');
+	const numberOfPlayersField = form.querySelector('[name=number-of-players]')?.closest('label');
 
 	const persistedPlayerNames = removePlayerFields();
 	roundsField && roundsField.remove();
@@ -59,14 +59,14 @@ function handlePlayModeChange(event) {
 		);
 
 		let additionalFields = player1Field;
-		additionalFields += numberOfRoundsField;
+		additionalFields += numberOfRoundsField();
 
 		addToAfterElement.insertAdjacentHTML('afterend', additionalFields);
 		return;
 	}
 	// Multiplayer
 	playerDetailsContainer.classList.add('have-children');
-	const addToAfterElement = form.querySelector('label:has([name=play-mode])');
+	const addToAfterElement = form.querySelector('[name=play-mode]').closest('label');
 
 	const newNumberOfPlayersField = `<label>
 		<div>Number of Players</div>
@@ -88,7 +88,7 @@ function handlePlayModeChange(event) {
 		.reduce((prev, curr) => prev + curr, '');
 
 	addToAfterElement.insertAdjacentHTML('afterend', newNumberOfPlayersField);
-	playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField);
+	playerDetailsContainer.insertAdjacentHTML('afterend', playerFields + numberOfRoundsField());
 }
 
 function handleSubmit(event) {
