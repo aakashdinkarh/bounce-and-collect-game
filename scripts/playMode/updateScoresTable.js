@@ -1,16 +1,7 @@
-function getTdElem(score) {
-	return `<td>${score ?? '-'}${
-		score === maximumPossibleScore ? '<span class="perfect-score-star">&#9733;</span>' : ''
-	}</td>`;
-}
-
 function updateScoresTable() {
-	const mergedArray = [...scoresArray, currentScores, ...ARRAY_FOR_ITERATION(totalNumberOfRounds).map(() => [])];
+	const mergedScoresArray = [...scoresArray, currentScores, ...ARRAY_FOR_ITERATION(totalNumberOfRounds).map(() => [])];
 
-	const tRows = mergedArray.slice(0, totalNumberOfRounds).reduce((prev, curr) => {
-		prev += `<tr>${ARRAY_FOR_ITERATION(numberOfPlayers).map((index) => getTdElem(curr[index])).join('')}</tr>`;
-		return prev;
-	}, '');
+	const tRows = mergedScoresArray.slice(0, totalNumberOfRounds).reduce((prevTrElem, currScoreRow) => prevTrElem + getTrElem(currScoreRow), '');
 
 	scoreTableBody.innerHTML = tRows;
 }

@@ -1,12 +1,10 @@
 function updateStatusText({ isWait = true } = {}) {
+	statusTextContainer.className = isWait ? 'wait' : 'throw';
+
 	if (isWait) {
 		statusTextContainer.innerText = 'Please wait...';
-		statusTextContainer.className = 'wait';
 	} else {
-		statusTextContainer.innerHTML = `Throw... ${
-			playMode !== 'free_play' ? `<strong style="color: initial" >(${PLAYER_NAME_LABEL_MAPPING[currentSelectedPlayer]})</strong>` : ''
-		}`;
-		statusTextContainer.className = 'throw';
+		statusTextContainer.innerHTML = `Throw... ${playMode !== 'free_play' ? getCurrentPlayerNameElem(): ''}`;
 	}
 }
 

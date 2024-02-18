@@ -1,3 +1,10 @@
+function cpuTurn() {
+	const clientX = generateRandomCoordinates(0, field.clientWidth);
+	const clientY = generateRandomCoordinates(0, field.clientHeight);
+
+	moveTheBall({ clientX, clientY });
+}
+
 function getWinText(cumulativeScoresArray = []) {
 	const maxScore = Math.max(...cumulativeScoresArray);
 	const maxScoreIndices = [];
@@ -30,17 +37,6 @@ function getWinText(cumulativeScoresArray = []) {
 	);
 }
 
-function cpuTurn() {
-	const clientX = generateRandomCoordinates(0, field.clientWidth);
-	const clientY = generateRandomCoordinates(0, field.clientHeight);
-
-	moveTheBall({ clientX, clientY });
-}
-
-function getScoreDetailDivElement({ playerName = '', playerScore = 0 }) {
-	return `<div class='score-details'>${playerName} : ${playerScore}</div>`;
-}
-
 function handleGameFinish() {
 	const cumulativeScoresArray = scoresArray.reduce(
 		(cumulativeScores, perRoundScoresArray) =>
@@ -51,9 +47,7 @@ function handleGameFinish() {
 	const overlayDiv = document.createElement('div');
 	overlayDiv.className = 'overlay game-finished';
 
-	let overlayDivHtmlContent = `<div class="celebrating-text">
-		<div class="winning-text">${getWinText(cumulativeScoresArray)}</div>
-	</div>`;
+	let overlayDivHtmlContent = getCelebratingDivElem({cumulativeScoresArray});
 
 	overlayDivHtmlContent += `${cumulativeScoresArray
 		.map(
@@ -66,7 +60,7 @@ function handleGameFinish() {
 		)
 		.join('')}`;
 
-	overlayDivHtmlContent += `<button class="restart-button">Click anywhere to restart</button>`;
+	overlayDivHtmlContent += restartButton;
 
 	overlayDiv.innerHTML = overlayDivHtmlContent;
 

@@ -21,7 +21,7 @@ function resetGame(turnToggle = false) {
 
 		const tableHeadRow = scoreBoard.querySelector('table thead tr');
 		const tableHeadData = ARRAY_FOR_ITERATION(numberOfPlayers)
-			.map(playerNameWrapper((playerName) => `<th>${playerName}</th>`))
+			.map(playerNameWrapper(getPlayerNameThElem))
 			.join('');
 
 		tableHeadRow.innerHTML = tableHeadData;

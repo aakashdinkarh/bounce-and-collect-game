@@ -1,13 +1,3 @@
-const playerNameField = (fieldName, fieldLabel, fieldValue) => `<label>
-        <div>${fieldLabel}</div>
-        <input name="${fieldName}" type="text" value="${fieldValue}" placeholder="Enter Name" required />
-    </label>`;
-
-const numberOfRoundsField = () => `<label>
-		<div>Number of Rounds</div>
-		<input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
-	</label>`;
-
 function removePlayerFields() {
 	const playerInputFields = form.querySelectorAll('input[name^="player-"]');
 	const persistedPlayerNameValues = Array.from(playerInputFields).map((playerInput) => playerInput.value);
@@ -68,14 +58,7 @@ function handlePlayModeChange(event) {
 	playerDetailsContainer.classList.add('have-children');
 	const addToAfterElement = form.querySelector('[name=play-mode]').closest('label');
 
-	const newNumberOfPlayersField = `<label>
-		<div>Number of Players</div>
-		<select name="number-of-players" required onChange="handleNumberOfPlayersChange(event)">
-			${ARRAY_FOR_ITERATION(maxNumberOfMultiplayer)
-				.slice(1)
-				.map((index) => `<option value='${index + 1}' label='${index + 1}'></option>`)}
-		</select>
-	</label>`;
+	const newNumberOfPlayersField = getNumberOfPlayersElem();
 
 	const playerFields = ARRAY_FOR_ITERATION(2) // 2 = min count for multiplayer
 		.map((index) =>
