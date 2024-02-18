@@ -64,7 +64,7 @@ function handleGameFinish() {
 
 	overlayDiv.addEventListener('click', function () {
 		this.remove();
-		resetGame(true);
+		resetGame();
 	});
 	document.body.append(overlayDiv);
 
@@ -111,7 +111,7 @@ async function handleTurnEnd() {
 		return;
 	}
 
-	handleTurnChangeEffects({ turnToggle: true });
+	handleTurnChangeEffects({ isTurnChange: true });
 	makePlaygroundEnable();
 
 	if (PLAY_MODE === ONE_VS_CPU && currentSelectedPlayer === PLAYER_NAME_KEY.cpu) {

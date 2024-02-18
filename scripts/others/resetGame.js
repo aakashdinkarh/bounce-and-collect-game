@@ -1,16 +1,19 @@
-function resetGame(turnToggle = false) {
+function resetGame() {
 	ball.style.top = field.clientHeight - ball.clientHeight + 'px';
 	ball.style.left = 0 + 'px';
 
+	currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
+
 	resetCurrentScore();
 	resetHighestScore();
-
 	clearTrajectory();
 	clearScoreDots();
-	showScoreDots();
 
+	currentScoresArray = [];
 	overallScoresArray = [];
 	numberOfRoundsPassed = 0;
+
+	clearInterval(projectileMotionIntervalId);
 
 	if (PLAY_MODE === FREE_PLAY) {
 		scoreBoard.classList.remove('show');
@@ -31,9 +34,10 @@ function resetGame(turnToggle = false) {
 		tableColgroup.outerHTML = getTableColGroup();
 	}
 
-	handleTurnChangeEffects({ turnToggle });
-	clearInterval(projectileMotionIntervalId);
+	handleTurnChangeEffects();
 
 	field.scrollIntoView({ behavior: 'smooth' });
+
+	showScoreDots();
 	makePlaygroundEnable();
 }

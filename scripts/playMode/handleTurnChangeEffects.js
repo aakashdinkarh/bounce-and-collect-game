@@ -1,5 +1,5 @@
-function handleTurnChangeEffects({ turnToggle = false } = {}) {
-	if (turnToggle) {
+function handleTurnChangeEffects({ isTurnChange = false } = {}) {
+	if (isTurnChange) {
 		const isCPU = currentSelectedPlayer === PLAYER_NAME_KEY.cpu;
 		const playerNum = isCPU ? 2 : WORD_TO_NUM_MAPPING[currentSelectedPlayer];
 
