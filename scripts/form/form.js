@@ -45,7 +45,7 @@ function handlePlayModeChange(event) {
 		const player1Field = playerNameField(
 			'player-1',
 			'Player 1 Name',
-			persistedPlayerNames[0] ?? PLAYER_NAME_LABEL_MAPPING.one
+			persistedPlayerNames[0] ?? PLAYER_NAME_KEY_LABEL_MAPPING.one
 		);
 
 		let additionalFields = player1Field;
@@ -80,24 +80,24 @@ function handleSubmit(event) {
 
 	document.activeElement.blur();
 
-	e = +form.elasticity.value || e;
-	g = +form.gravity.value || g;
+	E = +form.elasticity.value || E;
+	G = +form.gravity.value || G;
 
-	maximumPossibleScore = +form['max-score'].value || maximumPossibleScore;
-	playMode = form['play-mode'].value || FREE_PLAY;
-	numberOfPlayers = +(form['number-of-players'] || {}).value || numberOfPlayers;
-	totalNumberOfRounds = +(form['number-of-rounds'] || {}).value || totalNumberOfRounds;
+	MAXIMUM_POSSIBLE_SCORE = +form['max-score'].value || MAXIMUM_POSSIBLE_SCORE;
+	PLAY_MODE = form['play-mode'].value || FREE_PLAY;
+	NUMBER_OF_PLAYERS = +(form['number-of-players'] || {}).value || NUMBER_OF_PLAYERS;
+	TOTAL_NUMBER_OF_ROUNDS = +(form['number-of-rounds'] || {}).value || TOTAL_NUMBER_OF_ROUNDS;
 
-	ARRAY_FOR_ITERATION(maxNumberOfMultiplayer).forEach((index) => {
-		PLAYER_NAME_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]] =
+	ARRAY_FOR_ITERATION(MAX_NUMBER_OF_MULTIPLAYER).forEach((index) => {
+		PLAYER_NAME_KEY_LABEL_MAPPING[NUM_TO_WORD_MAPPING[`${index + 1}`]] =
 			(form[`player-${index + 1}`] || {}).value || getPlayerName(index + 1);
 	});
 
-	currentSelectedPlayer = INITIAL_TURN_MAPPING[playMode];
-	e_x = Math.min(e * 1.1, 0.99);
+	currentSelectedPlayer = INITIAL_TURN_MAPPING[PLAY_MODE];
+	E_X = Math.min(E * 1.1, 0.99);
 
-	if (playMode === ONE_VS_CPU) {
-		numberOfPlayers = 2;
+	if (PLAY_MODE === ONE_VS_CPU) {
+		NUMBER_OF_PLAYERS = 2;
 	}
 
 	resetGame();
@@ -106,7 +106,7 @@ function handleSubmit(event) {
 function playerNameKeyWrapper(callback) {
 	return function (_, index, array) {
 		let playerNameKey;
-		if (playMode === ONE_VS_CPU && index === array.length - 1) {
+		if (PLAY_MODE === ONE_VS_CPU && index === array.length - 1) {
 			playerNameKey = PLAYER_NAME_KEY.cpu;
 		} else {
 			playerNameKey = NUM_TO_WORD_MAPPING[index + 1];

@@ -1,9 +1,10 @@
 let moveBallToTimeoutId;
+let projectileMotionStartTimeoutId;
 
 function moveBallTo(x, y, duration){
     const { left, top } = getCoords('ball', true);
     
-    const totalSteps = Math.ceil(duration / frameRate);
+    const totalSteps = Math.ceil(duration / FRAME_RATE);
 
     let currentX = left;
     let currentY = top;
@@ -23,7 +24,7 @@ function moveBallTo(x, y, duration){
         currentStep++;
 
         if(currentStep < totalSteps){
-            moveBallToTimeoutId = setTimeout(updatePosition, frameRate);
+            moveBallToTimeoutId = setTimeout(updatePosition, FRAME_RATE);
         }
     }
 
@@ -59,12 +60,12 @@ function moveTheBall(e){
 
     clearTrajectory();
 
-    clearTimeout(timeoutId);
-    clearInterval(intervalId);
+    clearTimeout(projectileMotionStartTimeoutId);
+    clearInterval(projectileMotionIntervalId);
 
     makePlaygroundDisable();
 
-    timeoutId = setTimeout(() => {
+    projectileMotionStartTimeoutId = setTimeout(() => {
         projectileMotion({
             vx: initialHorizontalSpeed,
             dx: initialHorizontalDirection,

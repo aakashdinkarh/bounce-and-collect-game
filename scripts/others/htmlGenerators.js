@@ -1,4 +1,5 @@
 const restartButton = '<button class="restart-button">Click anywhere to restart</button>';
+const perfectScoreSpan = '<span class="perfect-score-star">&#9733;</span>';
 
 function getCelebratingDivElem({ cumulativeScoresArray = [] }) {
 	return `<div class="celebrating-text">
@@ -20,7 +21,7 @@ function playerNameField(fieldName, fieldLabel, fieldValue) {
 function numberOfRoundsField() {
 	return `<label>
 		<div>Number of Rounds</div>
-		<input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${totalNumberOfRounds}" required />
+		<input name="number-of-rounds" type="number" min="1" max="20" step="1" value="${TOTAL_NUMBER_OF_ROUNDS}" required />
 	</label>`;
 }
 
@@ -32,7 +33,7 @@ function getNumberOfPlayersElem() {
 	return `<label>
 		<div>Number of Players</div>
 		<select name="number-of-players" required onChange="handleNumberOfPlayersChange(event)">
-			${ARRAY_FOR_ITERATION(maxNumberOfMultiplayer)
+			${ARRAY_FOR_ITERATION(MAX_NUMBER_OF_MULTIPLAYER)
 				.slice(1)
 				.map((index) => getOptionElem({ label: index + 1, value: index + 1 }))}
 		</select>
@@ -40,27 +41,25 @@ function getNumberOfPlayersElem() {
 }
 
 function getCurrentPlayerNameElem() {
-	return `<strong style="color: initial" >(${PLAYER_NAME_LABEL_MAPPING[currentSelectedPlayer]})</strong>`;
+	return `<strong style="color: initial" >(${PLAYER_NAME_KEY_LABEL_MAPPING[currentSelectedPlayer]})</strong>`;
 }
 
 function getPlayerNameThElem(playerNameKey) {
-	return `<th>${PLAYER_NAME_LABEL_MAPPING[playerNameKey]}</th>`;
+	return `<th>${PLAYER_NAME_KEY_LABEL_MAPPING[playerNameKey]}</th>`;
 }
 
 function getTdElem(score) {
-	return `<td>${score ?? '-'}${
-		score === maximumPossibleScore ? '<span class="perfect-score-star">&#9733;</span>' : ''
-	}</td>`;
+	return `<td>${score ?? '-'}${score === MAXIMUM_POSSIBLE_SCORE ? perfectScoreSpan : ''}</td>`;
 }
 
 function getTrElem(scoreArray) {
-	return `<tr>${ARRAY_FOR_ITERATION(numberOfPlayers)
+	return `<tr>${ARRAY_FOR_ITERATION(NUMBER_OF_PLAYERS)
 		.map((index) => getTdElem(scoreArray[index]))
 		.join('')}</tr>`;
 }
 
 function getTableColGroup() {
-	return `<colgroup>${ARRAY_FOR_ITERATION(numberOfPlayers)
+	return `<colgroup>${ARRAY_FOR_ITERATION(NUMBER_OF_PLAYERS)
 		.map(
 			playerNameKeyWrapper(
 				(playerNameKey) =>

@@ -9,10 +9,10 @@ function resetGame(turnToggle = false) {
 	clearScoreDots();
 	showScoreDots();
 
-	scoresArray = [];
+	overallScoresArray = [];
 	numberOfRoundsPassed = 0;
 
-	if (playMode === FREE_PLAY) {
+	if (PLAY_MODE === FREE_PLAY) {
 		scoreBoard.classList.remove('show');
 	} else {
 		// todo : what if already added
@@ -23,7 +23,7 @@ function resetGame(turnToggle = false) {
 
 		const tableColgroup = scoreTable.querySelector('colgroup');
 		const tableHeadRow = scoreTable.querySelector('thead tr');
-		const tableHeadHtmlContent = ARRAY_FOR_ITERATION(numberOfPlayers)
+		const tableHeadHtmlContent = ARRAY_FOR_ITERATION(NUMBER_OF_PLAYERS)
 			.map(playerNameKeyWrapper(getPlayerNameThElem))
 			.join('');
 
@@ -32,7 +32,7 @@ function resetGame(turnToggle = false) {
 	}
 
 	handleTurnChangeEffects({ turnToggle });
-	clearInterval(intervalId);
+	clearInterval(projectileMotionIntervalId);
 
 	field.scrollIntoView({ behavior: 'smooth' });
 	makePlaygroundEnable();

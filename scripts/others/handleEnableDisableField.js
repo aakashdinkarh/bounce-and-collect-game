@@ -4,7 +4,7 @@ function updateStatusText({ isWait = true } = {}) {
 	if (isWait) {
 		statusTextContainer.innerText = 'Please wait...';
 	} else {
-		statusTextContainer.innerHTML = `Throw... ${playMode !== FREE_PLAY ? getCurrentPlayerNameElem() : ''}`;
+		statusTextContainer.innerHTML = `Throw... ${PLAY_MODE !== FREE_PLAY ? getCurrentPlayerNameElem() : ''}`;
 	}
 }
 

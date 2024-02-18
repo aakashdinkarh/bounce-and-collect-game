@@ -10,15 +10,15 @@ document.querySelector('.overlay.start').addEventListener('click', function(e) {
 })();
 
 (function applyInitialFormValues() {
-	form.elasticity.value = e;
-	form.gravity.value = g;
-	form['max-score'].value = maximumPossibleScore;
+	form.elasticity.value = E;
+	form.gravity.value = G;
+	form['max-score'].value = MAXIMUM_POSSIBLE_SCORE;
 	form['play-mode'].value = PLAY_MODE_OPTIONS[0].value;
 })();
 
 showScoreDots();
 
-frameRateText.innerHTML = frameRate;
+frameRateText.innerHTML = FRAME_RATE;
 
 theme.addEventListener('change', handleThemeChange);
 

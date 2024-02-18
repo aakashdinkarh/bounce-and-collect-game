@@ -1,7 +1,7 @@
 function updateScoresTable() {
-	const mergedScoresArray = [...scoresArray, currentScores, ...ARRAY_FOR_ITERATION(totalNumberOfRounds).map(() => [])];
+	const mergedScoresArray = [...overallScoresArray, currentScoresArray, ...ARRAY_FOR_ITERATION(TOTAL_NUMBER_OF_ROUNDS).map(() => [])];
 
-	const tRows = mergedScoresArray.slice(0, totalNumberOfRounds).reduce((prevTrElem, currScoreRow) => prevTrElem + getTrElem(currScoreRow), '');
+	const tRows = mergedScoresArray.slice(0, TOTAL_NUMBER_OF_ROUNDS).reduce((prevTrElem, currScoreRow) => prevTrElem + getTrElem(currScoreRow), '');
 
 	scoreTableBody.innerHTML = tRows;
 }

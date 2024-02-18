@@ -6,8 +6,8 @@ function isEdgeTouch(edge = ''){
 }
 
 function verticallyEdgeTouchEffect({ vx, vy, dy }){
-    vx = vx * e_x;
-    vy = vy * e;
+    vx = vx * E_X;
+    vy = vy * E;
     dy = -dy;
 
     return [vx, vy, dy];
@@ -15,7 +15,7 @@ function verticallyEdgeTouchEffect({ vx, vy, dy }){
 
 function horizontallyEdgeTouchEffect({ vx, dx }){
     dx = -dx;
-    vx = vx * e;
+    vx = vx * E;
 
     return [vx, dx];
 }

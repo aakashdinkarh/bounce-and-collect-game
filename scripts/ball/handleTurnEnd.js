@@ -9,13 +9,13 @@ function getWinText(cumulativeScoresArray = []) {
 	const maxScore = Math.max(...cumulativeScoresArray);
 	const maxScoreIndices = [];
 
-	for (let i = 0; i < numberOfPlayers; i++) {
+	for (let i = 0; i < NUMBER_OF_PLAYERS; i++) {
 		if (cumulativeScoresArray[i] === maxScore) {
 			maxScoreIndices.push(i);
 		}
 	}
 
-	const cpuScore = playMode === ONE_VS_CPU ? cumulativeScoresArray[cumulativeScoresArray.length - 1] : null;
+	const cpuScore = PLAY_MODE === ONE_VS_CPU ? cumulativeScoresArray[cumulativeScoresArray.length - 1] : null;
 
 	const isClearWin = maxScoreIndices.length === 1;
 	const isCpuWin = isClearWin && maxScore === cpuScore;
@@ -28,7 +28,7 @@ function getWinText(cumulativeScoresArray = []) {
 		return WIN_TEXT_MAPPING.playerWin(getPlayerName(maxScoreIndices[0] + 1));
 	}
 
-	if (numberOfPlayers <= 2) {
+	if (NUMBER_OF_PLAYERS <= 2) {
 		return WIN_TEXT_MAPPING.tie;
 	}
 
@@ -36,10 +36,10 @@ function getWinText(cumulativeScoresArray = []) {
 }
 
 function handleGameFinish() {
-	const cumulativeScoresArray = scoresArray.reduce(
+	const cumulativeScoresArray = overallScoresArray.reduce(
 		(cumulativeScores, perRoundScoresArray) =>
 			perRoundScoresArray.map((score, index) => score + cumulativeScores[index]),
-		Array(numberOfPlayers).fill(0)
+		Array(NUMBER_OF_PLAYERS).fill(0)
 	);
 
 	const overlayDiv = document.createElement('div');
@@ -51,7 +51,7 @@ function handleGameFinish() {
 		.map(
 			playerNameKeyWrapper((playerNameKey, score) =>
 				getScoreDetailDivElement({
-					playerName: PLAYER_NAME_LABEL_MAPPING[playerNameKey],
+					playerName: PLAYER_NAME_KEY_LABEL_MAPPING[playerNameKey],
 					playerScore: score,
 				})
 			)
@@ -80,7 +80,7 @@ async function handleTurnEnd() {
 	showScoreDots();
 
 	await new Promise((resolve) => {
-		if (currentScore === maximumPossibleScore) {
+		if (currentScore === MAXIMUM_POSSIBLE_SCORE) {
 			perfectScoreTextDiv.classList.toggle('show');
 			setTimeout(() => {
 				perfectScoreTextDiv.classList.toggle('show');
@@ -91,22 +91,22 @@ async function handleTurnEnd() {
 		}
 	});
 
-	if (playMode === FREE_PLAY) {
+	if (PLAY_MODE === FREE_PLAY) {
 		makePlaygroundEnable();
 		return;
 	}
 
-	if (currentScores.length >= numberOfPlayers - 1) {
-		scoresArray.push([...currentScores, currentScore]);
+	if (currentScoresArray.length >= NUMBER_OF_PLAYERS - 1) {
+		overallScoresArray.push([...currentScoresArray, currentScore]);
 		numberOfRoundsPassed += 1;
-		currentScores = [];
+		currentScoresArray = [];
 	} else {
-		currentScores.push(currentScore);
+		currentScoresArray.push(currentScore);
 	}
 
 	updateScoresTable();
 
-	if (numberOfRoundsPassed >= totalNumberOfRounds) {
+	if (numberOfRoundsPassed >= TOTAL_NUMBER_OF_ROUNDS) {
 		handleGameFinish();
 		return;
 	}
@@ -114,7 +114,7 @@ async function handleTurnEnd() {
 	handleTurnChangeEffects({ turnToggle: true });
 	makePlaygroundEnable();
 
-	if (playMode === ONE_VS_CPU && currentSelectedPlayer === PLAYER_NAME_KEY.cpu) {
+	if (PLAY_MODE === ONE_VS_CPU && currentSelectedPlayer === PLAYER_NAME_KEY.cpu) {
 		cpuTurn();
 	}
 }
