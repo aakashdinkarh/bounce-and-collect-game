@@ -43,16 +43,23 @@ function handleGameFinish() {
 
 	let overlayDivHtmlContent = getCelebratingDivElem({ cumulativeScoresArray });
 
-	overlayDivHtmlContent += `${cumulativeScoresArray
-		.map(
-			playerNameKeyWrapper((playerNameKey, score) =>
-				getScoreDetailDivElement({
-					playerName: PLAYER_NAME_KEY_LABEL_MAPPING[playerNameKey],
-					playerScore: score,
-				})
-			)
+	const outputContent = cumulativeScoresArray.map(
+		playerNameKeyWrapper((playerNameKey, score) =>
+			getScoreDetailDivElement({
+				playerName: PLAYER_NAME_KEY_LABEL_MAPPING[playerNameKey],
+				playerScore: score,
+			})
 		)
-		.join('')}`;
+	);
+	
+	// Sort outputContent based on cumulativeScoresArray values in descending order
+	const sortedOutput = outputContent
+	    .map((content, index) => ({ content, score: cumulativeScoresArray[index] }))
+	    .sort((a, b) => b.score - a.score)
+	    .map(item => item.content);
+
+
+	overlayDivHtmlContent += `${sortedOutput.join('')}`;
 
 	overlayDivHtmlContent += restartButton;
 
