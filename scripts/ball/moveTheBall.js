@@ -1,7 +1,6 @@
 let moveBallToTimeoutId;
-let projectileMotionStartTimeoutId;
 
-function moveBallTo(x, y, duration){
+async function moveBallTo(x, y, duration){
     const { left, top } = getCoords('ball', true);
     
     const totalSteps = Math.ceil(duration / FRAME_RATE);
@@ -14,25 +13,29 @@ function moveBallTo(x, y, duration){
 
     let currentStep = 0;
 
-    function updatePosition(){
-        currentX += dx;
-        currentY += dy;
-
-        ball.style.left = currentX + 'px';
-        ball.style.top = currentY + 'px';
-
-        currentStep++;
-
-        if(currentStep < totalSteps){
-            moveBallToTimeoutId = setTimeout(updatePosition, FRAME_RATE);
-        }
-    }
-
     clearTimeout(moveBallToTimeoutId);
-    updatePosition();
+
+    return new Promise((resolve) => {
+        function updatePosition(){
+            currentX += dx;
+            currentY += dy;
+
+            ball.style.left = currentX + 'px';
+            ball.style.top = currentY + 'px';
+
+            currentStep++;
+
+            if(currentStep < totalSteps){
+                moveBallToTimeoutId = setTimeout(updatePosition, FRAME_RATE);
+            } else {
+                resolve();
+            }
+        }
+        updatePosition();
+    });
 }
 
-function moveTheBall(e){
+async function moveTheBall(e) {
     const { width: ballWidth, height: ballHeight } = ball.getBoundingClientRect();
 
     const { left: fieldLeft, top: fieldTop } = getCoords('field');
@@ -54,23 +57,16 @@ function moveTheBall(e){
     const initialVerticalSpeed = Math.abs(ballInitialTop - ballY) / 40;
     const initialVerticalDirection = ballY - ballInitialTop >= 0 ? 1 : -1;
 
-    moveBallTo(ballX, ballY, 300);
-
+    makePlaygroundDisable();
     resetCurrentScore();
-
     clearTrajectory();
 
-    clearTimeout(projectileMotionStartTimeoutId);
-    clearInterval(projectileMotionIntervalId);
+    await moveBallTo(ballX, ballY, 300);
 
-    makePlaygroundDisable();
-
-    projectileMotionStartTimeoutId = setTimeout(() => {
-        projectileMotion({
-            vx: initialHorizontalSpeed,
-            dx: initialHorizontalDirection,
-            vy: initialVerticalSpeed,
-            dy: initialVerticalDirection,
-        });
-    }, 400);
+    projectileMotion({
+        vx: initialHorizontalSpeed,
+        dx: initialHorizontalDirection,
+        vy: initialVerticalSpeed,
+        dy: initialVerticalDirection,
+    });
 }
