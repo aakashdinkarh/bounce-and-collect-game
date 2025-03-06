@@ -1,4 +1,6 @@
 function showScoreDots(){
+    window.StaticCacheManager.invalidate(ALL_SCORE_POINT_DOT);
+
     const { width, height } = ball.getBoundingClientRect();
 
     const ballHalfWidth = width / 2;

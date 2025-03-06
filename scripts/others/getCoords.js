@@ -1,5 +1,3 @@
-const CACHEABLE_KEYS = ['coords-field-false', 'coords-field-true'];
-
 function getRelativeToField(elemCoords){
     const cacheKey = 'coords-field-false';
     let fieldCoords;
@@ -25,8 +23,8 @@ function getCoords(id, relativeToField = false) {
         return window.CacheManager.get(cacheKey);
     }
 
-    const elem = document.getElementById(id);
-    const elemBorderWidth = parseFloat(getComputedStyle(elem).borderWidth);
+    const { elem, elemBorderWidth } = getElemAndBorderWidth(id);
+
     const { left, top } = elem.getBoundingClientRect();
 
     let elemCoords = {
@@ -40,8 +38,23 @@ function getCoords(id, relativeToField = false) {
         elemCoords = getRelativeToField(elemCoords);
     }
 
-    if(CACHEABLE_KEYS.includes(cacheKey)) {
+    if(COORDS_CACHEABLE_KEYS.includes(cacheKey)) {
         window.CacheManager.set(cacheKey, elemCoords);
     }
     return elemCoords;
+}
+
+function getElemAndBorderWidth(id) {
+    const cacheKey = `${id}-elem-and-border-width`;
+
+    if(window.CacheManager.has(cacheKey)) {
+        return window.CacheManager.get(cacheKey);
+    }
+
+    const elem = document.getElementById(id);
+    const elemBorderWidth = parseFloat(getComputedStyle(elem).borderWidth);
+
+    window.CacheManager.set(cacheKey, { elem, elemBorderWidth });
+
+    return { elem, elemBorderWidth };
 }

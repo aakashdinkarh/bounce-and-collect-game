@@ -25,7 +25,12 @@ function checkIfScoreDotTouchBall(scoreDot, ball){
 function removeScoreDotIfEarned(){
     const ballCoords = ball.getBoundingClientRect();
 
-    const scoreDots = document.querySelectorAll('.score-point-dot');
+    let scoreDots = window.StaticCacheManager.get(ALL_SCORE_POINT_DOT);
+
+    if(!scoreDots){
+        scoreDots = document.querySelectorAll('.score-point-dot');
+        window.StaticCacheManager.set(ALL_SCORE_POINT_DOT, scoreDots);
+    }
 
     scoreDots.forEach((scoreDot) => {
         const coords =  scoreDot.getBoundingClientRect();
