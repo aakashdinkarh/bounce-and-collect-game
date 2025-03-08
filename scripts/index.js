@@ -1,6 +1,14 @@
 document.querySelector('.overlay.start').addEventListener('click', function(e) {
     this.remove();
     
+    const source = audioContext.createBufferSource();
+    source.buffer = audioCache['ball-hit-audio'];
+    source.connect(audioContext.destination);
+    
+    // Ensure the audio context is resumed in case it is suspended due to user interaction restrictions
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
     makePlaygroundDisable();
     projectileMotion();
 });
