@@ -1,4 +1,17 @@
-function showTrajectory(){
+// Add throttle utility
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Throttled version of trajectory creation
+const throttledShowTrajectory = throttle(function() {
     const { top, left } = getCoords('ball', true);
 
     const ballCenter = {
@@ -13,6 +26,11 @@ function showTrajectory(){
     trajectoryPoint.className = 'trajectory-point';
 
     field.append(trajectoryPoint);
+}, 20);
+
+// Original function now uses the throttled version
+function showTrajectory() {
+    throttledShowTrajectory();
 }
 
 function clearTrajectory(){
