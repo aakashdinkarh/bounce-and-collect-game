@@ -7,34 +7,56 @@
 		<meta http-equiv="Content-Language" content="en" />
 
 		<title>Bounce and Collect Game</title>
+		<link rel="preconnect" href="https://aakashdinkarh.github.io" crossorigin="anonymous">
 
-		<!-- Favicon for browsers -->
-		<link rel="icon" href="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" type="image/svg+xml">
-		<!-- Apple Touch Icon for iOS -->
-		<link rel="apple-touch-icon" href="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg">
+		<!-- Favicon for browsers / SVG version for modern browsers -->
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/svgs/ball.svg" type="image/svg+xml" />
+		
+		<!-- Favicon for high-resolution desktop displays (64x64) -->
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_64.png" sizes="64x64" type="image/png">
+		<!-- Favicon for standard desktop browsers (16x16, 32x32) -->
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_32.png" sizes="32x32" type="image/png">
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_16.png" sizes="16x16" type="image/png">
+		<!-- Apple Touch Icons for iOS -->
+		<link rel="apple-touch-icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_180.png" sizes="180x180">
+		<link rel="apple-touch-icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_167.png" sizes="167x167">
+		<link rel="apple-touch-icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_152.png" sizes="152x152">
+		<link rel="apple-touch-icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_120.png" sizes="120x120">
 		<!-- Favicon for Android devices -->
-		<link rel="icon" href="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" sizes="192x192" type="image/svg+xml">
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_512.png" sizes="512x512" type="image/png">
+		<link rel="icon" href="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_192.png" sizes="192x192" type="image/png">
+	
 		<!-- Shortcut icon for backward compatibility with older browsers -->
-		<link rel="shortcut icon" href="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" type="image/x-icon">
-		<!-- Mask icon for Safari Pinned Tab -->
-		<link rel="mask-icon" href="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" color="#000000">
-
+		<meta name="msapplication-TileImage" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/site-icon/ball_icon_150.png">
+		<!-- Mask icon for Safari Pinned Tab (can be in SVG format, for better scaling) -->
+		<link rel="mask-icon" href="https://aakashdinkarh.github.io/static_assets/images/svgs/ball.svg" color="#000000">
+	
 		<meta name="author" content="Aakash Dinkar" />
 		<meta name="description" content="Bounce and Collect Game is an interactive and engaging game where players guide bouncing balls through obstacles to collect as many as possible. The simple yet fun mechanics challenge players to strategize their moves while enjoying dynamic animations and physics-based gameplay." />
 		<meta name="keywords" content="Bounce and Collect, ball game, interactive game, physics-based game, obstacle game, bouncing balls, casual game, strategy game, fun game, dynamic animations, Aakash Dinkar, Aakash Dinkar game, Aakash Dinkar developer, Dinkar, Aakash" />
 
 		<meta property="og:title" content="Bounce and Collect Game" />
 		<meta property="og:description" content="Bounce and Collect Game is an engaging and interactive game where players guide bouncing balls through obstacles to collect as many as possible. Enjoy dynamic animations and physics-based gameplay while strategizing your moves in this fun and challenging game." />
-		<meta property="og:image" content="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" />
+		<meta property="og:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/avif-images/ball_icon.avif" />
+		<meta property="og:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/webp-images/ball_icon.webp" />
+		<meta property="og:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/original-images/ball_icon.png" />
 		<meta property="og:url" content="https://aakashdinkar.in/bounce-and-collect-game/" />
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Bounce and Collect Game">
 	
 		<meta name="twitter:title" content="Bounce and Collect Game" />
 		<meta name="twitter:description" content="Bounce and Collect Game is an engaging and interactive game where players guide bouncing balls through obstacles to collect as many as possible. Enjoy dynamic animations and physics-based gameplay while strategizing your moves in this fun and challenging game." />
-		<meta name="twitter:image" content="https://aakashdinkarh.github.io/bounce-and-collect-game/image/ball.svg" />
+		<meta name="twitter:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/avif-images/ball_icon.avif" />
+		<meta name="twitter:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/webp-images/ball_icon.webp" />
+		<meta name="twitter:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/original-images/ball_icon.png" />
+
+		<script>
+			if (!window.location.href.includes('aakashdinkar.in') && !window.location.href.includes('localhost')) {
+				history.replaceState({}, '', 'https://aakashdinkar.in/bounce-and-collect-game/');
+			}
+		</script>
 
 		<link rel="canonical" href="https://aakashdinkar.in/bounce-and-collect-game/">
-		
 		<link
 			rel="preload"
 			href="./styles/developerModeRelated.css"
@@ -60,6 +82,7 @@
 			<link rel="stylesheet" href="./styles/toggle.css" />
 		</noscript>
 
+		<script src="./scripts/cache/cacheManager.js"></script>
 		<script src="./scripts/accordion/accordionEventListener.js"></script>
 		<script src="./scripts/developerMode/developerModeEventListeners.js"></script>
 		<script src="./scripts/ball/edgeTouch.js"></script>
@@ -82,7 +105,26 @@
 		<script src="./scripts/score/showScoreDots.js"></script>
 		<script src="./scripts/others/toast.js"></script>
 		<script src="./scripts/playMode/updateScoresTable.js"></script>
-		<script src="./scripts/cache/cacheManager.js"></script>
+
+		<!-- google crawling -->
+		<meta name="google-site-verification" content="DCYDep9j5s7cyTxOdQrS3FYiHIfOwh1Laa-tgcAdxR8" />
+		<script>
+			// Check if the current URL is the live website
+			if (window.location.hostname === 'aakashdinkar.in') {
+				// Google tag (gtag.js)
+				const script = document.createElement("script");
+				script.src = "https://www.googletagmanager.com/gtag/js?id=G-B7Q8NCFNR6";
+				script.async = true;
+				document.head.appendChild(script);
+		
+				window.dataLayer = window.dataLayer || [];
+				function gtag() {
+				dataLayer.push(arguments);
+				}
+				gtag("js", new Date());
+				gtag("config", "G-B7Q8NCFNR6");
+			}
+		</script>
 	</head>
 
 	<body>
@@ -224,7 +266,7 @@
 						<div class="direction-line"></div>
 
 						<div id="ball" class="ball">
-							<img src="./image/ball.svg" alt="ball" />
+							<img src="https://aakashdinkarh.github.io/static_assets/images/svgs/ball.svg" alt="ball" />
 						</div>
 					</div>
 
@@ -251,15 +293,6 @@
 }
 			</style>
 		</div>
-
-		<audio
-			id="ball-hit-audio"
-			src="https://aakashdinkarh.github.io/bounce-and-collect-game/sound/ball-hits-sound.mp3"
-		></audio>
-		<audio
-			id="coin-collect-sound"
-			src="https://aakashdinkarh.github.io/bounce-and-collect-game/sound/coin-collect-sound.mp3"
-		></audio>
 
 		<script src="scripts/constants.js"></script>
 		<script src="scripts/elementSelectConstants.js"></script>
