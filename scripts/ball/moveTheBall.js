@@ -36,8 +36,6 @@ async function moveBallTo(x, y, duration){
 }
 
 async function moveTheBall(e) {
-    const { width: ballWidth, height: ballHeight } = ball.getBoundingClientRect();
-
     const { left: fieldLeft, top: fieldTop } = getCoords('field');
     const { left: ballInitialLeft, top: ballInitialTop } = getCoords('ball', true);
 
@@ -46,11 +44,11 @@ async function moveTheBall(e) {
     let mouseX = (isMobileEvent ? e.changedTouches[0].clientX : e.clientX) - fieldLeft;
     let mouseY = (isMobileEvent ? e.changedTouches[0].clientY : e.clientY) - fieldTop;
 
-    let ballX = Math.max(mouseX - ballWidth/2, 0); //left edge case
-    let ballY = Math.max(mouseY - ballHeight/2, 0); //top edge case
+    let ballX = Math.max(mouseX - BALL_WIDTH/2, 0); //left edge case
+    let ballY = Math.max(mouseY - BALL_HEIGHT/2, 0); //top edge case
 
-    ballX = Math.min(ballX, field.clientWidth - ballWidth); //right edge case
-    ballY = Math.min(ballY, field.clientHeight - ballHeight); //bottom edge case
+    ballX = Math.min(ballX, field.clientWidth - BALL_WIDTH); //right edge case
+    ballY = Math.min(ballY, field.clientHeight - BALL_HEIGHT); //bottom edge case
 
     const initialHorizontalSpeed = Math.abs(ballInitialLeft - ballX) / 40;
     const initialHorizontalDirection = ballX - ballInitialLeft >= 0 ? 1 : -1;

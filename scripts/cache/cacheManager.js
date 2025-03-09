@@ -1,4 +1,4 @@
-const COORDS_CACHEABLE_KEYS = ['coords-field-false', 'coords-field-true'];
+const COORDS_CACHEABLE_KEYS = ['coords-field-true'];
 
 // Single cache manager with one shared Map
 const CacheManager = (function() {
