@@ -1,4 +1,5 @@
 const COORDS_CACHEABLE_KEYS = ['coords-field-true'];
+const ALL_SCORE_POINT_DOT = 'all-score-point-dot';
 
 // Single cache manager with one shared Map
 const CacheManager = (function() {
@@ -25,38 +26,12 @@ const CacheManager = (function() {
         clear() {
             cache.clear();
         },
+
+        invalidate(key) {
+            cache.delete(key);
+        },
     };
 })();
 
 // Make it available globally
 window.CacheManager = CacheManager;
-
-// ------------------------------------- //
-
-const ALL_SCORE_POINT_DOT = 'all-score-point-dot';
-
-const StaticCacheManager = {
-    cache: new Map(),
-    
-    set(key, value) {
-        this.cache.set(key, value);
-    },
-    
-    get(key) {
-        return this.cache.get(key);
-    },
-    
-    has(key) {
-        return this.cache.has(key);
-    },
-    
-    invalidate(key) {
-        this.cache.delete(key);
-    },
-    
-    clear() {
-        this.cache.clear();
-    }
-};
-
-window.StaticCacheManager = StaticCacheManager;

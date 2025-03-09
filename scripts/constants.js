@@ -19,6 +19,8 @@ const FRAME_RATE = 10; // 1 frame / (FRAME_RATE) ms
 
 const BALL_HEIGHT = 40;
 const BALL_WIDTH = 40;
+const SCORE_POINT_DOT_WIDTH = 8;
+const SCORE_POINT_DOT_HEIGHT = 8;
 
 const INITIAL_TURN_MAPPING = {
 	[FREE_PLAY]: PLAYER_NAME_KEY.none,
