@@ -54,6 +54,7 @@ function moveTheBallHorizontally({ dx = 1, vx = 0 }){
 
 function projectileMotion({vy = 0, vx = 0.2, dy = 1, dx = 1} = {}) {
     clearInterval(projectileMotionIntervalId);
+    getCoords('ball', true); // to update the cache
 
     projectileMotionIntervalId = setInterval(() => {
         if(vy === 0 && isEdgeTouch('bottom') && vx === 0){
