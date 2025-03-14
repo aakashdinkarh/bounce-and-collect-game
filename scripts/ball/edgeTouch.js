@@ -1,6 +1,6 @@
 function isEdgeTouch(edge = ''){
-    const fieldCoords = getCoords('field', true);
-    const ballCoords = getCoords('ball', true);
+    const fieldCoords = getCoords('field', true, true);
+    const ballCoords = getCoords('ball', true, true);
 
     return +(fieldCoords[edge].toFixed(2)) === +(ballCoords[edge].toFixed(2));
 }

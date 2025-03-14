@@ -9,8 +9,8 @@ function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
         return [vx, vy, dx, dy];
     }
 
-    const { bottom: fieldBottom, top: fieldTop } = getCoords('field', true);
-    const { top, bottom } = getCoords('ball', true);
+    const { bottom: fieldBottom, top: fieldTop } = getCoords('field', true, true);
+    const { top, bottom } = getCoords('ball', true, true);
 
     const diffY = Math.abs(freeFall ? bottom - fieldBottom : top - fieldTop);
     
@@ -20,6 +20,8 @@ function moveTheBallVertically({vy = 0, vx = 2, dy = 1, dx = 1} = {}){
     } else {
         ball.style.top = top + (dy * vy) + 'px';
     }
+    // to update the cache after ball position is updated
+    getCoords('ball', true, false);
 
     return [vx, vy, dx, dy];
 }
@@ -32,8 +34,8 @@ function moveTheBallHorizontally({ dx = 1, vx = 0 }){
 
     const movingToRight = dx >= 0;
 
-    const { left, right } = getCoords('ball', true);
-    const { right: fieldRight, left: fieldLeft } = getCoords('field', true);
+    const { left, right } = getCoords('ball', true, true);
+    const { right: fieldRight, left: fieldLeft } = getCoords('field', true, true);
 
     const diffX = Math.abs(movingToRight ? fieldRight - right : left - fieldLeft);
 
@@ -44,6 +46,8 @@ function moveTheBallHorizontally({ dx = 1, vx = 0 }){
     } else {
         ball.style.left = left + (dx * vx) + 'px';
     }
+    // to update the cache after ball position is updated
+    getCoords('ball', true, false);
 
     return [vx, dx];
 }

@@ -51,8 +51,8 @@
 		<meta name="twitter:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/original-images/ball_icon.png" />
 
 		<script>
-			if (!window.location.href.includes('aakashdinkar.in') && !window.location.href.includes('localhost')) {
-				history.replaceState({}, '', 'https://aakashdinkar.in/bounce-and-collect-game/');
+			if (!['localhost', '127.0.0.1', 'aakashdinkar.in'].includes(window.location.hostname)) {
+				window.location.href = 'https://aakashdinkar.in/bounce-and-collect-game/';
 			}
 		</script>
 
@@ -82,29 +82,34 @@
 			<link rel="stylesheet" href="./styles/toggle.css" />
 		</noscript>
 
-		<script src="./scripts/accordion/accordionEventListener.js"></script>
-		<script src="./scripts/developerMode/developerModeEventListeners.js"></script>
-		<script src="./scripts/ball/edgeTouch.js"></script>
-		<script src="./scripts/form/form.js"></script>
-		<script src="./scripts/others/generateRandomCoordinates.js"></script>
-		<script src="./scripts/others/getCoords.js"></script>
-		<script src="./scripts/others/handleEnableDisableField.js"></script>
-		<script src="./scripts/playMode/handleTurnChangeEffects.js"></script>
-		<script src="./scripts/ball/handleTurnEnd.js"></script>
-		<script src="./scripts/others/htmlGenerators.js"></script>
-		<script src="./scripts/others/mouseEvents.js"></script>
-		<script src="./scripts/ball/moveTheBall.js"></script>
-		<script src="./scripts/others/playSound.js"></script>
-		<script src="./scripts/ball/projectileMotion.js"></script>
-		<script src="./scripts/score/removeScoreDotIfEarned.js"></script>
-		<script src="./scripts/others/resetGame.js"></script>
-		<script src="./scripts/score/scoreCallbacks.js"></script>
-		<script src="./scripts/trajectory/showClearTrajectory.js"></script>
-		<script src="./scripts/others/showDirectionOfThrow.js"></script>
-		<script src="./scripts/score/showScoreDots.js"></script>
-		<script src="./scripts/others/toast.js"></script>
-		<script src="./scripts/playMode/updateScoresTable.js"></script>
-
+		<script defer src="./scripts/performance/performanceMonitor.js"></script>
+	
+		<script defer src="./scripts/cache/cacheManager.js"></script>
+		<script defer src="./scripts/accordion/accordionEventListener.js"></script>
+		<script defer src="./scripts/developerMode/developerModeEventListeners.js"></script>
+		<script defer src="./scripts/ball/edgeTouch.js"></script>
+		<script defer src="./scripts/form/form.js"></script>
+		<script defer src="./scripts/others/generateRandomCoordinates.js"></script>
+		<script defer src="./scripts/others/getCoords.js"></script>
+		<script defer src="./scripts/others/handleEnableDisableField.js"></script>
+		<script defer src="./scripts/playMode/handleTurnChangeEffects.js"></script>
+		<script defer src="./scripts/ball/handleTurnEnd.js"></script>
+		<script defer src="./scripts/others/htmlGenerators.js"></script>
+		<script defer src="./scripts/others/mouseEvents.js"></script>
+		<script defer src="./scripts/ball/moveTheBall.js"></script>
+		<script defer src="./scripts/others/playSound.js"></script>
+		<script defer src="./scripts/ball/projectileMotion.js"></script>
+		<script defer src="./scripts/score/removeScoreDotIfEarned.js"></script>
+		<script defer src="./scripts/others/resetGame.js"></script>
+		<script defer src="./scripts/score/scoreCallbacks.js"></script>
+		<script defer src="./scripts/trajectory/showClearTrajectory.js"></script>
+		<script defer src="./scripts/others/showDirectionOfThrow.js"></script>
+		<script defer src="./scripts/score/showScoreDots.js"></script>
+		<script defer src="./scripts/others/toast.js"></script>
+		<script defer src="./scripts/playMode/updateScoresTable.js"></script>
+		<script defer src="scripts/constants.js"></script>
+		<script defer src="scripts/elementSelectConstants.js"></script>
+		<script defer src="scripts/index.js"></script>
 		<!-- google crawling -->
 		<meta name="google-site-verification" content="DCYDep9j5s7cyTxOdQrS3FYiHIfOwh1Laa-tgcAdxR8" />
 		<script>
@@ -292,9 +297,5 @@
 }
 			</style>
 		</div>
-
-		<script src="scripts/constants.js"></script>
-		<script src="scripts/elementSelectConstants.js"></script>
-		<script src="scripts/index.js"></script>
 	</body>
 </html>
