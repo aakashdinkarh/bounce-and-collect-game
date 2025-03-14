@@ -16,8 +16,7 @@ const PerformanceMonitor = {
             const checkOperation = () => {
                 if (checksCompleted >= this.SAMPLE_SIZE) {
                     const avgOperationTime = this.operationTimes.reduce((a, b) => a + b, 0) / this.operationTimes.length;
-                    console.log('Average operation time (ms):', avgOperationTime);
-                    
+
                     this.isLowPerformance = avgOperationTime > this.OPERATION_THRESHOLD;
                     this.measurementInProgress = false;
                     resolve(this.isLowPerformance);
