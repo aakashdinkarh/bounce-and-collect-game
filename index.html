@@ -51,8 +51,8 @@
 		<meta name="twitter:image" content="https://aakashdinkarh.github.io/static_assets/images/bounce-and-collect-game/original-images/ball_icon.png" />
 
 		<script>
-			if (!window.location.href.includes('aakashdinkar.in') && !window.location.href.includes('localhost')) {
-				history.replaceState({}, '', 'https://aakashdinkar.in/bounce-and-collect-game/');
+			if (!['localhost', '127.0.0.1', 'aakashdinkar.in'].includes(window.location.hostname)) {
+				window.location.href = 'https://aakashdinkar.in/bounce-and-collect-game/';
 			}
 		</script>
 
