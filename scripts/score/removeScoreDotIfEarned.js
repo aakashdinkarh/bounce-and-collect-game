@@ -26,7 +26,7 @@ function removeScoreDotIfEarned() {
     const scorePointCoords = window.CacheManager.get(ALL_SCORE_POINT_DOT);
     if (!scorePointCoords) return;
 
-    const ball = getCoords('ball', true);
+    const ball = getCoords('ball', true, true);
     
     scorePointCoords.forEach((scorePoint) => {
         if (scorePoint.isCollected) return;

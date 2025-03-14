@@ -1,4 +1,4 @@
-const COORDS_CACHEABLE_KEYS = ['coords-field-true'];
+const COORDS_CACHEABLE_KEYS = ['coords-field-true', 'coords-ball-true'];
 const ALL_SCORE_POINT_DOT = 'all-score-point-dot';
 
 // Single cache manager with one shared Map

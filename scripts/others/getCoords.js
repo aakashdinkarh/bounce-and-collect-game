@@ -16,10 +16,17 @@ function getRelativeToField(elemCoords){
     }
 }
 
-function getCoords(id, relativeToField = false) {
+/**
+ * @description Get the coordinates of the element
+ * @param {string} id - The id of the element
+ * @param {boolean} relativeToField - Whether to get the coordinates relative to the field
+ * @param {boolean} getFromCache - Whether to get the coordinates from the cache
+ * @returns {Object} The coordinates of the element
+ */
+function getCoords(id, relativeToField = false, getFromCache = false) {
     const cacheKey = `coords-${id}-${relativeToField}`;
-    
-    if (window.CacheManager.has(cacheKey)) {
+
+    if (getFromCache && window.CacheManager.has(cacheKey)) {
         return window.CacheManager.get(cacheKey);
     }
 

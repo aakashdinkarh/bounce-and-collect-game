@@ -11,7 +11,7 @@ function throttle(func, limit) {
 }
 
 function createTrajectoryPoint() {
-    const { top, left } = getCoords('ball', true);
+    const { top, left } = getCoords('ball', true, true);
     const ballCenter = {
         left: left + ball.clientWidth / 2,
         top: top + ball.clientHeight / 2,
